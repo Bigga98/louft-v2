@@ -1,5 +1,8 @@
 {
   "outputDirectory": ".",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/", "destination": "/delside-3", "permanent": false }
+  ]
 }
