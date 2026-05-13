@@ -5,6 +5,7 @@
     { label: 'Fundament',  href: 'Brandguideline.html' },
     { label: 'Delside 2',  href: 'delside-2.html' },
     { label: 'Delside 3',  href: 'delside-3.html' },
+    { label: 'Delside 4',  href: 'delside-4.html' },
   ];
 
   // ─── Mega-menu-knapper ────────────────────────────

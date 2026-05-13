@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delside 4 — Hero lys</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #f0f0f0;
+      font-family: 'IBM Plex Sans', sans-serif;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    :root {
+      --font-heading: 'Public Sans', sans-serif;
+      --font-body:    'IBM Plex Sans', sans-serif;
+      --font-weight-bold:     700;
+      --font-weight-semibold: 600;
+      --font-weight-medium:   500;
+      --font-weight-regular:  400;
+      --card-radius:          16px;
+      --card-gap:             24px;
+      --section-padding:      72px;
+      --content-width:        1200px;
+      --btn-height:           44px;
+      --btn-radius:           10px;
+      --text-heading-sub-gap: 12px;
+      --nav-link-size:        15px;
+      --color-text:           #28323b;
+      --color-text-muted:     #4a4a4a;
+      --color-bg-light:       #ffffff;
+      --color-btn-blue:       #3882E9;
+      --color-btn-blue-hover: #1e5ec4;
+    }
+
+    button { transition: background 0.15s ease; }
+    .btn-bla:hover { background: var(--color-btn-blue-hover) !important; }
+
+    .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--card-gap); }
+    .col-1-6  { grid-column: 1 / 7; }
+    .col-8-13 { grid-column: 8 / 13; }
+
+    @media (max-width: 768px) {
+      :root { --section-padding: 20px; }
+      .grid-12 { grid-template-columns: 1fr !important; }
+      .col-1-6, .col-8-13 { grid-column: 1 / -1 !important; }
+      .hero-images { order: 2; }
+      .hero-text   { order: 1; }
+    }
+  </style>
+</head>
+<body>
+  <script src="guide-nav.js"></script>
+
+  <!-- ── HERO LYS ── -->
+  <section style="background:#ffffff;min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
+    <div class="grid-12" style="max-width:1360px;margin:0 auto;width:100%;align-items:start;">
+
+      <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
+      <div class="hero-text col-1-6" style="grid-row:1/3;display:flex;flex-direction:column;gap:0;padding-top:60px;">
+
+        <!-- Badge -->
+        <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--card-gap);">
+          <span style="font-size:18px;color:#FBBC04;">★★★★★</span>
+          <span style="font-family:var(--font-body);font-size:14px;font-weight:var(--font-weight-semibold);color:var(--color-text-muted);">4.9 Google Anmeldelser</span>
+        </div>
+
+        <!-- H1 -->
+        <h1 style="font-family:var(--font-heading);font-size:64px;font-weight:var(--font-weight-bold);line-height:1.05;letter-spacing:-0.03em;color:var(--color-text);margin:0 0 var(--card-gap);">Vi hjelper deg med å flytte trygt fra A til B</h1>
+
+        <!-- Strek under tittel -->
+        <hr style="border:none;border-top:1px solid rgba(0,0,0,0.1);margin:0 0 40px;">
+
+        <!-- Ingress -->
+        <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-muted);margin:0 0 32px;max-width:520px;">Løft hjelper deg med alt du trenger for å flytte fra A til B – uten å løfte en finger selv. Vi håndterer alt fra pakking, flytting, lagring, vasking og overtakelse med en superenkel prismodell.</p>
+
+        <!-- Feature-liste -->
+        <div style="display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);margin-bottom:40px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:20px;height:20px;background:#3882E9;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path transform="matrix(0.6241,0.7813,-0.6241,0.7813,9.59,0.74)" d="M3.13419 2.94095 L3.35149 0.863123 L11.7851 0 L10.9103 8.36529 L8.8222 8.57899 L9.3217 3.80268 L1.38485 11.7161 L0 10.3362 L7.96114 2.44695 L3.13419 2.94095 Z" fill="#E4E8F0"/></svg>
+            </span>
+            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Personlig flyttekontakt</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:20px;height:20px;background:#3882E9;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path transform="matrix(0.6241,0.7813,-0.6241,0.7813,9.59,0.74)" d="M3.13419 2.94095 L3.35149 0.863123 L11.7851 0 L10.9103 8.36529 L8.8222 8.57899 L9.3217 3.80268 L1.38485 11.7161 L0 10.3362 L7.96114 2.44695 L3.13419 2.94095 Z" fill="#E4E8F0"/></svg>
+            </span>
+            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Langdistanse flytting</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span style="width:20px;height:20px;background:#3882E9;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path transform="matrix(0.6241,0.7813,-0.6241,0.7813,9.59,0.74)" d="M3.13419 2.94095 L3.35149 0.863123 L11.7851 0 L10.9103 8.36529 L8.8222 8.57899 L9.3217 3.80268 L1.38485 11.7161 L0 10.3362 L7.96114 2.44695 L3.13419 2.94095 Z" fill="#E4E8F0"/></svg>
+            </span>
+            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Digitale oppdateringer</span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 24px 0 28px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
+          <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Få tilbud</span>
+          <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+            <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
+
+      </div>
+
+      <!-- Øverste bilder — kolonne 8–12, rad 1 -->
+      <div class="hero-images col-8-13" style="grid-row:1;display:grid;grid-template-columns:58fr 42fr;gap:var(--card-gap);align-items:end;">
+
+        <!-- Bilde 1 — starter 2/3 inn i kol 7 -->
+        <div style="aspect-ratio:4/5;position:relative;left:-54px;border-radius:var(--card-radius);">
+          <img src="images/DSCF8489.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--card-radius);">
+          <!-- Badges — starter på grid 7 -->
+          <div style="position:absolute;bottom:16px;left:-61px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:inline-flex;align-items:center;gap:10px;background:#3882E9;border-radius:100px;padding:8px 18px 8px 10px;height:40px;">
+              <span style="width:25px;height:25px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="11" height="10" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">Løft forsikring</span>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:10px;background:#3882E9;border-radius:100px;padding:8px 18px 8px 10px;height:40px;">
+              <span style="width:25px;height:25px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="11" height="10" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">50% på minilager</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bilde 2 — større, fyller gapen -->
+        <div style="aspect-ratio:5/4;margin-left:-54px;border-radius:var(--card-radius);overflow:hidden;">
+          <img src="images/Loft_shoot__44.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+
+      </div>
+
+      <!-- Google Reviews badge — krysningspunkt bilder -->
+      <div style="grid-column:11/12;grid-row:1;align-self:end;justify-self:start;transform:translate(-65%, calc(50% + 4px));z-index:10;pointer-events:none;">
+        <div style="background:#3882E9;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,0.15);">
+          <span style="font-family:var(--font-heading);font-size:32px;font-weight:var(--font-weight-bold);color:#ffffff;line-height:1;">4.9</span>
+          <span style="font-size:18px;color:#FBBC04;letter-spacing:2px;">★★★★★</span>
+          <span style="font-family:var(--font-body);font-size:13px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;">Google Reviews</span>
+        </div>
+      </div>
+
+      <!-- Nederste bilde — kolonne 7–11, rad 2 -->
+      <div style="grid-column:7/12;grid-row:2;aspect-ratio:16/7;position:relative;border-radius:var(--card-radius);overflow:hidden;">
+        <img src="images/Loft_shoot__47.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <!-- Badge -->
+        <div style="position:absolute;bottom:16px;left:16px;display:inline-flex;align-items:center;gap:12px;background:#3882E9;border-radius:100px;padding:8px 20px 8px 10px;">
+          <span style="width:36px;height:36px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="14" height="12" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">Lokalt, Nasjonalt og Internasjonalt</span>
+            <span style="font-family:var(--font-body);font-size:13px;font-weight:var(--font-weight-regular);color:rgba(255,255,255,0.75);white-space:nowrap;">OSLO → Trondheim, Bergen, Stockholm etc.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
