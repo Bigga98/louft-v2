@@ -81,12 +81,13 @@
       gap: 28px;
     }
     .guide-nav-logo {
-      font-family: var(--font-heading, 'Public Sans', sans-serif);
-      font-size: 15px;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .guide-nav-logo svg {
+      height: 28px;
+      width: auto;
     }
     .guide-nav-divider {
       width: 1px;
@@ -319,7 +320,7 @@
   nav.id = 'guide-nav';
   nav.innerHTML = `
     <div class="guide-nav-inner">
-      <span class="guide-nav-logo">Mediegruppen</span>
+      <span class="guide-nav-logo"><svg viewBox="0 0 523 154" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#nav-logo-clip)"><path d="M0 154V0H26.4298V130.403H115.048V154H0Z" fill="#ffffff"/><path d="M154.848 23.9073V0H251.55V96.25H227.608V41.2944L145.209 123.883L127.485 106.185L210.195 23.9073H154.848Z" fill="#ffffff"/><path d="M264.609 154V0H375.304V23.5968H291.039V67.375H364.11V90.9718H291.039V154H264.609Z" fill="#ffffff"/><path d="M442.156 154V23.5968H388.363V0H523V23.5968H468.586V154H442.156Z" fill="#ffffff"/></g><defs><clipPath id="nav-logo-clip"><rect width="523" height="154" fill="white"/></clipPath></defs></svg></span>
       <div class="guide-nav-divider"></div>
       <div class="guide-nav-links">
         ${PAGES.map(p => `<a href="${p.href}" class="guide-nav-link${p.href === current ? ' active' : ''}">${p.label}</a>`).join('')}
