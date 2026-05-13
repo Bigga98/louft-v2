@@ -197,9 +197,12 @@
     .bento-2   { display: grid; grid-template-columns: 5fr 4fr 3fr; gap: var(--card-gap); }
 
     .col-1-8   { grid-column: 1 / 8; }
+    .col-1-7   { grid-column: 1 / 7; }
+    .col-1-6   { grid-column: 1 / 7; }
     .col-8-13  { grid-column: 8 / 13; }
     .col-1-5   { grid-column: 1 / 5; }
     .col-6-13  { grid-column: 6 / 13; }
+    .col-7-13  { grid-column: 7 / 13; }
 
     /* ── FAQ accordion ── */
     .faq-item { border-top: 1px solid #ebebeb; }
@@ -306,10 +309,10 @@
 
   <!-- ── HERO ── -->
   <section style="background:var(--color-bg-dark,#233D6F);min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
-    <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;width:100%;align-items:center;">
+    <div class="grid-12" style="max-width:1360px;margin:0 auto;width:100%;align-items:start;">
 
-      <!-- Venstre: tekst — kolonne 1–8 -->
-      <div class="hero-text col-1-8" style="display:flex;flex-direction:column;gap:0;">
+      <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
+      <div class="hero-text col-1-6" style="grid-row:1/3;display:flex;flex-direction:column;gap:0;padding-top:60px;">
 
         <!-- Badge -->
         <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--card-gap);">
@@ -360,46 +363,58 @@
 
       </div>
 
-      <!-- Høyre: bildegrid — kolonne 8–12 -->
-      <div class="hero-images col-8-13" style="display:flex;flex-direction:column;gap:var(--card-gap);">
+      <!-- Øverste bilder — kolonne 8–12, rad 1 -->
+      <div class="hero-images col-8-13" style="grid-row:1;display:grid;grid-template-columns:58fr 42fr;gap:var(--card-gap);align-items:end;">
 
-        <!-- Rad 1: asymmetrisk — bilde 1 bredere og høyere, bilde 2 kortere -->
-        <div style="display:grid;grid-template-columns:58fr 42fr;gap:var(--card-gap);align-items:end;">
-
-          <!-- Bilde 1 — bred portrett -->
-          <div style="aspect-ratio:4/5;position:relative;border-radius:var(--card-radius);">
-            <img src="images/DSCF8489.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--card-radius);">
-            <!-- Badge — 50% på minilager -->
-            <div style="position:absolute;bottom:16px;left:-32px;display:inline-flex;align-items:center;gap:10px;background:rgba(18,32,58,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:100px;padding:8px 18px 8px 10px;height:40px;">
-              <span style="width:25px;height:25px;background:#3882E9;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
-                <svg width="11" height="10" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- Bilde 1 — starter 2/3 inn i kol 7 -->
+        <div style="aspect-ratio:4/5;position:relative;left:-54px;border-radius:var(--card-radius);">
+          <img src="images/DSCF8489.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--card-radius);">
+          <!-- Badges — starter på grid 7 -->
+          <div style="position:absolute;bottom:16px;left:-61px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:inline-flex;align-items:center;gap:10px;background:#3882E9;border-radius:100px;padding:8px 18px 8px 10px;height:40px;">
+              <span style="width:25px;height:25px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="11" height="10" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">Løft forsikring</span>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:10px;background:#3882E9;border-radius:100px;padding:8px 18px 8px 10px;height:40px;">
+              <span style="width:25px;height:25px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+                <svg width="11" height="10" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">50% på minilager</span>
             </div>
           </div>
-
-          <!-- Bilde 2 — kortere, squarish -->
-          <div style="aspect-ratio:5/4;border-radius:var(--card-radius);overflow:hidden;">
-            <img src="images/Loft_shoot__44.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
-          </div>
-
         </div>
 
-        <!-- Rad 2: bredt bilde -->
-        <div style="width:100%;aspect-ratio:16/6;border-radius:var(--card-radius);position:relative;">
-          <img src="images/Loft_shoot__47.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--card-radius);">
-          <!-- Badge — Lokalt, Nasjonalt og Internasjonalt -->
-          <div style="position:absolute;bottom:16px;left:-32px;display:inline-flex;align-items:center;gap:12px;background:rgba(18,32,58,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:14px;padding:12px 20px 12px 12px;">
-            <span style="width:36px;height:36px;background:#3882E9;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
-              <svg width="14" height="12" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <div style="display:flex;flex-direction:column;gap:3px;">
-              <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">Lokalt, Nasjonalt og Internasjonalt</span>
-              <span style="font-family:var(--font-body);font-size:13px;font-weight:var(--font-weight-regular);color:rgba(255,255,255,0.65);white-space:nowrap;">OSLO → Trondheim, Bergen, Stockholm etc.</span>
-            </div>
-          </div>
+        <!-- Bilde 2 — større, fyller gapen -->
+        <div style="aspect-ratio:5/4;margin-left:-54px;border-radius:var(--card-radius);overflow:hidden;">
+          <img src="images/Loft_shoot__44.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
 
+      </div>
+
+      <!-- Google Reviews badge — krysningspunkt bilder -->
+      <div style="grid-column:11/12;grid-row:1;align-self:end;justify-self:start;transform:translate(-65%, calc(50% + 4px));z-index:10;pointer-events:none;">
+        <div style="background:#3882E9;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,0.25);">
+          <span style="font-family:var(--font-heading);font-size:32px;font-weight:var(--font-weight-bold);color:#ffffff;line-height:1;">4.9</span>
+          <span style="font-size:18px;color:#FBBC04;letter-spacing:2px;">★★★★★</span>
+          <span style="font-family:var(--font-body);font-size:13px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;">Google Reviews</span>
+        </div>
+      </div>
+
+      <!-- Nederste bilde — kolonne 7–11, rad 2 -->
+      <div style="grid-column:7/12;grid-row:2;aspect-ratio:16/7;position:relative;border-radius:var(--card-radius);overflow:hidden;">
+        <img src="images/Loft_shoot__47.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <!-- Badge — Lokalt, Nasjonalt og Internasjonalt -->
+        <div style="position:absolute;bottom:16px;left:16px;display:inline-flex;align-items:center;gap:12px;background:#3882E9;border-radius:100px;padding:8px 20px 8px 10px;">
+          <span style="width:36px;height:36px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="14" height="12" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <span style="font-family:var(--font-body);font-size:16px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;letter-spacing:0.01em;">Lokalt, Nasjonalt og Internasjonalt</span>
+            <span style="font-family:var(--font-body);font-size:13px;font-weight:var(--font-weight-regular);color:rgba(255,255,255,0.65);white-space:nowrap;">OSLO → Trondheim, Bergen, Stockholm etc.</span>
+          </div>
+        </div>
       </div>
 
     </div>
