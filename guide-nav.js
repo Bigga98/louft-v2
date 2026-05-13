@@ -81,8 +81,8 @@
       gap: 32px;
     }
     .guide-nav-logo {
-      font-family: var(--font-heading, 'Rubik', sans-serif);
-      font-size: 13px;
+      font-family: var(--font-heading, 'Public Sans', sans-serif);
+      font-size: 15px;
       font-weight: 600;
       color: #ffffff;
       letter-spacing: -0.01em;
@@ -101,9 +101,9 @@
     }
     .guide-nav-link {
       font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-      font-size: 13px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.88);
       text-decoration: none;
       transition: color 0.12s;
     }
@@ -112,22 +112,22 @@
     .guide-nav-cta {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       background: #ffffff;
-      border-radius: 8px;
-      padding: 0 10px 0 14px;
-      height: 36px;
+      border-radius: 10px;
+      padding: 0 12px 0 18px;
+      height: 44px;
       text-decoration: none;
       font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: #233D6F;
       white-space: nowrap;
-      margin-left: 8px;
+      margin-left: auto;
     }
     .guide-nav-cta-dot {
-      width: 16px;
-      height: 16px;
+      width: 19px;
+      height: 19px;
       border-radius: 50%;
       background: #233D6F;
       display: flex;
@@ -145,9 +145,9 @@
     }
     .guide-mega-trigger {
       font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
-      font-size: 13px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.88);
       cursor: pointer;
       display: flex;
       align-items: center;
