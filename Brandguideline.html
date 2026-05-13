@@ -1451,6 +1451,103 @@
   </div>
   </section>
 
+  <!-- ─── KNAPPER — HOVER-EFFEKTER ────────────────── -->
+  <section style="background:#f7f8fa;padding:80px 72px;border-top:1px solid #ebebeb;">
+  <div class="section-inner">
+
+    <p class="label">Knapper — Hover-effekter (forslag)</p>
+    <p style="font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:#666;margin-bottom:48px;">Hold musen over knappene for å se effekten. Velg favoritt.</p>
+
+    <style>
+      .btn-e { display:inline-flex;align-items:center;gap:8px;border:none;border-radius:10px;padding:0 12px 0 18px;height:44px;cursor:pointer;transition:background 0.15s ease, opacity 0.15s ease; }
+      .btn-e .dot { width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em); }
+
+      /* Forslag A — subtil mørkere */
+      .a-lys  { background:#f3eeee; } .a-lys:hover  { background:#e8e3e3; }
+      .a-mork { background:#292d4d; } .a-mork:hover { background:#363b60; }
+      .a-bla  { background:#3882E9; } .a-bla:hover  { background:#2d6fd1; }
+
+      /* Forslag B — tydelig mørkere */
+      .b-lys  { background:#f3eeee; } .b-lys:hover  { background:#dcd5d5; }
+      .b-mork { background:#292d4d; } .b-mork:hover { background:#363b60; }
+      .b-bla  { background:#3882E9; } .b-bla:hover  { background:#1e5ec4; }
+
+      /* Forslag C — opacity */
+      .c-lys  { background:#f3eeee; } .c-lys:hover  { opacity:0.7; }
+      .c-mork { background:#292d4d; } .c-mork:hover { opacity:0.75; }
+      .c-bla  { background:#3882E9; } .c-bla:hover  { opacity:0.75; }
+
+      .effect-col   { display:flex;flex-direction:column;gap:0;border:1px solid #ebebeb;border-radius:12px;padding:28px;background:#fff; }
+      .effect-col-label { font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:700;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px; }
+      .effect-col-desc  { font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:#777;margin-top:16px;line-height:1.55;border-top:1px solid #f0f0f0;padding-top:16px; }
+      .effect-btns  { display:flex;flex-direction:column;gap:10px; }
+      .effects-3col { display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
+    </style>
+
+    <div class="effects-3col">
+
+      <div class="effect-col">
+        <span class="effect-col-label">Forslag A — Subtil</span>
+        <div class="effect-btns">
+          <button class="btn-e a-lys">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#292d4d;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#233d6f;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="btn-e a-mork">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#f3eeee;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#f3eeee;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#233d6f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="btn-e a-bla">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#ffffff;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+        </div>
+        <p class="effect-col-desc">Lys: #e8e3e3 · Mørk: #363b60 · Blå: #2d6fd1 — ett steg mørkere, knapt merkbart</p>
+      </div>
+
+      <div class="effect-col">
+        <span class="effect-col-label">Forslag B — Tydelig</span>
+        <div class="effect-btns">
+          <button class="btn-e b-lys">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#292d4d;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#233d6f;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="btn-e b-mork">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#f3eeee;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#f3eeee;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#233d6f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="btn-e b-bla">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#ffffff;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+        </div>
+        <p class="effect-col-desc">Lys: #dcd5d5 · Mørk: #363b60 · Blå: #1e5ec4 — lys mørkere, mørk lysere, blå mørkere</p>
+      </div>
+
+      <div class="effect-col">
+        <span class="effect-col-label">Forslag C — Opacity</span>
+        <div class="effect-btns">
+          <button class="btn-e c-lys">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#292d4d;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#233d6f;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="btn-e c-mork">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#f3eeee;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#f3eeee;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#233d6f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="btn-e c-bla">
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
+            <span class="dot" style="background:#ffffff;"><svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+        </div>
+        <p class="effect-col-desc">opacity: 0.7–0.75 på alle — fader uniformt ned, samme logikk uansett farge</p>
+      </div>
+
+    </div>
+
+  </div>
+  </section>
+
   <!-- ─── NAVIGASJON / DROPDOWN ────────────────── -->
   <section style="background:#ffffff;padding:80px 72px;border-top:1px solid #ebebeb;">
   <div class="section-inner">

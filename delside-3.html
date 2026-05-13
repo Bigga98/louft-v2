@@ -84,12 +84,21 @@
 
       /* Farger — footer */
       --color-btn-blue:           #3882E9;
+      --color-btn-blue-hover:     #1e5ec4;
       --color-btn-dark:           #292d4d;
+      --color-btn-dark-hover:     #363b60;
       --color-btn-light:          #f3eeee;
+      --color-btn-light-hover:    #dcd5d5;
       --color-footer-link:        #ffffff;
       --color-footer-link-hover:  #ffffff;
       --color-footer-muted:       rgba(255,255,255,0.5);
     }
+
+    /* ── Knapp hover-effekter ── */
+    button { transition: background 0.15s ease; }
+    .btn-lys:hover  { background: var(--color-btn-light-hover) !important; }
+    .btn-mork:hover { background: var(--color-btn-dark-hover)  !important; }
+    .btn-bla:hover  { background: var(--color-btn-blue-hover)  !important; }
 
     /* ── WF-farger ── */
     :root {
@@ -342,7 +351,7 @@
         </div>
 
         <!-- CTA — Variant 4 Lys blå -->
-        <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 24px 0 28px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
+        <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 24px 0 28px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
           <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Få tilbud</span>
           <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
             <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -532,7 +541,7 @@
       <!-- Headline + knapp -->
       <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:var(--text-sub-body-gap);margin-bottom:calc(var(--card-gap) * 2);">
         <p style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;max-width:680px;"><span style="color:#1a4358;">Vi er din totalleverandør for flytting i </span><span style="color:#1a74cd;">Oslo, alt samlet på ett sted.</span></p>
-        <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:center;">
+        <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:center;">
           <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
           <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
             <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="var(--color-btn-blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -623,7 +632,7 @@
             <a href="#" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--font-body);font-size:14px;font-weight:var(--font-weight-semibold);color:var(--color-text);">Prosjektledelse <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             <a href="#" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--font-body);font-size:14px;font-weight:var(--font-weight-semibold);color:var(--color-text);">Kontoravvikling <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-          <button style="display:inline-flex;align-items:center;gap:8px;background:#292d4d;border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;margin-top:8px;">
+          <button class="btn-mork" style="display:inline-flex;align-items:center;gap:8px;background:#292d4d;border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;margin-top:8px;">
             <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#f3eeee;white-space:nowrap;">Gå til bedriftsside</span>
             <span style="width:19px;height:19px;border-radius:50%;background:#f3eeee;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
               <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#233d6f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -844,7 +853,7 @@
         <p style="font-family:var(--font-body);font-size:var(--nav-cat-size);font-weight:var(--font-weight-semibold);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--text-heading-sub-gap);">Priser</p>
         <h2 style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;color:var(--color-text);margin-bottom:var(--text-sub-body-gap);">Superenkel prismodell</h2>
         <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--text-sub-body-gap);">Alle flytteprosesser er ulike, men vi ønsker å tilby en enkel pris til alle våre kunder.</p>
-        <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;">
+        <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;">
           <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Få et prisestimat</span>
           <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
             <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="var(--color-btn-blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -913,7 +922,7 @@
           </div>
           <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-on-dark);">Vi hjelper deg å pakke ned alt trygt og effektivt, slik at du kan fokusere på det som virkelig betyr noe — den nye starten.</p>
           <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-on-dark);">Erfarne løftere pakker ned hele hjemmet ditt med profesjonelt emballasjemateriell. Bobleplast, bæreesker og strekkfilm sikrer at alt — fra servise til elektronikk — tåler turen. Alt merkes og sorteres slik at utpakkingen går like glatt som innpakkingen.</p>
-          <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
+          <button class="btn-lys" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
             <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:var(--color-btn-dark);white-space:nowrap;">Les mer om pakking</span>
             <span style="width:19px;height:19px;border-radius:50%;background:#233d6f;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
               <svg width="9" height="8" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -936,7 +945,7 @@
             <span style="font-family:monospace;font-size:15px;font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:3px 10px;letter-spacing:0.08em;">LOFT</span>
             <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-regular);color:var(--color-text-on-dark-muted);">i Flexistore-appen</span>
           </div>
-          <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
+          <button class="btn-lys" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
             <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:var(--color-btn-dark);white-space:nowrap;">Åpne Flexistore-appen</span>
             <span style="width:19px;height:19px;border-radius:50%;background:#233d6f;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
               <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -955,7 +964,7 @@
           </div>
           <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-on-dark);">Løft flyttebyrå er basert i Oslo. Som en totalleverandør av hele flyttereisen, leverer vi alle tjenester du trenger for å flytte – uten å løfte en finger selv.</p>
           <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-on-dark);">Vår ambisjon er å endre opplevelsen av flytteprosessen. Selv om vi er unge, er vi også sterke, motiverte, digitale og villige til å løfte tungt for å heve standarden i bransjen og levere profesjonalitet i alle ledd.</p>
-          <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
+          <button class="btn-lys" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
             <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:var(--color-btn-dark);white-space:nowrap;">Les mer om oss</span>
             <span style="width:19px;height:19px;border-radius:50%;background:#233d6f;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
               <svg width="9" height="8" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1136,7 +1145,7 @@
           </div>
         </div>
         <div style="grid-column:10/13;display:flex;justify-content:flex-end;align-items:flex-start;">
-          <button style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;">
+          <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;">
             <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
             <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
               <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="var(--color-btn-blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
