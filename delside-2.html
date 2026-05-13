@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — Delside 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #f0f0f0;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 23px,
+        rgba(100, 100, 220, 0.05) 23px,
+        rgba(100, 100, 220, 0.05) 24px
+      );
+      font-family: 'IBM Plex Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── Brand tokens (speiler Brandguideline.html) ── */
+    :root {
+      --card-radius:    16px;
+      --card-gap:       24px;
+      --image-radius:   10px;
+      --image-padding:  20px;
+      --section-padding: 72px;
+      --content-width:  1200px;
+      --btn-height:     44px;
+      --btn-radius:     10px;
+      --title-padding:  24px;
+      --text-heading-sub-gap: 12px;
+      --text-sub-body-gap:    20px;
+      --text-para-gap:        24px;
+      --text-max-width:       680px;
+    }
+
+    /* ── WF-farger ── */
+    :root {
+      --wf-bg:        #e2e2e2;
+      --wf-section:   #d4d4d4;
+      --wf-img:       #b8b8b8;
+      --wf-img-dark:  #a0a0a0;
+      --wf-line:      #c4c4c4;
+      --wf-line-dark: #aaaaaa;
+      --wf-border:    #cccccc;
+      --wf-text:      #888888;
+      --wf-text-dark: #555555;
+      --wf-btn:       #b0b0b0;
+      --wf-badge:     #c8c8c8;
+      --wf-dark-bg:      #5a5a70;
+      --wf-dark-surface: #6a6a80;
+      --wf-dark-title:   #3a3a50;
+      --wf-dark-line:    rgba(255,255,255,0.15);
+      --wf-dark-badge:   rgba(255,255,255,0.2);
+      --wf-dark-img:     rgba(255,255,255,0.12);
+    }
+
+    .wf-label {
+      font-family: 'IBM Plex Sans', monospace;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--wf-text);
+    }
+
+    /* ── Bilde-placeholder ── */
+    .wf-img {
+      background: var(--wf-img);
+      border-radius: var(--card-radius);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wf-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, transparent 45%, var(--wf-img-dark) 45%, var(--wf-img-dark) 55%, transparent 55%),
+        linear-gradient(45deg, transparent 45%, var(--wf-img-dark) 45%, var(--wf-img-dark) 55%, transparent 55%);
+      border-radius: 10px;
+      opacity: 0.3;
+    }
+
+    /* ── Tekst-placeholder linjer ── */
+    .wf-line {
+      height: 12px;
+      background: var(--wf-line);
+      border-radius: 4px;
+    }
+
+    .wf-line-sm {
+      height: 8px;
+      background: var(--wf-line);
+      border-radius: 3px;
+    }
+
+    /* ── Grid-overlay ── */
+    .wf-grid-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .wf-grid-inner {
+      max-width: calc(var(--content-width) + 2 * var(--section-padding));
+      margin: 0 auto;
+      padding: 0 var(--section-padding);
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--card-gap);
+    }
+    .wf-col {
+      height: 100%;
+      background: rgba(100, 100, 220, 0.03);
+      border-left: 1px dashed rgba(100, 100, 220, 0.1);
+    }
+    .wf-col:last-child {
+      border-right: 1px dashed rgba(100, 100, 220, 0.1);
+    }
+
+    /* ── Responsive klasser ── */
+    .grid-12   { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--card-gap); }
+    .grid-3    { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--card-gap); }
+    .grid-2    { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); }
+    .bento-1   { display: grid; grid-template-columns: 4fr 5fr 3fr; gap: var(--card-gap); }
+    .bento-2   { display: grid; grid-template-columns: 5fr 4fr 3fr; gap: var(--card-gap); }
+
+    .col-1-8   { grid-column: 1 / 8; }
+    .col-8-13  { grid-column: 8 / 13; }
+    .col-1-5   { grid-column: 1 / 5; }
+    .col-6-13  { grid-column: 6 / 13; }
+
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      :root { --section-padding: 20px; }
+
+      .wf-grid-overlay { display: none; }
+
+      .grid-12,
+      .grid-3,
+      .grid-2,
+      .bento-1,
+      .bento-2 {
+        grid-template-columns: 1fr !important;
+      }
+
+      .col-1-8,
+      .col-8-13,
+      .col-1-5,
+      .col-6-13 {
+        grid-column: 1 / -1 !important;
+      }
+
+      /* Hero-bilder etter tekst */
+      .hero-images { order: 2; }
+      .hero-text   { order: 1; }
+
+      /* Feature stripe: 2 kolonner på mobil */
+      .feature-grid {
+        grid-template-columns: 1fr 1fr !important;
+      }
+      .feature-grid > div {
+        grid-column: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="guide-nav.js"></script>
+
+  <!-- Grid-overlay -->
+  <div class="wf-grid-overlay">
+    <div class="wf-grid-inner">
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+      <div class="wf-col"></div>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section style="background:var(--wf-section);min-height:75vh;padding:var(--section-padding);display:flex;align-items:center;">
+    <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;width:100%;align-items:center;">
+
+      <!-- Venstre: tekst — kolonne 1–7 -->
+      <div class="hero-text col-1-8" style="display:flex;flex-direction:column;gap:0;">
+
+        <!-- Badge -->
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-badge);border-radius:6px;padding:6px 12px;width:fit-content;margin-bottom:24px;">
+          <div style="width:70px;height:8px;background:var(--wf-line-dark);border-radius:3px;"></div>
+          <div style="width:100px;height:8px;background:var(--wf-line-dark);border-radius:3px;"></div>
+        </div>
+
+        <!-- H1 -->
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;">
+          <div class="wf-line" style="width:100%;height:40px;border-radius:6px;"></div>
+          <div class="wf-line" style="width:100%;height:40px;border-radius:6px;"></div>
+          <div class="wf-line" style="width:72%;height:40px;border-radius:6px;"></div>
+        </div>
+
+        <!-- Ingress -->
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:32px;">
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:60%;"></div>
+        </div>
+
+        <!-- Feature-liste -->
+        <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:40px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:16px;height:16px;border-radius:4px;background:var(--wf-line-dark);flex-shrink:0;"></div>
+            <div class="wf-line-sm" style="width:160px;"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:16px;height:16px;border-radius:4px;background:var(--wf-line-dark);flex-shrink:0;"></div>
+            <div class="wf-line-sm" style="width:180px;"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:16px;height:16px;border-radius:4px;background:var(--wf-line-dark);flex-shrink:0;"></div>
+            <div class="wf-line-sm" style="width:140px;"></div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-btn);border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);width:fit-content;">
+          <div class="wf-line-sm" style="width:80px;background:var(--wf-text-dark);"></div>
+          <div style="width:20px;height:20px;border-radius:50%;background:var(--wf-text-dark);"></div>
+        </div>
+
+      </div>
+
+      <!-- Høyre: bildegrid — kolonne 8–12 -->
+      <div class="hero-images col-8-13" style="display:flex;flex-direction:column;gap:var(--card-gap);">
+
+        <!-- Rad 1: asymmetrisk — bilde 1 bredere og høyere, bilde 2 kortere -->
+        <div style="display:grid;grid-template-columns:58fr 42fr;gap:var(--card-gap);align-items:end;">
+
+          <!-- Bilde 1 — bred portrett, badge overlay -->
+          <div class="wf-img" style="aspect-ratio:4/5;position:relative;">
+            <div style="position:absolute;bottom:14px;left:14px;background:var(--wf-badge);border-radius:6px;padding:6px 10px;display:flex;flex-direction:column;gap:5px;z-index:1;">
+              <div class="wf-line-sm" style="width:60px;background:var(--wf-text-dark);"></div>
+              <div class="wf-line-sm" style="width:80px;background:var(--wf-line-dark);"></div>
+            </div>
+            <span class="wf-label">Bilde</span>
+          </div>
+
+          <!-- Bilde 2 — kortere, squarish -->
+          <div class="wf-img" style="aspect-ratio:5/4;">
+            <span class="wf-label">Bilde</span>
+          </div>
+
+        </div>
+
+        <!-- Rad 2: bredt bilde, to tekst-overlays -->
+        <div class="wf-img" style="width:100%;aspect-ratio:16/6;position:relative;">
+          <div style="position:absolute;bottom:14px;left:14px;display:flex;flex-direction:column;gap:5px;z-index:1;">
+            <div class="wf-line-sm" style="width:50px;background:var(--wf-text-dark);"></div>
+            <div class="wf-line-sm" style="width:36px;background:var(--wf-line-dark);"></div>
+          </div>
+          <div style="position:absolute;bottom:14px;left:calc(50% + 14px);display:flex;flex-direction:column;gap:5px;z-index:1;">
+            <div class="wf-line-sm" style="width:130px;background:var(--wf-text-dark);"></div>
+            <div class="wf-line-sm" style="width:160px;background:var(--wf-line-dark);"></div>
+          </div>
+          <span class="wf-label">Bilde</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FEATURE STRIPE ── -->
+  <section style="background:var(--wf-bg);border-top:1px solid var(--wf-border);border-bottom:1px solid var(--wf-border);padding:28px var(--section-padding);">
+    <div class="feature-grid grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:center;">
+
+      <!-- Item 1 — kol 1–3 -->
+      <div style="grid-column:1/4;display:flex;align-items:center;gap:12px;">
+        <div style="width:24px;height:24px;background:var(--wf-line-dark);border-radius:4px;flex-shrink:0;"></div>
+        <div class="wf-line" style="width:130px;height:10px;"></div>
+      </div>
+
+      <!-- Item 2 — kol 4–6 -->
+      <div style="grid-column:4/7;display:flex;align-items:center;gap:12px;">
+        <div style="width:24px;height:24px;background:var(--wf-line-dark);border-radius:4px;flex-shrink:0;"></div>
+        <div class="wf-line" style="width:160px;height:10px;"></div>
+      </div>
+
+      <!-- Item 3 — kol 7–9 -->
+      <div style="grid-column:7/10;display:flex;align-items:center;gap:12px;">
+        <div style="width:24px;height:24px;background:var(--wf-line-dark);border-radius:4px;flex-shrink:0;"></div>
+        <div class="wf-line" style="width:150px;height:10px;"></div>
+      </div>
+
+      <!-- Item 4 — kol 10–12 -->
+      <div style="grid-column:10/13;display:flex;align-items:center;gap:12px;">
+        <div style="width:24px;height:24px;background:var(--wf-line-dark);border-radius:4px;flex-shrink:0;"></div>
+        <div class="wf-line" style="width:110px;height:10px;"></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ── BENTO-SEKSJON ── -->
+  <section style="background:var(--wf-bg);padding:var(--section-padding);">
+    <div style="max-width:var(--content-width);margin:0 auto;">
+
+      <!-- Headline — sentrert -->
+      <div style="text-align:center;margin-bottom:40px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div class="wf-line" style="width:480px;height:14px;"></div>
+        <div class="wf-line" style="width:360px;height:14px;"></div>
+        <div class="wf-line" style="width:240px;height:14px;"></div>
+      </div>
+
+      <!-- Bento — full 12-kol bredde -->
+      <div style="display:flex;flex-direction:column;gap:var(--card-gap);">
+
+      <!-- Bento rad 1 — 4fr 5fr 3fr -->
+      <div class="bento-1">
+
+        <div style="min-height:260px;background:var(--wf-section);border-radius:var(--card-radius);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;">
+          <div class="wf-line" style="width:70%;height:9px;"></div>
+          <div class="wf-line-sm" style="width:50%;"></div>
+        </div>
+
+        <div style="min-height:260px;background:var(--wf-section);border-radius:var(--card-radius);padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;">
+          <div class="wf-line" style="width:60%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:45%;"></div>
+        </div>
+
+        <div style="min-height:260px;background:var(--wf-section);border-radius:var(--card-radius);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;">
+          <div class="wf-line" style="width:80%;height:9px;"></div>
+          <div class="wf-line-sm" style="width:60%;"></div>
+        </div>
+
+      </div>
+
+      <!-- Bento rad 2 — 5fr 4fr 3fr -->
+      <div class="bento-2">
+
+        <div style="min-height:260px;background:var(--wf-section);border-radius:var(--card-radius);padding:20px;display:flex;flex-direction:column;gap:8px;">
+          <div class="wf-line" style="width:65%;height:9px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:80%;"></div>
+        </div>
+
+        <div style="min-height:260px;background:var(--wf-section);border-radius:var(--card-radius);padding:20px;display:flex;flex-direction:column;gap:8px;">
+          <div class="wf-line" style="width:75%;height:9px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:90%;"></div>
+        </div>
+
+        <div style="min-height:260px;background:var(--wf-section);border-radius:var(--card-radius);padding:20px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;">
+          <div class="wf-line" style="width:80%;height:9px;"></div>
+          <div class="wf-line-sm" style="width:60%;"></div>
+        </div>
+
+      </div><!-- /rad 2 -->
+      </div><!-- /9-kol wrapper, midtstilt -->
+    </div>
+  </section>
+
+  <!-- ── TJENESTESEKSJON ── -->
+  <section style="background:var(--wf-section);padding:var(--section-padding);border-top:1px solid var(--wf-border);">
+    <div style="max-width:var(--content-width);margin:0 auto;">
+
+      <!-- Headline + knapp sentrert -->
+      <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:var(--text-sub-body-gap);margin-bottom:calc(var(--card-gap) * 2);">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+          <div class="wf-line" style="width:440px;height:14px;"></div>
+          <div class="wf-line" style="width:320px;height:14px;"></div>
+          <div class="wf-line" style="width:200px;height:14px;"></div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-btn);border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);">
+          <div class="wf-line-sm" style="width:100px;background:var(--wf-text-dark);"></div>
+          <div style="width:19px;height:19px;border-radius:50%;background:var(--wf-text-dark);"></div>
+        </div>
+      </div>
+
+      <!-- Rad 1 — 3 like kort -->
+      <div class="grid-3" style="margin-bottom:var(--card-gap);">
+        <!-- Kort 1 -->
+        <div style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);min-height:220px;">
+          <div class="wf-line" style="width:55%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:80%;"></div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;">
+            <div class="wf-line-sm" style="width:120px;background:var(--wf-line-dark);"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--wf-line-dark);"></div>
+          </div>
+        </div>
+        <!-- Kort 2 -->
+        <div style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);min-height:220px;">
+          <div class="wf-line" style="width:60%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:70%;"></div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;">
+            <div class="wf-line-sm" style="width:110px;background:var(--wf-line-dark);"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--wf-line-dark);"></div>
+          </div>
+        </div>
+        <!-- Kort 3 -->
+        <div style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);min-height:220px;">
+          <div class="wf-line" style="width:45%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:85%;"></div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;">
+            <div class="wf-line-sm" style="width:100px;background:var(--wf-line-dark);"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--wf-line-dark);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rad 2 — 3 like kort -->
+      <div class="grid-3" style="margin-bottom:var(--card-gap);">
+        <div style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);min-height:220px;">
+          <div class="wf-line" style="width:65%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:75%;"></div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;">
+            <div class="wf-line-sm" style="width:130px;background:var(--wf-line-dark);"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--wf-line-dark);"></div>
+          </div>
+        </div>
+        <div style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);min-height:220px;">
+          <div class="wf-line" style="width:55%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:60%;"></div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;">
+            <div class="wf-line-sm" style="width:120px;background:var(--wf-line-dark);"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--wf-line-dark);"></div>
+          </div>
+        </div>
+        <div style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);min-height:220px;">
+          <div class="wf-line" style="width:50%;height:11px;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:100%;"></div>
+          <div class="wf-line-sm" style="width:80%;"></div>
+          <div style="margin-top:auto;display:flex;align-items:center;gap:8px;">
+            <div class="wf-line-sm" style="width:115px;background:var(--wf-line-dark);"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--wf-line-dark);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rad 3 — 1 bred featured-kort -->
+      <div class="grid-2" style="background:var(--wf-bg);border-radius:var(--card-radius);padding:var(--section-padding);align-items:center;border:1px solid var(--wf-border);gap:calc(var(--card-gap) * 2);">
+        <!-- Venstre: tekst + liste + knapp -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="wf-line" style="width:80%;height:13px;"></div>
+          <div class="wf-line" style="width:65%;height:13px;"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <div class="wf-line-sm" style="width:140px;"></div>
+            <div class="wf-line-sm" style="width:160px;"></div>
+            <div class="wf-line-sm" style="width:120px;"></div>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-btn);border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);width:fit-content;margin-top:8px;">
+            <div class="wf-line-sm" style="width:80px;background:var(--wf-text-dark);"></div>
+            <div style="width:19px;height:19px;border-radius:50%;background:var(--wf-text-dark);"></div>
+          </div>
+        </div>
+        <!-- Høyre: bildeplassholder -->
+        <div class="wf-img" style="aspect-ratio:4/3;border-radius:var(--image-radius);">
+          <span class="wf-label">Bilde</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PRISSEKSJON ── -->
+  <section style="background:var(--wf-bg);padding:var(--section-padding);border-top:1px solid var(--wf-border);">
+    <div style="max-width:var(--content-width);margin:0 auto;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;text-align:center;">
+        <div class="wf-line-sm" style="width:60px;"></div>
+        <div class="wf-line" style="width:55%;height:18px;"></div>
+        <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
+          <div class="wf-line-sm" style="width:90%;margin:0 auto;"></div>
+          <div class="wf-line-sm" style="width:70%;margin:0 auto;"></div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-btn);border-radius:var(--btn-radius);padding:0 20px;height:var(--btn-height);margin-top:4px;">
+          <div class="wf-line-sm" style="width:120px;background:var(--wf-text-dark);"></div>
+        </div>
+      </div>
+      <div class="grid-12" style="margin-bottom:48px;">
+        <div style="grid-column:2/7;background:var(--wf-section);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);">
+          <div class="wf-line" style="width:65%;height:12px;"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <div class="wf-line-sm" style="width:100%;"></div>
+            <div class="wf-line-sm" style="width:100%;"></div>
+            <div class="wf-line-sm" style="width:80%;"></div>
+          </div>
+        </div>
+        <div style="grid-column:7/12;background:var(--wf-section);border-radius:var(--card-radius);padding:var(--title-padding);display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);">
+          <div class="wf-line" style="width:55%;height:12px;"></div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <div class="wf-line-sm" style="width:100%;"></div>
+            <div class="wf-line-sm" style="width:100%;"></div>
+            <div class="wf-line-sm" style="width:70%;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="width:100%;height:220px;background:var(--wf-section);border-radius:var(--card-radius);display:flex;align-items:center;justify-content:center;">
+        <span class="wf-label">Illustrasjon — full bredde</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STICKY SIDEBAR-SEKSJON ── -->
+  <section style="background:var(--wf-dark-bg);padding:var(--section-padding);">
+    <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:start;">
+
+      <!-- Venstre: kol 1–4 — sticky tekstblokk -->
+      <div class="col-1-5" style="position:sticky;top:30vh;">
+        <div style="display:flex;flex-direction:column;">
+          <div style="height:16px;background:var(--wf-dark-line);border-radius:4px;width:80%;margin-bottom:14px;"></div>
+          <div style="height:1px;background:var(--wf-dark-line);width:85%;margin-bottom:14px;"></div>
+          <div style="height:12px;background:var(--wf-dark-line);border-radius:3px;width:62%;margin-bottom:14px;"></div>
+          <div style="height:1px;background:var(--wf-dark-line);width:85%;margin-bottom:14px;"></div>
+          <div style="height:12px;background:var(--wf-dark-line);border-radius:3px;width:70%;"></div>
+        </div>
+      </div>
+
+      <!-- Høyre: kol 6–12 — 3 innholdsblokker -->
+      <div class="col-6-13" style="display:flex;flex-direction:column;gap:calc(var(--card-gap) * 2);">
+
+        <!-- Blokk 1 -->
+        <div style="display:flex;flex-direction:column;gap:var(--card-gap);">
+          <div style="height:14px;background:var(--wf-dark-title);border-radius:3px;width:100%;"></div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:95%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:90%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:85%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:70%;"></div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <div style="height:24px;width:80px;background:var(--wf-dark-badge);border-radius:6px;"></div>
+            <div style="height:24px;width:70px;background:var(--wf-dark-badge);border-radius:6px;"></div>
+          </div>
+          <div style="width:100%;aspect-ratio:16/9;background:var(--wf-dark-surface);border-radius:var(--card-radius);display:flex;align-items:center;justify-content:center;">
+            <span class="wf-label" style="color:rgba(255,255,255,0.3);">Bilde</span>
+          </div>
+        </div>
+
+        <!-- Blokk 2 -->
+        <div style="display:flex;flex-direction:column;gap:var(--card-gap);">
+          <div style="height:14px;background:var(--wf-dark-title);border-radius:3px;width:100%;"></div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:92%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:88%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:80%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:65%;"></div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <div style="height:24px;width:90px;background:var(--wf-dark-badge);border-radius:6px;"></div>
+            <div style="height:24px;width:65px;background:var(--wf-dark-badge);border-radius:6px;"></div>
+          </div>
+          <div style="width:100%;aspect-ratio:16/9;background:var(--wf-dark-surface);border-radius:var(--card-radius);display:flex;align-items:center;justify-content:center;">
+            <span class="wf-label" style="color:rgba(255,255,255,0.3);">Bilde</span>
+          </div>
+        </div>
+
+        <!-- Blokk 3 -->
+        <div style="display:flex;flex-direction:column;gap:var(--card-gap);">
+          <div style="height:14px;background:var(--wf-dark-title);border-radius:3px;width:100%;"></div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:94%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:87%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:75%;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:60%;"></div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <div style="height:24px;width:75px;background:var(--wf-dark-badge);border-radius:6px;"></div>
+            <div style="height:24px;width:85px;background:var(--wf-dark-badge);border-radius:6px;"></div>
+          </div>
+          <div style="width:100%;aspect-ratio:16/9;background:var(--wf-dark-surface);border-radius:var(--card-radius);display:flex;align-items:center;justify-content:center;">
+            <span class="wf-label" style="color:rgba(255,255,255,0.3);">Bilde</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Horisontal bildescroll — full bredde -->
+    <div style="margin-top:calc(var(--card-gap)*2);overflow:hidden;margin-left:calc(-1*var(--section-padding));margin-right:calc(-1*var(--section-padding));">
+      <div style="display:flex;gap:16px;padding:0 var(--section-padding);animation:scroll-left 18s linear infinite;width:max-content;">
+        <div class="wf-img" style="width:280px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:220px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:260px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:240px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:280px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:220px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <!-- Duplisert for sømløs loop -->
+        <div class="wf-img" style="width:280px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:220px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:260px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+        <div class="wf-img" style="width:240px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── FAQ-SEKSJON ── -->
+  <section style="background:var(--wf-section);border-top:1px solid var(--wf-border);padding:var(--section-padding);">
+    <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:start;">
+      <div class="col-1-5" style="display:flex;flex-direction:column;gap:var(--card-gap);">
+        <div class="wf-img" style="width:100%;aspect-ratio:5/4;border-radius:var(--card-radius);">
+          <span class="wf-label">Bilde</span>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-btn);border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);width:fit-content;">
+          <div class="wf-line-sm" style="width:120px;background:var(--wf-text-dark);"></div>
+          <div style="width:19px;height:19px;border-radius:50%;background:var(--wf-text-dark);flex-shrink:0;"></div>
+        </div>
+      </div>
+      <div class="col-6-13" style="display:flex;flex-direction:column;">
+        <div class="wf-line" style="width:55%;height:14px;margin-bottom:32px;"></div>
+        <div style="border-top:1px solid var(--wf-border);padding:20px 0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:32px;margin-bottom:12px;">
+            <div class="wf-line" style="width:40%;height:10px;"></div>
+            <div style="width:20px;height:20px;border-radius:4px;background:var(--wf-line-dark);flex-shrink:0;"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="wf-line-sm" style="width:100%;"></div>
+            <div class="wf-line-sm" style="width:100%;"></div>
+            <div class="wf-line-sm" style="width:65%;"></div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--wf-border);padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:32px;">
+          <div class="wf-line" style="width:50%;height:10px;"></div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--wf-line);flex-shrink:0;"></div>
+        </div>
+        <div style="border-top:1px solid var(--wf-border);padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:32px;">
+          <div class="wf-line" style="width:38%;height:10px;"></div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--wf-line);flex-shrink:0;"></div>
+        </div>
+        <div style="border-top:1px solid var(--wf-border);padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:32px;">
+          <div class="wf-line" style="width:44%;height:10px;"></div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--wf-line);flex-shrink:0;"></div>
+        </div>
+        <div style="border-top:1px solid var(--wf-border);padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:32px;">
+          <div class="wf-line" style="width:35%;height:10px;"></div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--wf-line);flex-shrink:0;"></div>
+        </div>
+        <div style="border-top:1px solid var(--wf-border);border-bottom:1px solid var(--wf-border);padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:32px;">
+          <div class="wf-line" style="width:42%;height:10px;"></div>
+          <div style="width:20px;height:20px;border-radius:4px;background:var(--wf-line);flex-shrink:0;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── FOOTER ── -->
+  <footer style="background:var(--wf-dark-bg);padding:var(--section-padding);">
+    <div style="max-width:var(--content-width);margin:0 auto;">
+
+      <!-- Topp: logo + CTA -->
+      <div class="grid-12" style="align-items:center;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:48px;">
+        <div style="grid-column:1/5;display:flex;flex-direction:column;gap:10px;">
+          <div style="height:14px;background:var(--wf-dark-line);border-radius:3px;width:50%;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.12);border-radius:3px;width:75%;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.12);border-radius:3px;width:55%;"></div>
+        </div>
+        <div style="grid-column:10/13;display:flex;justify-content:flex-end;">
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);">
+            <div style="height:8px;width:100px;background:var(--wf-dark-line);border-radius:3px;"></div>
+            <div style="width:19px;height:19px;border-radius:50%;background:var(--wf-dark-line);flex-shrink:0;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lenkekol -->
+      <div class="grid-12" style="margin-bottom:48px;">
+
+        <!-- Tjenester: kol 1–3 -->
+        <div style="grid-column:1/4;display:flex;flex-direction:column;">
+          <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:60%;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:70%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:55%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:65%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:75%;"></div>
+        </div>
+
+        <!-- Om oss: kol 4–6 -->
+        <div style="grid-column:4/7;display:flex;flex-direction:column;">
+          <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:50%;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:60%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:45%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:55%;"></div>
+        </div>
+
+        <!-- Kontakt: kol 7–9 -->
+        <div style="grid-column:7/10;display:flex;flex-direction:column;">
+          <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:55%;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:65%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:70%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:80%;"></div>
+        </div>
+
+        <!-- Sosialt: kol 10–12 -->
+        <div style="grid-column:10/13;display:flex;flex-direction:column;">
+          <div style="height:10px;background:var(--wf-dark-line);border-radius:3px;width:60%;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:55%;margin-bottom:12px;"></div>
+          <div style="height:8px;background:rgba(255,255,255,0.15);border-radius:3px;width:45%;"></div>
+        </div>
+
+      </div>
+
+      <!-- Bunn-bar -->
+      <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="height:7px;background:rgba(255,255,255,0.15);border-radius:3px;width:220px;"></div>
+        <div style="display:flex;gap:24px;">
+          <div style="height:7px;background:rgba(255,255,255,0.15);border-radius:3px;width:70px;"></div>
+          <div style="height:7px;background:rgba(255,255,255,0.15);border-radius:3px;width:50px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+
+</html>

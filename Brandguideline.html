@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brandguideline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS (speilet fra JS-objektet nedenfor) ── */
+    :root {
+      --card-radius:     16px;
+      --card-gap:        24px;
+      --image-radius:    10px;
+      --image-padding:   20px;
+      --title-padding:   24px;
+      --title-body-gap:  8px;
+      --card-title-size: 18px;
+      --card-body-size:  14px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #f4f4f5;
+      font-family: var(--font-heading);
+      min-height: 100vh;
+    }
+
+    section {
+      background: #ffffff;
+      min-height: 100vh;
+      padding: 80px 72px;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .label {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaaaaa;
+      margin-bottom: 20px;
+    }
+
+    .type-block {
+      padding: 48px 0;
+      border-bottom: 1px solid #ebebeb;
+    }
+    .type-block:last-child { border-bottom: none; }
+
+    .type-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .type-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #111;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .type-spec { font-size: 12px; font-weight: 400; color: #aaa; }
+
+    .headline-sample {
+      font-family: var(--font-heading);
+      font-size: 64px; font-weight: 600;
+      line-height: 1.05; letter-spacing: -0.03em; color: #111111;
+    }
+
+    .section-headline-sample {
+      font-family: var(--font-heading);
+      font-size: 40px; font-weight: 500;
+      line-height: 1.15; letter-spacing: -0.02em; color: #111111;
+    }
+
+    .subheading-sample {
+      font-family: var(--font-body);
+      font-size: 22px; font-weight: 500;
+      line-height: 1.3; letter-spacing: -0.01em; color: #111111;
+    }
+
+    .body-sample {
+      font-family: var(--font-body);
+      font-size: 16px; font-weight: 400;
+      line-height: 1.65; color: #444444;
+    }
+
+    /* ─── Boks-seksjon ─── */
+    .box-section {
+      background: #f7f7f7;
+      padding: 80px 72px;
+      border-top: 1px solid #ebebeb;
+    }
+    .box-section .label { margin-bottom: 48px; }
+
+    .box-demo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--card-gap);
+      margin-bottom: 64px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+    }
+
+    .card-img-wrap {
+      padding: var(--image-padding) var(--image-padding) 0 var(--image-padding);
+    }
+
+    .card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--image-radius);
+      background: linear-gradient(135deg, #d8d8d8 0%, #c4c4c4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 11px;
+      font-family: var(--font-body);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: var(--image-title-gap) var(--title-padding) 24px;
+    }
+
+    .card-title {
+      font-family: var(--font-body);
+      font-size: var(--card-title-size);
+      font-weight: 600;
+      color: #111;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: var(--title-body-gap);
+    }
+
+    .card-text {
+      font-family: var(--font-body);
+      font-size: var(--card-body-size);
+      font-weight: 400;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    .anno-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .anno-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #ebebeb;
+      padding: 20px 24px;
+    }
+
+    .anno-label {
+      font-family: var(--font-body);
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #aaa; margin-bottom: 6px;
+    }
+
+    .anno-value {
+      font-family: var(--font-heading);
+      font-size: 26px; font-weight: 600;
+      color: #111; letter-spacing: -0.02em;
+    }
+
+    .anno-desc {
+      font-family: var(--font-body);
+      font-size: 13px; color: #888; margin-top: 4px;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: 14px;
+    }
+
+    .spec-table thead tr { border-bottom: 2px solid #111; }
+
+    .spec-table th {
+      text-align: left;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #aaa; padding: 0 0 12px;
+    }
+    .spec-table th:not(:first-child) { padding-left: 24px; }
+
+    .spec-table td {
+      padding: 16px 0;
+      border-bottom: 1px solid #ebebeb;
+      color: #444; vertical-align: top;
+    }
+    .spec-table td:not(:first-child) { padding-left: 24px; }
+    .spec-table td:first-child { font-weight: 500; color: #111; }
+    .spec-table tr:last-child td { border-bottom: none; }
+
+    /* ─── Fargeseksjon ─── */
+    .color-group-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 500;
+      color: #111;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .color-alt-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #aaa;
+    }
+
+    .color-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .swatch {
+      width: 100%;
+      height: 80px;
+      border-radius: 10px;
+      margin-bottom: 4px;
+    }
+
+    .color-token {
+      font-family: 'IBM Plex Sans', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .color-hex {
+      font-family: 'IBM Plex Sans', monospace;
+      font-size: 13px;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .color-use {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.4;
+    }
+
+    /* ── Trykkbart tekstkort ── */
+    .text-card {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: var(--card-radius);
+      padding: var(--card-text-padding-y) var(--card-text-padding-x);
+      min-height: var(--card-text-min-height);
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: box-shadow 0.15s ease;
+    }
+    .text-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .text-card:hover .btn-text-label {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    code {
+      font-family: 'IBM Plex Sans', monospace;
+      font-size: 12px;
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── TYPOGRAFI ─────────────────────────────── -->
+  <section>
+  <div class="section-inner">
+    <p class="label">Typografi — Rubik</p>
+
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Headline</span>
+        <span class="type-spec">Rubik · 64px · SemiBold 600</span>
+      </div>
+      <p class="headline-sample">Nettsider som faktisk<br>representerer deg.</p>
+    </div>
+
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Seksjonsheadline</span>
+        <span class="type-spec">Rubik · 40px · Medium 500</span>
+      </div>
+      <p class="section-headline-sample">Alt du trenger — samlet ett sted.</p>
+    </div>
+
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Mellomtittel</span>
+        <span class="type-spec">IBM Plex Sans · 22px · Medium 500</span>
+      </div>
+      <p class="subheading-sample">Vi lager utkastet. Du bestemmer etterpå.</p>
+    </div>
+
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Undertekst</span>
+        <span class="type-spec">IBM Plex Sans · 16px · Regular 400</span>
+      </div>
+      <p class="body-sample">En nettside som faktisk representerer bedriften din. Ingen bindingstid, ingen skjulte kostnader — bare en ryddig nettside som fungerer.</p>
+    </div>
+
+    <!-- Tekst på mørk bakgrunn -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Innholdsheadline</span>
+        <span class="type-spec">Rubik · <span data-token-value="contentHeadlineSize"></span> · SemiBold 600</span>
+      </div>
+      <div style="background:var(--color-bg-dark);border-radius:var(--card-radius);padding:32px 40px;">
+        <p style="font-family:var(--font-heading);font-size:var(--content-headline-size);font-weight:600;line-height:1.1;letter-spacing:-0.02em;color:var(--color-text-on-dark);">Vi vil endre flyttebransjen!</p>
+      </div>
+    </div>
+
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Tekst på mørk bakgrunn</span>
+        <span class="type-spec">--color-text-on-dark · #f0f0ee</span>
+      </div>
+      <div style="background:var(--color-bg-dark);border-radius:var(--card-radius);padding:40px 48px;">
+        <p style="font-family:var(--font-heading);font-size:40px;font-weight:500;line-height:1.15;letter-spacing:-0.02em;color:var(--color-text-on-dark);margin-bottom:16px;">Alt du trenger — samlet ett sted.</p>
+        <p style="font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.65;color:var(--color-text-on-dark);opacity:0.75;max-width:560px;">En nettside som faktisk representerer bedriften din. Ingen bindingstid, ingen skjulte kostnader — bare en ryddig nettside som fungerer.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#f0f0ee;border:1px solid #ddd;"></span>--color-text-on-dark · #f0f0ee</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Heading: opacity 1</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Brødtekst: opacity 0.75</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Bakgrunn: --color-bg-dark</span>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ─── TEKSTAVSTANDER ──────────────────────── -->
+  <section style="background:#ffffff;padding:80px 72px;border-top:1px solid #ebebeb;">
+  <div class="section-inner">
+    <p class="label">Tekstavstander — frittstående seksjoner</p>
+
+    <!-- Visuell demo -->
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:64px;align-items:start;margin-top:8px;">
+
+      <!-- Venstre: annotert tekstblokk -->
+      <div>
+
+        <!-- Maks-bredde-indikator -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="flex:1;height:1px;background:#ebebeb;position:relative;">
+            <div style="position:absolute;left:0;top:-3px;width:1px;height:7px;background:#bbb;"></div>
+            <div style="position:absolute;right:0;top:-3px;width:1px;height:7px;background:#bbb;"></div>
+          </div>
+          <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:#bbb;white-space:nowrap;" data-token-value="textMaxWidth"></span>
+          <div style="flex:1;height:1px;background:#ebebeb;"></div>
+        </div>
+
+        <div style="max-width:680px;">
+
+          <!-- Seksjonsheadline -->
+          <p style="font-family:var(--font-heading);font-size:40px;font-weight:500;line-height:1.15;letter-spacing:-0.02em;color:#111;margin:0;">Alt du trenger — samlet ett sted.</p>
+
+          <!-- Gap 1: headline → mellomtittel -->
+          <div style="height:12px;display:flex;align-items:center;position:relative;margin:0;">
+            <div style="position:absolute;left:0;right:52px;top:50%;height:1px;background:rgba(234,88,12,0.25);"></div>
+            <span style="margin-left:auto;background:#ea580c;color:#fff;font-family:'IBM Plex Sans',monospace;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;" data-token-value="textHeadingSubGap"></span>
+          </div>
+
+          <!-- Mellomtittel -->
+          <p style="font-family:var(--font-body);font-size:22px;font-weight:500;line-height:1.3;letter-spacing:-0.01em;color:#111;margin:0;">Vi lager utkastet. Du bestemmer etterpå.</p>
+
+          <!-- Gap 2: mellomtittel → brødtekst -->
+          <div style="height:20px;display:flex;align-items:center;position:relative;margin:0;">
+            <div style="position:absolute;left:0;right:52px;top:50%;height:1px;background:rgba(37,99,235,0.25);"></div>
+            <span style="margin-left:auto;background:#2563eb;color:#fff;font-family:'IBM Plex Sans',monospace;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;" data-token-value="textSubBodyGap"></span>
+          </div>
+
+          <!-- Brødtekst 1 -->
+          <p style="font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.65;color:#444;margin:0;">En nettside som faktisk representerer bedriften din. Ingen bindingstid, ingen skjulte kostnader — bare en ryddig nettside som fungerer.</p>
+
+          <!-- Gap 3: avsnitt → avsnitt -->
+          <div style="height:24px;display:flex;align-items:center;position:relative;margin:0;">
+            <div style="position:absolute;left:0;right:52px;top:50%;height:1px;background:rgba(22,163,74,0.25);"></div>
+            <span style="margin-left:auto;background:#16a34a;color:#fff;font-family:'IBM Plex Sans',monospace;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;" data-token-value="textParaGap"></span>
+          </div>
+
+          <!-- Brødtekst 2 -->
+          <p style="font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.65;color:#444;margin:0;">Vi er tilgjengelige på telefon og e-post. Du slipper å forholde deg til et callsenter eller en supportkø — bare én fast kontaktperson.</p>
+
+        </div>
+      </div>
+
+      <!-- Høyre: forklaringspanel -->
+      <div style="display:flex;flex-direction:column;gap:16px;padding-top:60px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="display:inline-block;width:28px;height:3px;background:#ea580c;border-radius:2px;flex-shrink:0;"></span>
+          <div>
+            <p style="font-family:var(--font-body);font-size:12px;font-weight:600;color:#111;margin:0;">Headline → mellomtittel</p>
+            <p style="font-family:'IBM Plex Sans',monospace;font-size:11px;color:#aaa;margin:0;" data-token-value="textHeadingSubGap"></p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="display:inline-block;width:28px;height:3px;background:#2563eb;border-radius:2px;flex-shrink:0;"></span>
+          <div>
+            <p style="font-family:var(--font-body);font-size:12px;font-weight:600;color:#111;margin:0;">Mellomtittel → brødtekst</p>
+            <p style="font-family:'IBM Plex Sans',monospace;font-size:11px;color:#aaa;margin:0;" data-token-value="textSubBodyGap"></p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="display:inline-block;width:28px;height:3px;background:#16a34a;border-radius:2px;flex-shrink:0;"></span>
+          <div>
+            <p style="font-family:var(--font-body);font-size:12px;font-weight:600;color:#111;margin:0;">Avsnitt → avsnitt</p>
+            <p style="font-family:'IBM Plex Sans',monospace;font-size:11px;color:#aaa;margin:0;" data-token-value="textParaGap"></p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="display:inline-block;width:28px;height:3px;background:#bbb;border-radius:2px;flex-shrink:0;"></span>
+          <div>
+            <p style="font-family:var(--font-body);font-size:12px;font-weight:600;color:#111;margin:0;">Maks tekstbredde</p>
+            <p style="font-family:'IBM Plex Sans',monospace;font-size:11px;color:#aaa;margin:0;" data-token-value="textMaxWidth"></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Spec-tabell -->
+    <table class="spec-table" style="margin-top:64px;">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Verdi</th>
+          <th>CSS</th>
+          <th>Bruk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>--text-heading-sub-gap</td>
+          <td data-token-value="textHeadingSubGap"></td>
+          <td><code data-token-css="textHeadingSubGap"></code></td>
+          <td>Seksjonsheadline → mellomtittel</td>
+        </tr>
+        <tr>
+          <td>--text-sub-body-gap</td>
+          <td data-token-value="textSubBodyGap"></td>
+          <td><code data-token-css="textSubBodyGap"></code></td>
+          <td>Mellomtittel → brødtekst</td>
+        </tr>
+        <tr>
+          <td>--text-para-gap</td>
+          <td data-token-value="textParaGap"></td>
+          <td><code data-token-css="textParaGap"></code></td>
+          <td>Avstand mellom avsnitt</td>
+        </tr>
+        <tr>
+          <td>--text-max-width</td>
+          <td data-token-value="textMaxWidth"></td>
+          <td><code data-token-css="textMaxWidth"></code></td>
+          <td>Maks lesebredde for frittstående tekst</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  </section>
+
+  <!-- ─── BOKS-SEKSJON ─────────────────────────── -->
+  <section class="box-section">
+  <div class="section-inner">
+    <p class="label">Bokser og kort</p>
+
+    <!-- Visuell demo -->
+    <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">3 kolonner</p>
+    <div class="box-demo">
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">Skreddersydd nettside</p>
+          <p class="card-text">Vi designer og bygger en nettside som faktisk representerer bedriften din.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">Hosting og vedlikehold</p>
+          <p class="card-text">Ingen bindingstid, ingen skjulte kostnader. Alt er inkludert i én pris.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">Én fast kontaktperson</p>
+          <p class="card-text">Du får alltid svar fra den samme personen — ingen videresending.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4-kolonne variant -->
+    <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">4 kolonner</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--card-gap);margin-bottom:64px;">
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">Skreddersydd nettside</p>
+          <p class="card-text">Vi designer og bygger en nettside som faktisk representerer bedriften din.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">Hosting og vedlikehold</p>
+          <p class="card-text">Ingen bindingstid, ingen skjulte kostnader. Alt er inkludert i én pris.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">Én fast kontaktperson</p>
+          <p class="card-text">Du får alltid svar fra den samme personen — ingen videresending.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img-wrap"><div class="card-img-placeholder">Bilde</div></div>
+        <div class="card-body">
+          <p class="card-title">SSL og sikkerhet</p>
+          <p class="card-text">Sertifikat, oppdateringer og backup er inkludert — du trenger ikke tenke på det.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tekstkort — kun tekst, ingen bilde -->
+    <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">Tekstkort — ingen bilde</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--card-gap);margin-bottom:64px;">
+      <a href="#" class="text-card">
+        <p class="card-title" style="margin-bottom:var(--title-body-gap);">Privat flytting</p>
+        <p class="card-text" style="margin-bottom:var(--title-body-gap);">Vi hjelper deg med alt fra pakking til overtakelse. Én fast kontaktperson fra start til slutt.</p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:auto;border-top:1px solid #ebebeb;margin-left:calc(-1 * var(--card-text-padding-x));margin-right:calc(-1 * var(--card-text-padding-x));padding:16px var(--card-text-padding-x) 0;">
+          <span class="btn-text-label" style="font-family:var(--font-body);font-size:14px;font-weight:600;color:#28323b;">Se mer om Privat flytting</span>
+          <span style="width:19px;height:19px;border-radius:50%;background:#233D6F;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+            <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fdfcfb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="#" class="text-card">
+        <p class="card-title" style="margin-bottom:var(--title-body-gap);">Pianoflyting</p>
+        <p class="card-text" style="margin-bottom:var(--title-body-gap);">Spesialkompetanse på tunge og verdifulle instrumenter. Trygg transport med riktig utstyr.</p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:auto;border-top:1px solid #ebebeb;margin-left:calc(-1 * var(--card-text-padding-x));margin-right:calc(-1 * var(--card-text-padding-x));padding:16px var(--card-text-padding-x) 0;">
+          <span class="btn-text-label" style="font-family:var(--font-body);font-size:14px;font-weight:600;color:#28323b;">Se mer om Pianoflyting</span>
+          <span style="width:19px;height:19px;border-radius:50%;background:#233D6F;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+            <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fdfcfb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+      <a href="#" class="text-card">
+        <p class="card-title" style="margin-bottom:var(--title-body-gap);">Dødsbo</p>
+        <p class="card-text" style="margin-bottom:var(--title-body-gap);">Vi tar oss av alt praktisk — rydding, transport og håndtering med respekt og diskresjon.</p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:auto;border-top:1px solid #ebebeb;margin-left:calc(-1 * var(--card-text-padding-x));margin-right:calc(-1 * var(--card-text-padding-x));padding:16px var(--card-text-padding-x) 0;">
+          <span class="btn-text-label" style="font-family:var(--font-body);font-size:14px;font-weight:600;color:#28323b;">Se mer om Dødsbo</span>
+          <span style="width:19px;height:19px;border-radius:50%;background:#233D6F;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+            <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fdfcfb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Tekstkort — spesifikasjoner -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:64px;">
+      <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Tittel: IBM Plex Sans · <span data-token-value="cardTitleSize"></span> · SemiBold 600</span>
+      <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Brødtekst: IBM Plex Sans · <span data-token-value="cardBodySize"></span> · Regular 400</span>
+      <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Padding-X: <span data-token-value="cardTextPaddingX"></span></span>
+      <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Padding-Y: <span data-token-value="cardTextPaddingY"></span></span>
+      <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Tittel → tekst: <span data-token-value="titleBodyGap"></span></span>
+      <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Min-høyde: <span data-token-value="cardTextMinHeight"></span></span>
+    </div>
+
+    <!-- Nøkkeltall -->
+    <div class="anno-grid">
+      <div class="anno-card">
+        <p class="anno-label">Boksens hjørneradius</p>
+        <p class="anno-value" data-token-value="cardRadius"></p>
+        <p class="anno-desc">Ytre avrunding på selve kortet</p>
+      </div>
+      <div class="anno-card">
+        <p class="anno-label">Avstand mellom bokser</p>
+        <p class="anno-value" data-token-value="cardGap"></p>
+        <p class="anno-desc">Gap i grid mellom kort</p>
+      </div>
+      <div class="anno-card">
+        <p class="anno-label">Bildets hjørneradius</p>
+        <p class="anno-value" data-token-value="imageRadius"></p>
+        <p class="anno-desc">Avrunding på bilder inne i boks</p>
+      </div>
+      <div class="anno-card">
+        <p class="anno-label">Bilde → bokskant</p>
+        <p class="anno-value" data-token-value="imagePadding"></p>
+        <p class="anno-desc">Padding rundt bildet inne i kortet</p>
+      </div>
+      <div class="anno-card">
+        <p class="anno-label">Tittel → bokskant</p>
+        <p class="anno-value" data-token-value="titlePadding"></p>
+        <p class="anno-desc">Horisontal padding i kortets tekstområde</p>
+      </div>
+      <div class="anno-card">
+        <p class="anno-label">Tittel → undertekst</p>
+        <p class="anno-value" data-token-value="titleBodyGap"></p>
+        <p class="anno-desc">Vertikal avstand mellom tittel og brødtekst</p>
+      </div>
+    </div>
+
+    <!-- Tabell -->
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Egenskap</th>
+          <th>Verdi</th>
+          <th>Token / CSS</th>
+          <th>Merknad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Boksens hjørneradius</td>
+          <td data-token-value="cardRadius"></td>
+          <td><code data-token-css="cardRadius"></code></td>
+          <td>Gjelder ytre kortramme</td>
+        </tr>
+        <tr>
+          <td>Avstand mellom bokser</td>
+          <td data-token-value="cardGap"></td>
+          <td><code data-token-css="cardGap"></code></td>
+          <td>Grid-gap, horisontalt og vertikalt</td>
+        </tr>
+        <tr>
+          <td>Bilde → bokskant (padding)</td>
+          <td data-token-value="imagePadding"></td>
+          <td><code data-token-css="imagePadding"></code></td>
+          <td>Luft mellom bilde og kortets ytre kant</td>
+        </tr>
+        <tr>
+          <td>Bilde → tittel (avstand)</td>
+          <td data-token-value="imageTitleGap"></td>
+          <td><code data-token-css="imageTitleGap"></code></td>
+          <td>Vertikal luft mellom bildet og tittelen under</td>
+        </tr>
+        <tr>
+          <td>Bildets hjørneradius</td>
+          <td data-token-value="imageRadius"></td>
+          <td><code data-token-css="imageRadius"></code></td>
+          <td>Alltid noe mindre enn boksens radius</td>
+        </tr>
+        <tr>
+          <td>Tittel → bokskant (padding)</td>
+          <td data-token-value="titlePadding"></td>
+          <td><code data-token-css="titlePadding"></code></td>
+          <td>Tekstområdets indre padding</td>
+        </tr>
+        <tr>
+          <td>Tittel → undertekst</td>
+          <td data-token-value="titleBodyGap"></td>
+          <td><code data-token-css="titleBodyGap"></code></td>
+          <td>Avstand fra tittelen ned til brødtekst</td>
+        </tr>
+        <tr>
+          <td>Font — korttittel</td>
+          <td>IBM Plex Sans · SemiBold 600</td>
+          <td><code>font-family: 'IBM Plex Sans'</code></td>
+          <td>Samme font som <em>Mellomtittel</em> og <em>Undertekst</em> i typografi-seksjonen</td>
+        </tr>
+        <tr>
+          <td>Størrelse — korttittel</td>
+          <td data-token-value="cardTitleSize"></td>
+          <td><code data-token-css="cardTitleSize"></code></td>
+          <td>Mellom mellomtittel (22px) og undertekst — kompakt men lesbar</td>
+        </tr>
+        <tr>
+          <td>Font — kortbrødtekst</td>
+          <td>IBM Plex Sans · Regular 400</td>
+          <td><code>font-family: 'IBM Plex Sans'</code></td>
+          <td>Samme font som <em>Mellomtittel</em> og <em>Undertekst</em> i typografi-seksjonen</td>
+        </tr>
+        <tr>
+          <td>Størrelse — kortbrødtekst</td>
+          <td data-token-value="cardBodySize"></td>
+          <td><code data-token-css="cardBodySize"></code></td>
+          <td>2px under sidenes undertekst (16px) — holder kortene kompakte</td>
+        </tr>
+        <tr>
+          <td>Sidemargin</td>
+          <td data-token-value="sectionPadding"></td>
+          <td><code data-token-css="sectionPadding"></code></td>
+          <td>Luft mellom nettleservindu og innhold</td>
+        </tr>
+        <tr>
+          <td>Innholdsbredde</td>
+          <td data-token-value="contentWidth"></td>
+          <td><code data-token-css="contentWidth"></code></td>
+          <td>Maks innholdsbredde ved 1440px viewport</td>
+        </tr>
+        <tr>
+          <td>Boksformat (grid)</td>
+          <td>3 kolonner</td>
+          <td><code>grid-template-columns: repeat(3, 1fr)</code></td>
+          <td>Standardgrid for kortrekker</td>
+        </tr>
+        <tr>
+          <td>Grid — kolonner</td>
+          <td data-token-value="gridColumns"></td>
+          <td><code data-token-css="gridColumns"></code></td>
+          <td>Basegrid for hele layouten</td>
+        </tr>
+        <tr>
+          <td>Grid — gutter</td>
+          <td data-token-value="gridGutter"></td>
+          <td><code data-token-css="gridGutter"></code></td>
+          <td>Avstand mellom kolonner</td>
+        </tr>
+        <tr>
+          <td>Grid — kolonnebredde</td>
+          <td id="grid-col-width-value">—</td>
+          <td><code id="grid-col-width-css">—</code></td>
+          <td>Beregnet: (innholdsbredde − 11 × gutter) ÷ 12</td>
+        </tr>
+        <tr>
+          <td>Boksens kant</td>
+          <td>Ingen border</td>
+          <td><code>border: none</code></td>
+          <td>Kortene skilles av bakgrunnsfarge — ikke synlig ramme</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ─── Forstørret visuell spesifikasjon ─── -->
+    <div style="margin-top:64px;padding-top:48px;border-top:1px solid #ebebeb;">
+      <p class="label" style="margin-bottom:6px;">Forstørret spesifikasjon</p>
+      <p style="font-family:var(--font-body);font-size:13px;color:#bbb;margin-bottom:40px;">Skalert 2× for lesbarhet — ikke faktiske mål</p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+        <!-- Panel 1: Hjørneradius -->
+        <div style="background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:28px 24px;">
+          <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">Hjørneradius</p>
+          <svg width="100%" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="280" height="220" fill="#f3f4f6" rx="8"/>
+            <rect x="20" y="16" width="240" height="190" rx="32" fill="white" stroke="#e5e5e5" stroke-width="2"/>
+            <rect x="44" y="40" width="192" height="110" rx="20" fill="#e4e4e4"/>
+            <!-- Card corner (blue) -->
+            <line x1="20" y1="16" x2="52" y2="16" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="20" y1="16" x2="20" y2="48" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <path d="M 52,16 A 32,32 0 0,0 20,48" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="7,4"/>
+            <circle cx="20" cy="16" r="3" fill="#2563eb"/>
+            <rect x="54" y="14" width="36" height="16" rx="4" fill="#2563eb"/>
+            <text x="72" y="26" text-anchor="middle" fill="white" font-size="10" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="cardRadius"></text>
+            <!-- Image corner (orange) -->
+            <line x1="44" y1="40" x2="64" y2="40" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <line x1="44" y1="40" x2="44" y2="60" stroke="#ea580c" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <path d="M 64,40 A 20,20 0 0,0 44,60" fill="none" stroke="#ea580c" stroke-width="2.5" stroke-dasharray="5,3"/>
+            <circle cx="44" cy="40" r="2.5" fill="#ea580c"/>
+            <rect x="65" y="52" width="36" height="16" rx="4" fill="#ea580c"/>
+            <text x="83" y="64" text-anchor="middle" fill="white" font-size="10" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="imageRadius"></text>
+          </svg>
+          <div style="display:flex;gap:16px;margin-top:14px;">
+            <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+              <span style="display:inline-block;width:16px;height:2px;background:#2563eb;border-radius:2px;"></span>Boks (<span data-token-label="cardRadius"></span>)
+            </span>
+            <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+              <span style="display:inline-block;width:16px;height:2px;background:#ea580c;border-radius:2px;"></span>Bilde (<span data-token-label="imageRadius"></span>)
+            </span>
+          </div>
+        </div>
+
+        <!-- Panel 2: Bilde-padding + kortavstand -->
+        <div style="background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:28px 24px;">
+          <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">Bilde-padding + kortavstand</p>
+          <svg width="100%" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="280" height="220" fill="#f3f4f6" rx="8"/>
+            <rect x="8" y="20" width="112" height="180" rx="16" fill="white" stroke="#e5e5e5" stroke-width="2"/>
+            <rect x="32" y="44" width="64" height="40" rx="10" fill="#e4e4e4"/>
+            <rect x="168" y="20" width="104" height="180" rx="16" fill="white" stroke="#e5e5e5" stroke-width="2"/>
+            <rect x="192" y="44" width="56" height="36" rx="10" fill="#e4e4e4"/>
+            <!-- Top padding -->
+            <line x1="64" y1="20" x2="64" y2="44" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="59" y1="20" x2="69" y2="20" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="59" y1="44" x2="69" y2="44" stroke="#16a34a" stroke-width="1.5"/>
+            <rect x="67" y="25" width="24" height="13" rx="3" fill="#16a34a"/>
+            <text x="79" y="35" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="imagePadding"></text>
+            <!-- Left padding -->
+            <line x1="8" y1="68" x2="32" y2="68" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="8" y1="63" x2="8" y2="73" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="32" y1="63" x2="32" y2="73" stroke="#16a34a" stroke-width="1.5"/>
+            <rect x="9" y="72" width="24" height="13" rx="3" fill="#16a34a"/>
+            <text x="21" y="82" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="imagePadding"></text>
+            <!-- Right padding -->
+            <line x1="96" y1="68" x2="120" y2="68" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="96" y1="63" x2="96" y2="73" stroke="#16a34a" stroke-width="1.5"/>
+            <line x1="120" y1="63" x2="120" y2="73" stroke="#16a34a" stroke-width="1.5"/>
+            <rect x="97" y="72" width="24" height="13" rx="3" fill="#16a34a"/>
+            <text x="109" y="82" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="imagePadding"></text>
+            <!-- Card gap -->
+            <line x1="120" y1="110" x2="168" y2="110" stroke="#2563eb" stroke-width="1.5"/>
+            <line x1="120" y1="105" x2="120" y2="115" stroke="#2563eb" stroke-width="1.5"/>
+            <line x1="168" y1="105" x2="168" y2="115" stroke="#2563eb" stroke-width="1.5"/>
+            <rect x="132" y="99" width="24" height="13" rx="3" fill="#2563eb"/>
+            <text x="144" y="109" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="cardGap"></text>
+          </svg>
+          <div style="display:flex;gap:16px;margin-top:14px;">
+            <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+              <span style="display:inline-block;width:16px;height:2px;background:#16a34a;border-radius:2px;"></span>Bilde-padding (<span data-token-label="imagePadding"></span>)
+            </span>
+            <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+              <span style="display:inline-block;width:16px;height:2px;background:#2563eb;border-radius:2px;"></span>Kortavstand (<span data-token-label="cardGap"></span>)
+            </span>
+          </div>
+        </div>
+
+        <!-- Panel 3: Tekstinnhold -->
+        <div style="background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:28px 24px;">
+          <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">Tekstinnhold</p>
+          <svg width="100%" viewBox="0 0 280 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="280" height="220" fill="#f3f4f6" rx="8"/>
+            <rect x="20" y="16" width="240" height="190" rx="16" fill="white" stroke="#e5e5e5" stroke-width="2"/>
+            <rect x="68" y="48" width="144" height="18" rx="3" fill="#222"/>
+            <rect x="68" y="82" width="144" height="10" rx="2" fill="#ddd"/>
+            <rect x="68" y="97" width="120" height="10" rx="2" fill="#ddd"/>
+            <rect x="68" y="112" width="96" height="10" rx="2" fill="#ddd"/>
+            <!-- Left padding -->
+            <line x1="20" y1="57" x2="68" y2="57" stroke="#2563eb" stroke-width="1.5"/>
+            <line x1="20" y1="52" x2="20" y2="62" stroke="#2563eb" stroke-width="1.5"/>
+            <line x1="68" y1="52" x2="68" y2="62" stroke="#2563eb" stroke-width="1.5"/>
+            <rect x="24" y="39" width="24" height="13" rx="3" fill="#2563eb"/>
+            <text x="36" y="49" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="titlePadding"></text>
+            <!-- Title-body gap -->
+            <line x1="228" y1="66" x2="228" y2="82" stroke="#ea580c" stroke-width="1.5"/>
+            <line x1="223" y1="66" x2="233" y2="66" stroke="#ea580c" stroke-width="1.5"/>
+            <line x1="223" y1="82" x2="233" y2="82" stroke="#ea580c" stroke-width="1.5"/>
+            <rect x="234" y="67" width="24" height="13" rx="3" fill="#ea580c"/>
+            <text x="246" y="77" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="titleBodyGap"></text>
+            <!-- Font labels -->
+            <text x="68" y="146" fill="#999" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="600" data-token-fontlabel="cardTitleSize">IBM Plex Sans SemiBold · 20px</text>
+            <text x="68" y="162" fill="#bbb" font-size="9" font-family="IBM Plex Sans, sans-serif" data-token-fontlabel="cardBodySize">IBM Plex Sans Regular · 14px</text>
+          </svg>
+          <div style="display:flex;gap:16px;margin-top:14px;">
+            <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+              <span style="display:inline-block;width:16px;height:2px;background:#2563eb;border-radius:2px;"></span>Padding (<span data-token-label="titlePadding"></span>)
+            </span>
+            <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+              <span style="display:inline-block;width:16px;height:2px;background:#ea580c;border-radius:2px;"></span>Tittelgap (<span data-token-label="titleBodyGap"></span>)
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Panel 4: Innholdsbredde (full width) -->
+      <div style="margin-top:24px;background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:28px 24px;">
+        <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">Sidemargin og innholdsbredde</p>
+        <svg width="100%" viewBox="0 0 800 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Page background -->
+          <rect width="800" height="100" fill="#f3f4f6" rx="8"/>
+          <!-- Content area fill -->
+          <rect x="72" y="20" width="656" height="60" fill="#e8edf8" rx="4"/>
+          <!-- Left margin fill -->
+          <rect x="0" y="20" width="72" height="60" fill="#f3f4f6"/>
+          <!-- Right margin fill -->
+          <rect x="728" y="20" width="72" height="60" fill="#f3f4f6"/>
+
+          <!-- Left dashed boundary line -->
+          <line x1="72" y1="8" x2="72" y2="92" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <!-- Right dashed boundary line -->
+          <line x1="728" y1="8" x2="728" y2="92" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+          <!-- Left margin measurement -->
+          <line x1="0" y1="50" x2="72" y2="50" stroke="#ea580c" stroke-width="1.5"/>
+          <line x1="0" y1="44" x2="0" y2="56" stroke="#ea580c" stroke-width="1.5"/>
+          <line x1="72" y1="44" x2="72" y2="56" stroke="#ea580c" stroke-width="1.5"/>
+          <rect x="14" y="38" width="44" height="14" rx="3" fill="#ea580c"/>
+          <text x="36" y="49" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="sectionPadding"></text>
+
+          <!-- Right margin measurement -->
+          <line x1="728" y1="50" x2="800" y2="50" stroke="#ea580c" stroke-width="1.5"/>
+          <line x1="728" y1="44" x2="728" y2="56" stroke="#ea580c" stroke-width="1.5"/>
+          <line x1="800" y1="44" x2="800" y2="56" stroke="#ea580c" stroke-width="1.5"/>
+          <rect x="742" y="38" width="44" height="14" rx="3" fill="#ea580c"/>
+          <text x="764" y="49" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="sectionPadding"></text>
+
+          <!-- Content width measurement -->
+          <line x1="72" y1="88" x2="728" y2="88" stroke="#2563eb" stroke-width="1.5"/>
+          <line x1="72" y1="82" x2="72" y2="94" stroke="#2563eb" stroke-width="1.5"/>
+          <line x1="728" y1="82" x2="728" y2="94" stroke="#2563eb" stroke-width="1.5"/>
+          <rect x="352" y="78" width="96" height="14" rx="3" fill="#2563eb"/>
+          <text x="400" y="89" text-anchor="middle" fill="white" font-size="9" font-family="IBM Plex Sans, sans-serif" font-weight="700" data-token-label="contentWidth"></text>
+
+          <!-- Content area label -->
+          <text x="400" y="54" text-anchor="middle" fill="#6b7aaa" font-size="11" font-family="IBM Plex Sans, sans-serif" font-weight="500">Innholdsområde</text>
+          <!-- Margin labels -->
+          <text x="36" y="70" text-anchor="middle" fill="#aaa" font-size="8" font-family="IBM Plex Sans, sans-serif">Margin</text>
+          <text x="764" y="70" text-anchor="middle" fill="#aaa" font-size="8" font-family="IBM Plex Sans, sans-serif">Margin</text>
+        </svg>
+        <div style="display:flex;gap:24px;margin-top:14px;">
+          <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+            <span style="display:inline-block;width:16px;height:2px;background:#ea580c;border-radius:2px;"></span>Sidemargin (<span data-token-label="sectionPadding"></span> × 2)
+          </span>
+          <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+            <span style="display:inline-block;width:16px;height:2px;background:#2563eb;border-radius:2px;"></span>Innholdsbredde (<span data-token-label="contentWidth"></span> ved 1440px viewport)
+          </span>
+        </div>
+      </div>
+
+      <!-- Panel 5: Gridsystem -->
+      <div style="margin-top:24px;background:#fff;border:1px solid #ebebeb;border-radius:12px;padding:28px 24px;">
+        <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:20px;">Gridsystem — <span data-token-label="gridColumns"></span> kolonner</p>
+
+        <svg width="100%" viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg" id="grid-svg">
+          <!-- Background -->
+          <rect width="800" height="140" fill="#f3f4f6" rx="8"/>
+
+          <!-- 12 columns + 11 gutters drawn by JS -->
+          <g id="grid-cols"></g>
+
+          <!-- Gutter annotation (between col 1 and 2) — drawn by JS -->
+          <g id="grid-gutter-anno"></g>
+
+          <!-- Column label -->
+          <g id="grid-col-labels"></g>
+        </svg>
+
+        <div style="display:flex;gap:24px;margin-top:14px;">
+          <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+            <span style="display:inline-block;width:16px;height:12px;background:#dce8fb;border-radius:2px;border:1px solid #bdd0f5;"></span>Kolonne (1 av <span data-token-label="gridColumns"></span>)
+          </span>
+          <span style="display:flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:11px;color:#666;">
+            <span style="display:inline-block;width:16px;height:2px;background:#ea580c;border-radius:2px;"></span>Gutter (<span data-token-label="gridGutter"></span>)
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  </section>
+
+  <!-- ─── FARGESYSTEM ───────────────────────────── -->
+  <section style="background:#ffffff;padding:80px 72px;border-top:1px solid #ebebeb;overflow-x:clip;">
+  <div class="section-inner">
+
+    <p class="label">Fargesystem</p>
+
+    <!-- ── 1. Bakgrunner ─────────────────── -->
+    <div style="margin-bottom:64px;">
+      <p class="color-group-title">01 — Bakgrunner</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:16px;">
+
+        <!-- Alt. 1 -->
+        <div>
+          <p class="color-alt-label" style="margin-bottom:10px;">Alt. 1 — Varm / nøytral</p>
+          <div style="background:#fdfcfb;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;">
+            <div style="background:#ffffff;border-radius:8px;height:52px;border:1px solid #ebebeb;"></div>
+            <div style="height:8px;background:#ebebeb;border-radius:3px;width:70%;"></div>
+            <div style="height:6px;background:#f0f0f0;border-radius:3px;width:50%;"></div>
+          </div>
+          <div class="color-card">
+            <div class="swatch" style="background:#fdfcfb;border:1px solid #e5e7eb;"></div>
+            <p class="color-token">--color-bg-warm</p>
+            <p class="color-hex">#fdfcfb</p>
+            <p class="color-use">Primær body</p>
+          </div>
+        </div>
+
+        <!-- Alt. 2 -->
+        <div>
+          <p class="color-alt-label" style="margin-bottom:10px;">Alt. 2 — Lys blå</p>
+          <div style="background:#eef2f8;border:1px solid #dce5f0;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;">
+            <div style="background:#ffffff;border-radius:8px;height:52px;border:1px solid #dde8f2;"></div>
+            <div style="height:8px;background:#dde8f2;border-radius:3px;width:70%;"></div>
+            <div style="height:6px;background:#e5edf7;border-radius:3px;width:50%;"></div>
+          </div>
+          <div class="color-card">
+            <div class="swatch" style="background:#eef2f8;border:1px solid #e5e7eb;"></div>
+            <p class="color-token">--color-bg-cool</p>
+            <p class="color-hex">#eef2f8</p>
+            <p class="color-use">Primær body</p>
+          </div>
+        </div>
+
+        <!-- Alt. 3 -->
+        <div>
+          <p class="color-alt-label" style="margin-bottom:10px;">Alt. 3 — Mørk / blå</p>
+          <div style="background:#233D6F;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;">
+            <div style="background:#2d4f84;border-radius:8px;height:52px;"></div>
+            <div style="height:8px;background:#1a2f56;border-radius:3px;width:70%;"></div>
+            <div style="height:6px;background:#1e3460;border-radius:3px;width:50%;"></div>
+          </div>
+          <div class="color-card">
+            <div class="swatch" style="background:#233D6F;"></div>
+            <p class="color-token">--color-bg-dark</p>
+            <p class="color-hex">#233D6F</p>
+            <p class="color-use">Primær body</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 2. Tekst ──────────────────────── -->
+    <div style="margin-bottom:64px;">
+      <p class="color-group-title">02 — Tekst</p>
+
+      <!-- Visuell kontekst -->
+      <div style="background:#fdfcfb;border:1px solid #e5e7eb;border-radius:12px;padding:28px 32px;margin-top:16px;margin-bottom:16px;">
+        <p style="font-family:var(--font-heading);font-size:28px;font-weight:600;color:#28323b;line-height:1.15;letter-spacing:-0.02em;margin-bottom:10px;">Nettsider som faktisk representerer deg.</p>
+        <p style="font-family:var(--font-body);font-size:16px;font-weight:400;color:#4a4a4a;line-height:1.65;">En nettside som faktisk representerer bedriften din. Ingen bindingstid, ingen skjulte kostnader — bare en ryddig nettside som fungerer.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+        <div class="color-card">
+          <div class="swatch" style="background:#28323b;"></div>
+          <p class="color-token">--color-text</p>
+          <p class="color-hex">#28323b</p>
+          <p class="color-use">Primærtekst — headings</p>
+        </div>
+        <div class="color-card">
+          <div class="swatch" style="background:#4a4a4a;"></div>
+          <p class="color-token">--color-text-muted</p>
+          <p class="color-hex">#4a4a4a</p>
+          <p class="color-use">Brødtekst — løpende tekst</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. Bokser ──────────────────────── -->
+    <div style="margin-bottom:64px;">
+      <p class="color-group-title">03 — Bokser</p>
+
+      <!-- Rad 1: Lys bakgrunn — bryter ut av section-inner padding -->
+      <div style="margin:24px -72px 0;">
+        <div style="background:var(--color-bg-warm);border-top:1px solid #e5e7eb;padding:40px 72px 36px;">
+          <div style="display:flex;gap:28px;margin-bottom:24px;">
+            <span style="display:flex;align-items:center;gap:7px;">
+              <span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:var(--color-bg-warm);border:1px solid #ccc;flex-shrink:0;"></span>
+              <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:#aaa;letter-spacing:0.04em;">Bakgrunn — #fdfcfb</span>
+            </span>
+            <span style="display:flex;align-items:center;gap:7px;">
+              <span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:var(--color-card);border:1px solid #ccc;flex-shrink:0;"></span>
+              <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:#888;letter-spacing:0.04em;">Boks — #ffffff</span>
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
+            <div style="background:var(--color-card);border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-cool);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#dde4ee;border-radius:3px;margin-bottom:var(--title-body-gap);width:75%;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;width:60%;"></div>
+              </div>
+            </div>
+            <div style="background:var(--color-card);border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-cool);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#dde4ee;border-radius:3px;margin-bottom:var(--title-body-gap);width:65%;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;width:50%;"></div>
+              </div>
+            </div>
+            <div style="background:var(--color-card);border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-cool);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#dde4ee;border-radius:3px;margin-bottom:var(--title-body-gap);width:80%;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;width:65%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- ── Rad 2: Mørk bakgrunn — Lys boks — full viewport-bredde ── -->
+        <div style="margin:0 calc(50% - 50vw);background:var(--color-bg-dark);padding:40px max(72px, calc((100vw - 1200px) / 2)) 36px;">
+          <div style="display:flex;gap:28px;margin-bottom:24px;">
+            <span style="display:flex;align-items:center;gap:7px;">
+              <span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:var(--color-bg-dark);border:1px solid rgba(255,255,255,0.25);flex-shrink:0;"></span>
+              <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.04em;">Bakgrunn — #233D6F</span>
+            </span>
+            <span style="display:flex;align-items:center;gap:7px;">
+              <span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:#ffffff;border:1px solid rgba(255,255,255,0.3);flex-shrink:0;"></span>
+              <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:rgba(255,255,255,0.65);letter-spacing:0.04em;">Boks — #ffffff</span>
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
+            <div style="background:#ffffff;border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-cool);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#dde4ee;border-radius:3px;margin-bottom:var(--title-body-gap);width:75%;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;width:60%;"></div>
+              </div>
+            </div>
+            <div style="background:#ffffff;border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-cool);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#dde4ee;border-radius:3px;margin-bottom:var(--title-body-gap);width:65%;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;width:50%;"></div>
+              </div>
+            </div>
+            <div style="background:#ffffff;border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-cool);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#dde4ee;border-radius:3px;margin-bottom:var(--title-body-gap);width:80%;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#e8edf5;border-radius:3px;width:65%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Rad 3: Mørk bakgrunn — Løftet boks — full viewport-bredde ── -->
+        <div style="margin:0 calc(50% - 50vw);background:var(--color-bg-dark);padding:40px max(72px, calc((100vw - 1200px) / 2)) 36px;border-top:1px solid rgba(255,255,255,0.08);">
+          <div style="display:flex;gap:28px;margin-bottom:24px;">
+            <span style="display:flex;align-items:center;gap:7px;">
+              <span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:var(--color-bg-dark);border:1px solid rgba(255,255,255,0.25);flex-shrink:0;"></span>
+              <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.04em;">Bakgrunn — #233D6F</span>
+            </span>
+            <span style="display:flex;align-items:center;gap:7px;">
+              <span style="display:inline-block;width:13px;height:13px;border-radius:3px;background:var(--color-card-dark);border:1px solid rgba(255,255,255,0.15);flex-shrink:0;"></span>
+              <span style="font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:600;color:rgba(255,255,255,0.65);letter-spacing:0.04em;">Boks — #2d4f84</span>
+            </span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--card-gap);">
+            <div style="background:var(--color-card-dark);border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-dark);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#1a2f56;border-radius:3px;margin-bottom:var(--title-body-gap);width:75%;"></div>
+                <div style="height:7px;background:#1e3460;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#1e3460;border-radius:3px;width:60%;"></div>
+              </div>
+            </div>
+            <div style="background:var(--color-card-dark);border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-dark);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#1a2f56;border-radius:3px;margin-bottom:var(--title-body-gap);width:65%;"></div>
+                <div style="height:7px;background:#1e3460;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#1e3460;border-radius:3px;width:50%;"></div>
+              </div>
+            </div>
+            <div style="background:var(--color-card-dark);border-radius:var(--card-radius);">
+              <div style="padding:var(--image-padding) var(--image-padding) 0;">
+                <div style="height:120px;background:var(--color-bg-dark);border-radius:var(--image-radius);"></div>
+              </div>
+              <div style="padding:var(--image-title-gap) var(--title-padding) 24px;">
+                <div style="height:10px;background:#1a2f56;border-radius:3px;margin-bottom:var(--title-body-gap);width:80%;"></div>
+                <div style="height:7px;background:#1e3460;border-radius:3px;margin-bottom:5px;"></div>
+                <div style="height:7px;background:#1e3460;border-radius:3px;width:65%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Fargeswatches under -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:20px;">
+        <div class="color-card">
+          <div class="swatch" style="background:#f7f8fa;border:1px solid #e5e7eb;"></div>
+          <p class="color-token">--color-card</p>
+          <p class="color-hex">#f7f8fa</p>
+          <p class="color-use">Boks på lys bakgrunn</p>
+        </div>
+        <div class="color-card">
+          <div class="swatch" style="background:#f7f8fa;border:1px solid #e5e7eb;"></div>
+          <p class="color-token">--color-card</p>
+          <p class="color-hex">#f7f8fa</p>
+          <p class="color-use">Lys boks på mørk bakgrunn</p>
+        </div>
+        <div class="color-card">
+          <div class="swatch" style="background:#2d4f84;"></div>
+          <p class="color-token">--color-card-dark</p>
+          <p class="color-hex">#2d4f84</p>
+          <p class="color-use">Løftet boks på mørk bakgrunn</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── 4. Aksent / Badge ──────────────── -->
+    <div style="margin-bottom:64px;">
+      <p class="color-group-title">04 — Aksent</p>
+
+      <!-- Visuell kontekst -->
+      <div style="background:#fdfcfb;border:1px solid #e5e7eb;border-radius:12px;padding:28px 32px;margin-top:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="background:#dcfce7;color:#166534;border-radius:6px;padding:4px 12px;font-family:var(--font-body);font-size:13px;font-weight:600;">Populær</span>
+        <span style="background:#dcfce7;color:#166534;border-radius:6px;padding:4px 12px;font-family:var(--font-body);font-size:13px;font-weight:600;">Ny</span>
+        <span style="background:#dcfce7;color:#166534;border-radius:6px;padding:4px 12px;font-family:var(--font-body);font-size:13px;font-weight:600;">Anbefalt</span>
+        <span style="background:#dcfce7;color:#166534;border-radius:6px;padding:4px 12px;font-family:var(--font-body);font-size:13px;font-weight:600;">Inkludert</span>
+      </div>
+
+    </div>
+
+    <!-- ── Fargetabell ───────────────────── -->
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Gruppe</th>
+          <th>Token</th>
+          <th>Hex</th>
+          <th>Bruk</th>
+          <th>Visuelt</th>
+          <th>Regel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#aaa;font-weight:400;font-size:12px;vertical-align:middle;">Bakgrunn<br>Alt. 1</td>
+          <td>--color-bg-warm</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#fdfcfb;border-radius:3px;border:1px solid #e5e7eb;"></span>#fdfcfb</span></td>
+          <td>Primær body</td>
+          <td><span style="display:inline-block;width:80px;height:32px;background:#fdfcfb;border-radius:5px;border:1px solid #e5e7eb;vertical-align:middle;position:relative;"><span style="display:block;width:50px;height:20px;background:#fff;border-radius:3px;border:1px solid #ebebeb;position:absolute;top:6px;left:15px;"></span></span></td>
+          <td>Varm, nøytral</td>
+        </tr>
+        <tr>
+          <td style="color:#aaa;font-weight:400;font-size:12px;vertical-align:middle;">Bakgrunn<br>Alt. 2</td>
+          <td>--color-bg-cool</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#eef2f8;border-radius:3px;border:1px solid #e5e7eb;"></span>#eef2f8</span></td>
+          <td>Primær body</td>
+          <td><span style="display:inline-block;width:80px;height:32px;background:#eef2f8;border-radius:5px;border:1px solid #dce5f0;vertical-align:middle;position:relative;"><span style="display:block;width:50px;height:20px;background:#fff;border-radius:3px;border:1px solid #dde8f2;position:absolute;top:6px;left:15px;"></span></span></td>
+          <td>Lys blå, bridger til mørk</td>
+        </tr>
+        <tr>
+          <td style="color:#aaa;font-weight:400;font-size:12px;vertical-align:middle;">Bakgrunn<br>Alt. 3</td>
+          <td>--color-bg-dark</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#233D6F;border-radius:3px;"></span>#233D6F</span></td>
+          <td>Primær body</td>
+          <td><span style="display:inline-block;width:80px;height:32px;background:#233D6F;border-radius:5px;vertical-align:middle;position:relative;"><span style="display:block;width:50px;height:20px;background:#2d4f84;border-radius:3px;position:absolute;top:6px;left:15px;"></span></span></td>
+          <td>Mørk blå variant</td>
+        </tr>
+        <tr>
+          <td rowspan="2" style="color:#aaa;font-weight:400;font-size:12px;vertical-align:middle;">Tekst</td>
+          <td>--color-text</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#28323b;border-radius:3px;"></span>#28323b</span></td>
+          <td>Primærtekst</td>
+          <td><span style="font-family:var(--font-heading);font-size:15px;font-weight:600;color:#28323b;">Overskrift</span></td>
+          <td>Headings og viktig tekst</td>
+        </tr>
+        <tr>
+          <td>--color-text-muted</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#4a4a4a;border-radius:3px;"></span>#4a4a4a</span></td>
+          <td>Brødtekst</td>
+          <td><span style="font-family:var(--font-body);font-size:13px;color:#4a4a4a;">Brødtekst her</span></td>
+          <td>Brødtekst, metadata</td>
+        </tr>
+        <tr>
+          <td rowspan="3" style="color:#aaa;font-weight:400;font-size:12px;vertical-align:middle;">Bokser</td>
+          <td>--color-card</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#ffffff;border-radius:3px;border:1px solid #e5e7eb;"></span>#ffffff</span></td>
+          <td>Boks, lys bg</td>
+          <td><span style="display:inline-block;width:80px;height:32px;background:#fdfcfb;border-radius:5px;border:1px solid #e5e7eb;vertical-align:middle;position:relative;"><span style="display:block;width:50px;height:20px;background:#ffffff;border-radius:3px;border:1px solid #ebebeb;position:absolute;top:6px;left:15px;"></span></span></td>
+          <td>Hvit boks på lys bakgrunn</td>
+        </tr>
+        <tr>
+          <td>--color-card</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#ffffff;border-radius:3px;border:1px solid #e5e7eb;"></span>#ffffff</span></td>
+          <td>Boks, mørk bg</td>
+          <td><span style="display:inline-block;width:80px;height:32px;background:#233D6F;border-radius:5px;vertical-align:middle;position:relative;"><span style="display:block;width:50px;height:20px;background:#ffffff;border-radius:3px;position:absolute;top:6px;left:15px;"></span></span></td>
+          <td>Hvit boks på mørk bakgrunn</td>
+        </tr>
+        <tr>
+          <td>--color-card-dark</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#2d4f84;border-radius:3px;"></span>#2d4f84</span></td>
+          <td>Boks, mørk bg</td>
+          <td><span style="display:inline-block;width:80px;height:32px;background:#233D6F;border-radius:5px;vertical-align:middle;position:relative;"><span style="display:block;width:50px;height:20px;background:#2d4f84;border-radius:3px;position:absolute;top:6px;left:15px;"></span></span></td>
+          <td>Løftet blå — kun på #233D6F bakgrunn</td>
+        </tr>
+        <tr>
+          <td rowspan="2" style="color:#aaa;font-weight:400;font-size:12px;vertical-align:middle;">Aksent</td>
+          <td>--color-badge-bg</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#dcfce7;border-radius:3px;border:1px solid #bbf7d0;"></span>#dcfce7</span></td>
+          <td>Badge-bakgrunn</td>
+          <td rowspan="2"><span style="background:#dcfce7;color:#166534;border-radius:5px;padding:3px 10px;font-family:var(--font-body);font-size:12px;font-weight:600;white-space:nowrap;">Anbefalt</span></td>
+          <td>KUN badges — aldri seksjons-bg</td>
+        </tr>
+        <tr>
+          <td>--color-badge-text</td>
+          <td><span style="display:inline-flex;align-items:center;gap:8px;"><span style="display:inline-block;width:14px;height:14px;background:#166534;border-radius:3px;"></span>#166534</span></td>
+          <td>Badge-tekst</td>
+          <td>Kun med --color-badge-bg</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  </section>
+
+  <!-- ─── KNAPPER ──────────────────────────── -->
+  <section style="background:#ffffff;padding:80px 72px;border-top:1px solid #ebebeb;">
+  <div class="section-inner">
+
+    <p class="label">Knapper</p>
+
+    <!-- Variant 1 — Lys -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Variant 1 — Lys</span>
+      </div>
+      <button style="display:inline-flex;align-items:center;gap:8px;background:#f3eeee;border:none;border-radius:10px;padding:0 12px 0 18px;height:44px;cursor:pointer;">
+        <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#292d4d;white-space:nowrap;">Planlegg flytting</span>
+        <span style="width:19px;height:19px;border-radius:50%;background:#233d6f;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+          <svg width="9" height="8" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#f3eeee" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#f3eeee;border:1px solid #ddd;"></span>#f3eeee — bakgrunn</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#292d4d;"></span>#292d4d — tekst</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#233d6f;"></span>#233d6f — sirkel</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">h: 44px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">border-radius: 10px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">IBM Plex Sans Medium 15px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">sirkel ø 19px</span>
+      </div>
+    </div>
+
+    <!-- Variant 2 — Mørk -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Variant 2 — Mørk</span>
+      </div>
+      <button style="display:inline-flex;align-items:center;gap:8px;background:#292d4d;border:none;border-radius:10px;padding:0 12px 0 18px;height:44px;cursor:pointer;">
+        <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#f3eeee;white-space:nowrap;">Planlegg flytting</span>
+        <span style="width:19px;height:19px;border-radius:50%;background:#f3eeee;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+          <svg width="9" height="8" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#233d6f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#292d4d;"></span>#292d4d — bakgrunn</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#f3eeee;border:1px solid #ddd;"></span>#f3eeee — tekst</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#f3eeee;border:1px solid #ddd;"></span>#f3eeee — sirkel</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#233d6f;"></span>#233d6f — ikon</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">h: 44px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">border-radius: 10px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">IBM Plex Sans Medium 15px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">sirkel ø 19px</span>
+      </div>
+    </div>
+
+    <!-- Variant 3 — Tekstknapp -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Variant 3 — Tekstknapp</span>
+      </div>
+      <style>
+        .btn-text-label {
+          background-image: linear-gradient(#273352, #273352);
+          background-size: 0% 1px;
+          background-position: left bottom;
+          background-repeat: no-repeat;
+          transition: background-size 280ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .btn-text:hover .btn-text-label {
+          background-size: 100% 1px;
+        }
+      </style>
+      <a href="#" class="btn-text" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;">
+        <span class="btn-text-label" style="font-family:var(--font-body);font-weight:700;font-size:20px;color:#273352;line-height:26px;white-space:nowrap;">Se mer om Kontoravvikling</span>
+        <span style="width:25px;height:25px;border-radius:50%;background:#273352;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+          <svg width="12" height="11" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#273352;"></span>#273352 — tekst + sirkel</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">IBM Plex Sans Bold 20px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">sirkel ø 25px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">hover: underline</span>
+      </div>
+    </div>
+
+    <!-- Variant 4 — Lys blå -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Variant 4 — Lys blå</span>
+      </div>
+      <button style="display:inline-flex;align-items:center;gap:8px;background:#3882E9;border:none;border-radius:10px;padding:0 12px 0 18px;height:44px;cursor:pointer;">
+        <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
+        <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+          <svg width="9" height="8" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#3882E9;"></span>#3882E9 — bakgrunn</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#ffffff;border:1px solid #ddd;"></span>#ffffff — tekst + ikon</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">h: 44px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">border-radius: 10px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">IBM Plex Sans Medium 15px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">sirkel ø 19px</span>
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+  <!-- ─── NAVIGASJON / DROPDOWN ────────────────── -->
+  <section style="background:#ffffff;padding:80px 72px;border-top:1px solid #ebebeb;">
+  <div class="section-inner">
+
+    <p class="label">Navigasjon — Mega-menu dropdown</p>
+
+    <!-- Visuell demo -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Dropdown-panel</span>
+        <span class="type-spec">Hover på nav-element → åpner panel</span>
+      </div>
+
+      <!-- Rendret dropdown -->
+      <div style="background:#ffffff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.08);overflow:hidden;">
+        <!-- Simulert nav-bar -->
+        <div style="height:52px;background:#ffffff;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 72px;gap:32px;">
+          <span style="font-family:var(--font-heading);font-size:13px;font-weight:600;color:#111;">Mediegruppen</span>
+          <div style="width:1px;height:16px;background:#e0e0e0;"></div>
+          <span style="font-family:var(--font-body);font-size:13px;color:#999;">Fundament</span>
+          <span style="font-family:var(--font-body);font-size:13px;color:#999;">Delside 2</span>
+          <div style="display:flex;align-items:center;gap:5px;">
+            <span style="font-family:var(--font-body);font-size:13px;font-weight:600;color:#233D6F;">Tjenester</span>
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#233D6F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <!-- Dropdown-panel -->
+        <div style="background:#ffffff;padding:36px 72px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start;">
+
+          <!-- Kolonne 1 — Kategori 1 -->
+          <div style="grid-column:3/6;grid-row:1;">
+            <p style="font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#111;padding-bottom:10px;border-bottom:1px solid #ebebeb;margin-bottom:14px;">Kategori 1</p>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 1</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 2</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 3</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 4</a>
+          </div>
+
+          <!-- Kolonne 2 — Kategori 2 -->
+          <div style="grid-column:6/8;grid-row:1;">
+            <p style="font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#111;padding-bottom:10px;border-bottom:1px solid #ebebeb;margin-bottom:14px;">Kategori 2</p>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 1</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 2</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:15px;color:#444;text-decoration:none;padding:7px 0;">Innholdsside 3</a>
+          </div>
+
+          <!-- Promo-kort -->
+          <div style="grid-column:8/11;grid-row:1;display:flex;flex-direction:column;gap:12px;">
+            <div style="width:100%;aspect-ratio:16/9;background:#f4f4f5;border-radius:10px;border:1px solid #ebebeb;"></div>
+            <p style="font-family:var(--font-body);font-size:14px;font-weight:600;color:#111;">Innholdssidetittel</p>
+            <p style="font-family:var(--font-body);font-size:12px;color:#888;line-height:1.5;">Kort beskrivelse av innholdssiden eller CTA-tekst her.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Spesifikasjoner -->
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Spesifikasjoner</span>
+      </div>
+
+      <!-- Panel -->
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Panel</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">background: #ffffff</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">box-shadow: 0 8px 32px rgba(0,0,0,0.08)</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">padding: 36px 72px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">grid: repeat(12, 1fr)</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">gap: 24px</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">animasjon: opacity + translateY(-8px) — 180ms ease</span>
+      </div>
+
+      <!-- Kategori-heading -->
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Kategori-heading</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">--nav-cat-size · <span data-token-value="navCatSize"></span> · SemiBold 600</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">letter-spacing: 0.1em · uppercase · store bokstaver</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#111111;"></span>--color-nav-cat · #111</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">padding-bottom: 10px · border-bottom: 1px solid #ebebeb</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">margin-bottom: 14px</span>
+      </div>
+
+      <!-- Lenker -->
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Lenker</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">--nav-link-size · <span data-token-value="navLinkSize"></span> · Regular 400</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#444444;"></span>--color-nav-link · #444</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#111111;"></span>--color-nav-link-hover · #111</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">--nav-link-padding · <span data-token-value="navLinkPadding"></span> 0</span>
+      </div>
+
+      <!-- Promo-kort -->
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Promo-kort</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Bilde: aspect-ratio 16/9 · border-radius var(--image-radius)</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#f4f4f5;border:1px solid #ddd;"></span>Bilde-bg: #f4f4f5</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Tittel: IBM Plex Sans · 14px · 600 · --color-nav-promo-title</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">Beskrivelse: IBM Plex Sans · 12px · 400 · --color-nav-promo-desc</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">gap: 12px</span>
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────── -->
+  <section style="background:#ffffff;padding:80px 72px;border-top:1px solid #ebebeb;">
+  <div class="section-inner">
+    <p class="label">Footer</p>
+
+    <div class="type-block">
+      <div class="type-meta">
+        <span class="type-name">Visuell demo</span>
+      </div>
+
+      <!-- Rendret footer -->
+      <div style="background:var(--color-bg-dark);border-radius:var(--card-radius);overflow:hidden;padding:var(--section-padding);">
+
+        <!-- Topp: Logo + CTA -->
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--card-gap);align-items:center;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:48px;">
+          <div style="grid-column:1/5;">
+            <p style="font-family:var(--font-heading);font-size:18px;font-weight:600;color:#ffffff;margin-bottom:8px;">Mediegruppen</p>
+            <p style="font-family:var(--font-body);font-size:14px;color:var(--color-footer-link);line-height:1.5;">Nettsider som faktisk representerer deg.</p>
+          </div>
+          <div style="grid-column:10/13;display:flex;justify-content:flex-end;">
+            <button style="display:inline-flex;align-items:center;gap:8px;background:#ffffff;border:none;border-radius:var(--btn-radius,10px);padding:0 12px 0 18px;height:var(--btn-height,44px);cursor:pointer;">
+              <span style="font-family:var(--font-body);font-size:15px;font-weight:500;color:#233D6F;">Planlegg flytting</span>
+              <span style="width:19px;height:19px;border-radius:50%;background:#233D6F;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+                <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lenkekol -->
+        <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:var(--card-gap);margin-bottom:48px;">
+
+          <!-- Tjenester -->
+          <div style="grid-column:1/4;">
+            <p style="font-family:var(--font-body);font-size:var(--nav-cat-size,12px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;">Tjenester</p>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Privat flytting</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Pianoflyting</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Dødsbo</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Distanseflytting</a>
+          </div>
+
+          <!-- Om oss -->
+          <div style="grid-column:4/7;">
+            <p style="font-family:var(--font-body);font-size:var(--nav-cat-size,12px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;">Om oss</p>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Vår historie</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Teamet</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Priser</a>
+          </div>
+
+          <!-- Kontakt -->
+          <div style="grid-column:7/10;">
+            <p style="font-family:var(--font-body);font-size:var(--nav-cat-size,12px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;">Kontakt</p>
+            <p style="font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);padding:8px 0;">Oslo, Norge</p>
+            <p style="font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);padding:8px 0;">+47 XXX XX XXX</p>
+            <p style="font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);padding:8px 0;">hei@mediegruppen.no</p>
+          </div>
+
+          <!-- Sosialt -->
+          <div style="grid-column:10/13;">
+            <p style="font-family:var(--font-body);font-size:var(--nav-cat-size,12px);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#ffffff;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.15);margin-bottom:14px;">Følg oss</p>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Instagram</a>
+            <a href="#" style="display:block;font-family:var(--font-body);font-size:var(--footer-link-size,14px);color:var(--color-footer-link);text-decoration:none;padding:8px 0;">Facebook</a>
+          </div>
+
+        </div>
+
+        <!-- Bunn-bar -->
+        <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;">
+          <p style="font-family:var(--font-body);font-size:12px;color:var(--color-footer-muted);">© 2026 Mediegruppen. Alle rettigheter forbeholdt.</p>
+          <div style="display:flex;gap:24px;">
+            <a href="#" style="font-family:var(--font-body);font-size:12px;color:var(--color-footer-muted);text-decoration:none;">Personvern</a>
+            <a href="#" style="font-family:var(--font-body);font-size:12px;color:var(--color-footer-muted);text-decoration:none;">Vilkår</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Spesifikasjoner -->
+    <div class="type-block">
+      <div class="type-meta"><span class="type-name">Spesifikasjoner</span></div>
+
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Layout</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">background: --color-bg-dark</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">padding: --section-padding (<span data-token-value="sectionPadding"></span>)</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">grid: repeat(12, 1fr) · gap: --card-gap (<span data-token-value="cardGap"></span>)</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">separator: 1px solid rgba(255,255,255,0.08)</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">logo+CTA padding-bottom: --footer-padding-bottom (<span data-token-value="footerPaddingBottom"></span>)</span>
+      </div>
+
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Kategori-heading</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">--nav-cat-size (<span data-token-value="navCatSize"></span>) · SemiBold 600 · uppercase</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#ffffff;border:1px solid #ddd;"></span>#ffffff</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">border-bottom: 1px solid rgba(255,255,255,0.15)</span>
+      </div>
+
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Lenker</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">--footer-link-size (<span data-token-value="footerLinkSize"></span>) · Regular 400</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#a8bcd4;"></span>--color-footer-link</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#ffffff;border:1px solid #ddd;"></span>--color-footer-link-hover · #fff</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">padding: --footer-link-padding (<span data-token-value="footerLinkPadding"></span>) 0</span>
+      </div>
+
+      <p style="font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Bunn-bar</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">IBM Plex Sans · 12px · Regular</span>
+        <span style="display:inline-flex;align-items:center;gap:6px;background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;"><span style="width:10px;height:10px;border-radius:3px;background:#6b82a0;"></span>--color-footer-muted</span>
+        <span style="background:#f4f4f5;border-radius:6px;padding:5px 10px;font-family:'IBM Plex Sans',monospace;font-size:11px;font-weight:500;color:#555;">border-top: 1px solid rgba(255,255,255,0.08) · padding-top: 24px</span>
+      </div>
+    </div>
+
+  </div>
+  </section>
+
+  <script>
+    // ─────────────────────────────────────────────────────
+    //  TOKENS — endre verdier her, alt oppdateres automatisk
+    // ─────────────────────────────────────────────────────
+    const TOKENS = {
+      textHeadingSubGap: { value: 12,  unit: 'px', css: 'margin-bottom: {v}' },
+      textSubBodyGap:    { value: 20,  unit: 'px', css: 'margin-bottom: {v}' },
+      textParaGap:       { value: 24,  unit: 'px', css: 'margin-bottom: {v}' },
+      textMaxWidth:      { value: 680, unit: 'px', css: 'max-width: {v}' },
+      cardRadius:    { value: 16, unit: 'px', css: 'border-radius: {v}' },
+      cardGap:       { value: 24, unit: 'px', css: 'gap: {v}' },
+      imageRadius:   { value: 10, unit: 'px', css: 'border-radius: {v}' },
+      imagePadding:  { value: 20, unit: 'px', css: 'padding: {v} {v} 0' },
+      imageTitleGap: { value: 20, unit: 'px', css: 'padding-top: {v}' },
+      titlePadding:  { value: 24, unit: 'px', css: 'padding: 20px {v} 24px' },
+      titleBodyGap:  { value: 20, unit: 'px', css: 'margin-bottom: {v}' },
+      cardTitleSize:  { value: 24,   unit: 'px',  css: 'font-size: {v}; font-weight: 600' },
+      cardBodySize:   { value: 16,   unit: 'px',  css: 'font-size: {v}; font-weight: 400' },
+      sectionPadding: { value: 72,   unit: 'px',  css: 'padding-left: {v}; padding-right: {v}' },
+      contentWidth:   { value: 1200, unit: 'px',  css: 'max-width: {v}' },
+      gridColumns:    { value: 12,   unit: '',    css: 'grid-template-columns: repeat({v}, 1fr)' },
+      gridGutter:     { value: 24,   unit: 'px',  css: 'gap: {v}' },
+      cardHeadlineSize:    { value: 28, unit: 'px', css: 'font-size: {v}' },
+      contentHeadlineSize: { value: 32, unit: 'px', css: 'font-size: {v}' },
+      cardTextPaddingX:    { value: 24, unit: 'px', css: 'padding-left: {v}; padding-right: {v}' },
+      cardTextPaddingY:    { value: 32, unit: 'px', css: 'padding-top: {v}; padding-bottom: {v}' },
+      cardTextMinHeight:   { value: 300, unit: 'px', css: 'min-height: {v}' },
+      footerPaddingBottom: { value: 48, unit: 'px', css: 'padding-bottom: {v}' },
+      footerLinkSize:      { value: 14, unit: 'px', css: 'font-size: {v}' },
+      footerLinkPadding:   { value: 8,  unit: 'px', css: 'padding: {v} 0' },
+      navCatSize:     { value: 12,   unit: 'px',  css: 'font-size: {v}' },
+      navLinkSize:    { value: 15,   unit: 'px',  css: 'font-size: {v}' },
+      navLinkPadding: { value: 7,    unit: 'px',  css: 'padding: {v} 0' },
+      navPaddingV:    { value: 36,   unit: 'px',  css: 'padding-top: {v}; padding-bottom: {v}' },
+    };
+
+    const FONTS = {
+      '--font-heading': "'Rubik', sans-serif",
+      '--font-body':    "'IBM Plex Sans', sans-serif",
+    };
+
+    const COLORS = {
+      '--color-bg-warm':    '#fdfcfb',
+      '--color-bg-cool':    '#eef2f8',
+      '--color-bg-dark':    '#233D6F',
+      '--color-card':       '#f7f8fa',
+      '--color-card-dark':  '#2d4f84',
+      '--color-text':            '#28323b',
+      '--color-text-muted':      '#4a4a4a',
+      '--color-nav-cat':         '#111111',
+      '--color-nav-link':        '#444444',
+      '--color-nav-link-hover':  '#111111',
+      '--color-nav-promo-title': '#111111',
+      '--color-nav-promo-desc':  '#888888',
+      '--color-btn-blue':        '#3882E9',
+      '--color-footer-link':     '#a8bcd4',
+      '--color-footer-link-hover': '#ffffff',
+      '--color-footer-muted':    '#6b82a0',
+      '--color-footer-separator':    'rgba(255,255,255,0.08)',
+      '--color-bg-darker':           '#1a2f56',
+      '--color-text-on-dark':        '#ffffff',
+      '--color-text-on-dark-muted':  'rgba(255,255,255,0.65)',
+    };
+
+    const root = document.documentElement;
+
+    // 1. Sett font-tokens
+    Object.entries(FONTS).forEach(([k, v]) => root.style.setProperty(k, v));
+
+    // 2. Sett fargetokens som CSS-variabler
+    Object.entries(COLORS).forEach(([k, v]) => root.style.setProperty(k, v));
+
+    // 2. Oppdater størrelses-CSS-variabler fra TOKENS
+    Object.entries(TOKENS).forEach(([key, t]) => {
+      const cssVar = '--' + key.replace(/([A-Z])/g, c => '-' + c.toLowerCase());
+      root.style.setProperty(cssVar, t.value + t.unit);
+    });
+
+    // 2. Fyll ut data-token-value (anno-grid + tabell)
+    document.querySelectorAll('[data-token-value]').forEach(el => {
+      const t = TOKENS[el.dataset.tokenValue];
+      if (t) el.textContent = t.value + t.unit;
+    });
+
+    // 3. Fyll ut data-token-css (tabell)
+    document.querySelectorAll('[data-token-css]').forEach(el => {
+      const t = TOKENS[el.dataset.tokenCss];
+      if (t) el.textContent = t.css.replace(/{v}/g, t.value + t.unit);
+    });
+
+    // 4. Fyll ut data-token-label (SVG-annotations + forklaringstekst)
+    document.querySelectorAll('[data-token-label]').forEach(el => {
+      const t = TOKENS[el.dataset.tokenLabel];
+      if (t) el.textContent = t.value + t.unit;
+    });
+
+    // 5. Tegn gridsystem-SVG fra tokens
+    (function() {
+      const ns     = 'http://www.w3.org/2000/svg';
+      const mk = (tag, attrs) => {
+        const el = document.createElementNS(ns, tag);
+        Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+        return el;
+      };
+
+      const cols   = TOKENS.gridColumns.value;
+      const svgW   = 800;
+      const padX   = 24;
+      const rowY   = 20;
+      const rowH   = 56;
+      const gutter = TOKENS.gridGutter.value;
+      const colW   = (svgW - padX * 2 - (cols - 1) * gutter) / cols;
+
+      const colG   = document.getElementById('grid-cols');
+      const annoG  = document.getElementById('grid-gutter-anno');
+      const labelG = document.getElementById('grid-col-labels');
+      if (!colG) return;
+
+      // Tegn alle kolonner
+      for (let i = 0; i < cols; i++) {
+        const x = padX + i * (colW + gutter);
+        colG.appendChild(mk('rect', { x, y: rowY, width: colW, height: rowH, rx: '3', fill: '#dce8fb', stroke: '#bdd0f5', 'stroke-width': '1' }));
+        const txt = mk('text', { x: x + colW / 2, y: rowY + rowH / 2 + 4, 'text-anchor': 'middle', fill: '#6b91d4', 'font-size': '10', 'font-family': 'IBM Plex Sans, sans-serif', 'font-weight': '600' });
+        txt.textContent = i + 1;
+        labelG.appendChild(txt);
+      }
+
+      // Gutter-annotasjon (mellom kol 1 og 2)
+      const g1x  = padX + colW;
+      const g2x  = g1x + gutter;
+      const gutY = rowY + rowH + 10;
+      annoG.appendChild(mk('line', { x1: g1x, y1: gutY, x2: g2x, y2: gutY, stroke: '#ea580c', 'stroke-width': '1.5' }));
+      annoG.appendChild(mk('line', { x1: g1x, y1: gutY - 4, x2: g1x, y2: gutY + 4, stroke: '#ea580c', 'stroke-width': '1.5' }));
+      annoG.appendChild(mk('line', { x1: g2x, y1: gutY - 4, x2: g2x, y2: gutY + 4, stroke: '#ea580c', 'stroke-width': '1.5' }));
+      const gBadge = mk('rect', { x: g1x + (gutter - 28) / 2, y: gutY + 3, width: 28, height: 13, rx: '3', fill: '#ea580c' });
+      annoG.appendChild(gBadge);
+      const gLbl = mk('text', { x: g1x + gutter / 2, y: gutY + 12.5, 'text-anchor': 'middle', fill: 'white', 'font-size': '8', 'font-family': 'IBM Plex Sans, sans-serif', 'font-weight': '700' });
+      gLbl.textContent = gutter + 'px';
+      annoG.appendChild(gLbl);
+
+      // Kolonnebredde-annotasjon (under kol 1)
+      const colWidthPx = Math.round((TOKENS.contentWidth.value - (cols - 1) * gutter) / cols);
+      const colY = rowY + rowH + 30;
+      annoG.appendChild(mk('line', { x1: padX, y1: colY, x2: padX + colW, y2: colY, stroke: '#2563eb', 'stroke-width': '1.5' }));
+      annoG.appendChild(mk('line', { x1: padX, y1: colY - 4, x2: padX, y2: colY + 4, stroke: '#2563eb', 'stroke-width': '1.5' }));
+      annoG.appendChild(mk('line', { x1: padX + colW, y1: colY - 4, x2: padX + colW, y2: colY + 4, stroke: '#2563eb', 'stroke-width': '1.5' }));
+      const cBadge = mk('rect', { x: padX + (colW - 32) / 2, y: colY + 3, width: 32, height: 13, rx: '3', fill: '#2563eb' });
+      annoG.appendChild(cBadge);
+      const cLbl = mk('text', { x: padX + colW / 2, y: colY + 12.5, 'text-anchor': 'middle', fill: 'white', 'font-size': '8', 'font-family': 'IBM Plex Sans, sans-serif', 'font-weight': '700' });
+      cLbl.textContent = colWidthPx + 'px';
+      annoG.appendChild(cLbl);
+
+      // Oppdater tabell
+      const cwVal = document.getElementById('grid-col-width-value');
+      const cwCss = document.getElementById('grid-col-width-css');
+      if (cwVal) cwVal.textContent = colWidthPx + 'px';
+      if (cwCss) cwCss.textContent = 'width: ' + colWidthPx + 'px';
+    })();
+
+    // 6. Oppdater font-labels i SVG
+    document.querySelectorAll('[data-token-fontlabel]').forEach(el => {
+      const key = el.dataset.tokenFontlabel;
+      const t = TOKENS[key];
+      if (!t) return;
+      const prefix = key === 'cardTitleSize' ? 'IBM Plex Sans SemiBold · ' : 'IBM Plex Sans Regular · ';
+      el.textContent = prefix + t.value + t.unit;
+    });
+  </script>
+
+  <script src="guide-nav.js"></script>
+</body>
+</html>
