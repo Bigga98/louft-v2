@@ -72,13 +72,13 @@
       z-index: 1000;
     }
     .guide-nav-inner {
-      max-width: 1200px;
+      max-width: 1440px;
       margin: 0 auto;
       padding: 0 72px;
       height: 100%;
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
     }
     .guide-nav-logo {
       font-family: var(--font-heading, 'Public Sans', sans-serif);
@@ -98,6 +98,7 @@
       display: flex;
       align-items: center;
       gap: 24px;
+      flex: 1;
     }
     .guide-nav-link {
       font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
