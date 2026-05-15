@@ -375,9 +375,22 @@
       <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
       <div class="hero-text col-1-6" style="grid-row:1/3;display:flex;flex-direction:column;gap:0;padding-top:60px;">
 
-        <!-- Mobil-bilde over badge -->
-        <div class="hero-mobile-top-img" style="display:none;width:calc(100% + 2 * var(--section-padding));margin-left:calc(-1 * var(--section-padding));aspect-ratio:4/3;overflow:hidden;margin-bottom:var(--card-gap);">
-          <img src="images/Loft_shoot__6.jpg" alt="Løft flytteservice" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <!-- Mobil-carousel over badge -->
+        <div class="hero-mobile-top-img" id="hero-carousel" style="display:none;width:calc(100% + 2 * var(--section-padding));margin-left:calc(-1 * var(--section-padding));aspect-ratio:4/3;overflow:hidden;margin-bottom:var(--card-gap);position:relative;">
+          <div id="hero-carousel-track" style="display:flex;height:100%;transition:transform 0.35s ease;will-change:transform;">
+            <img src="images/Loft_shoot__6.jpg"   alt="Løft" style="min-width:100%;height:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/Loft_shoot__1.jpg"   alt="Løft" style="min-width:100%;height:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/Loft_shoot__24.jpg"  alt="Løft" style="min-width:100%;height:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/Loft_shoot__44.jpg"  alt="Løft" style="min-width:100%;height:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/DSCF8489.jpg"        alt="Løft" style="min-width:100%;height:100%;object-fit:cover;flex-shrink:0;">
+          </div>
+          <div id="hero-carousel-dots" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2;">
+            <span class="c-dot active" style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:1;transition:opacity 0.2s;"></span>
+            <span class="c-dot"        style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+            <span class="c-dot"        style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+            <span class="c-dot"        style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+            <span class="c-dot"        style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+          </div>
         </div>
 
         <!-- Badge -->
@@ -1322,6 +1335,30 @@
         if (!isOpen) item.classList.add('open');
       });
     });
+  </script>
+
+  <script>
+    (function () {
+      var carousel = document.getElementById('hero-carousel');
+      if (!carousel) return;
+      var track = document.getElementById('hero-carousel-track');
+      var dots  = document.querySelectorAll('#hero-carousel-dots .c-dot');
+      var total = dots.length;
+      var current = 0;
+      var startX = 0;
+
+      function goTo(n) {
+        current = (n + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function (d, i) { d.style.opacity = i === current ? '1' : '0.45'; });
+      }
+
+      carousel.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      carousel.addEventListener('touchend', function (e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+      }, { passive: true });
+    })();
   </script>
 </body>
 
