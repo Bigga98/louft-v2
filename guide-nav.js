@@ -104,9 +104,9 @@
       z-index: 1000;
     }
     .guide-nav-inner {
-      max-width: 1440px;
+      max-width: 1600px;
       margin: 0 auto;
-      padding: 0 72px;
+      padding: 0 48px;
       height: 100%;
       display: flex;
       align-items: center;
