@@ -2,10 +2,8 @@
 
   // ─── Vanlige sider ────────────────────────────────
   const PAGES = [
-    { label: 'Fundament',  href: 'Brandguideline.html' },
-    { label: 'Delside 2',  href: 'delside-2.html' },
-    { label: 'Delside 3',  href: 'delside-3.html' },
-    { label: 'Delside 4',  href: 'delside-4.html' },
+    { label: 'Hjem',             href: 'delside-3.html' },
+    { label: 'Hjem (mørk alt.)', href: 'delside-4.html' },
   ];
 
   // ─── Mega-menu-knapper ────────────────────────────
@@ -127,7 +125,9 @@
       color: #233D6F;
       white-space: nowrap;
       margin-left: auto;
+      transition: background 0.15s ease;
     }
+    .guide-nav-cta:hover { background: #dcd5d5; }
     .guide-nav-cta-dot {
       width: 19px;
       height: 19px;
@@ -277,6 +277,79 @@
       line-height: 1.5;
     }
     a.guide-mega-promo:hover .guide-mega-promo-label { color: var(--color-bg-dark, #233D6F); }
+
+    /* ── MOBIL ── */
+    @media (max-width: 768px) {
+      .guide-nav-inner { padding: 0 20px; gap: 12px; }
+      .guide-nav-divider { display: none; }
+      .guide-nav-links { display: none !important; }
+      .guide-nav-mobile-toggle {
+        display: flex;
+        margin-left: auto;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        align-items: center;
+        gap: 6px;
+        color: #fff;
+        font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .guide-nav-mobile-panel {
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: #fff;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        z-index: 999;
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s, transform 0.18s;
+        max-height: calc(100vh - 64px);
+        overflow-y: auto;
+      }
+      .guide-nav-mobile-panel.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .guide-nav-mobile-link {
+        font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        text-decoration: none;
+        padding: 14px 0;
+        border-bottom: 1px solid #f0f0f0;
+        display: block;
+      }
+      .guide-nav-mobile-link.active { font-weight: 700; color: #233D6F; }
+      .guide-nav-mobile-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #3882E9;
+        border-radius: 10px;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-family: var(--font-body, 'IBM Plex Sans', sans-serif);
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        margin-top: 16px;
+      }
+    }
+    @media (min-width: 769px) {
+      .guide-nav-mobile-toggle { display: none; }
+      .guide-nav-mobile-panel { display: none !important; }
+    }
   `;
   document.head.appendChild(style);
 
@@ -317,6 +390,15 @@
     </div>
   `).join('');
 
+  const allNavLinks = [
+    ...PAGES.map(p => ({ label: p.label, href: p.href, active: p.href === current })),
+    { label: 'Tjenester', href: '#' },
+    { label: 'Minilager', href: '#' },
+    { label: 'Bedrift', href: '#' },
+    { label: 'Forsikring', href: '#' },
+    { label: 'Om oss', href: '#' },
+  ];
+
   const nav = document.createElement('nav');
   nav.id = 'guide-nav';
   nav.innerHTML = `
@@ -337,10 +419,32 @@
           </span>
         </a>
       </div>
+      <button class="guide-nav-mobile-toggle" aria-label="Meny" id="guide-nav-toggle">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+          <rect width="22" height="2" rx="1" fill="white"/>
+          <rect y="7" width="22" height="2" rx="1" fill="white"/>
+          <rect y="14" width="22" height="2" rx="1" fill="white"/>
+        </svg>
+      </button>
+    </div>
+    <div class="guide-nav-mobile-panel" id="guide-nav-mobile-panel">
+      ${allNavLinks.map(l => `<a href="${l.href}" class="guide-nav-mobile-link${l.active ? ' active' : ''}">${l.label}</a>`).join('')}
+      <a href="#" class="guide-nav-mobile-cta">Kontakt oss</a>
     </div>
   `;
 
   document.body.prepend(nav);
   document.body.style.paddingTop = '64px';
+
+  var toggle = document.getElementById('guide-nav-toggle');
+  var panel = document.getElementById('guide-nav-mobile-panel');
+  if (toggle && panel) {
+    toggle.addEventListener('click', function () {
+      panel.classList.toggle('open');
+    });
+    document.addEventListener('click', function (e) {
+      if (!nav.contains(e.target)) panel.classList.remove('open');
+    });
+  }
 
 })();
