@@ -63,7 +63,9 @@
       .grid-12 { grid-template-columns: 1fr !important; }
       .col-1-6, .col-8-13 { grid-column: 1 / -1 !important; }
       .hero-images { display: none !important; }
-      .hero-text   { order: 1; padding-top: 0 !important; }
+      .hero-google-badge { display: none !important; }
+      .hero-bottom-img { display: none !important; }
+      .hero-text { order: 1; padding-top: 0 !important; grid-row: auto !important; }
       .hero-section { padding-top: 0 !important; }
       .hero-hr { display: none !important; }
       .hero-arrow { width: 32px !important; height: 27px !important; }
@@ -176,7 +178,7 @@
       </div>
 
       <!-- Google Reviews badge — krysningspunkt bilder -->
-      <div style="grid-column:11/12;grid-row:1;align-self:end;justify-self:start;transform:translate(-65%, calc(50% + 4px));z-index:10;pointer-events:none;">
+      <div class="hero-google-badge" style="grid-column:11/12;grid-row:1;align-self:end;justify-self:start;transform:translate(-65%, calc(50% + 4px));z-index:10;pointer-events:none;">
         <div style="background:#3882E9;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,0.25);">
           <span style="font-family:var(--font-heading);font-size:32px;font-weight:var(--font-weight-bold);color:#ffffff;line-height:1;">4.9</span>
           <span style="font-size:18px;color:#FBBC04;letter-spacing:2px;">★★★★★</span>
@@ -185,7 +187,7 @@
       </div>
 
       <!-- Nederste bilde — kolonne 7–11, rad 2 -->
-      <div style="grid-column:7/12;grid-row:2;aspect-ratio:16/7;position:relative;border-radius:var(--card-radius);overflow:hidden;">
+      <div class="hero-bottom-img" style="grid-column:7/12;grid-row:2;aspect-ratio:16/7;position:relative;border-radius:var(--card-radius);overflow:hidden;">
         <img src="images/Loft_shoot__47.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
         <!-- Badge -->
         <div style="position:absolute;bottom:16px;left:16px;display:inline-flex;align-items:center;gap:12px;background:#3882E9;border-radius:100px;padding:8px 20px 8px 10px;">
