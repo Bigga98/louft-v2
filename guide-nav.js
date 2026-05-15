@@ -16,6 +16,8 @@
     cases:      `<path fill="#233D6F" d="M120-80q-33 0-56.5-23.5T40-160v-400q0-17 11.5-28.5T80-600q17 0 28.5 11.5T120-560v400h640q17 0 28.5 11.5T800-120q0 17-11.5 28.5T760-80H120Zm160-160q-33 0-56.5-23.5T200-320v-400q0-17 11.5-28.5T240-760h160v-80q0-33 23.5-56.5T480-920h160q33 0 56.5 23.5T720-840v80h160q17 0 28.5 11.5T920-720v400q0 33-23.5 56.5T840-240H280Zm200-520h160v-80H480v80Z"/>`,
     assignment: `<path fill="#233D6F" d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h168q13-36 43.5-58t68.5-22q38 0 68.5 22t43.5 58h168q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm120-160h200q17 0 28.5-11.5T560-320q0-17-11.5-28.5T520-360H320q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160h320q17 0 28.5-11.5T680-480q0-17-11.5-28.5T640-520H320q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160h320q17 0 28.5-11.5T680-640q0-17-11.5-28.5T640-680H320q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm181.5-198.5Q510-807 510-820t-8.5-21.5Q493-850 480-850t-21.5 8.5Q450-833 450-820t8.5 21.5Q467-790 480-790t21.5-8.5Z"/>`,
     encrypted:  `<path fill="#233D6F" d="M444-360h72q9 0 15.5-7.5T536-384l-19-105q20-10 31.5-29t11.5-42q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 23 11.5 42t31.5 29l-19 105q-2 9 4.5 16.5T444-360Zm23 275q-6-1-12-3-135-45-215-166.5T160-516v-189q0-25 14.5-45t37.5-29l240-90q14-5 28-5t28 5l240 90q23 9 37.5 29t14.5 45v189q0 140-80 261.5T505-88q-6 2-12 3t-13 1q-7 0-13-1Z"/>`,
+    book:       `<path fill="#233D6F" d="M320-240 80-400v-400l240 160v400Zm80 0V-480l240-160v400L400-240Zm-80-400L80-800l240-160 240 160-240 160Zm320 400-240-160v-400l240 160v400Z"/>`,
+    article:    `<path fill="#233D6F" d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h320l240 240v400q0 33-23.5 56.5T680-120H200Zm280-480v-160H200v560h480v-400H480ZM200-760v160-160 560-560Z"/>`,
     globe:      `<path fill="#233D6F" d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-40-82v-78q-33 0-56.5-23.5T360-320v-40L168-552q-3 18-5.5 36t-2.5 36q0 121 79.5 212T440-162Zm276-102q20-22 35-47.5t24-53q9-27.5 13-56t4-58.5q0-98-54.5-179T600-776v16q0 33-23.5 56.5T520-680h-80v80q0 17-11.5 28.5T400-560h-80v80h240q17 0 28.5 11.5T600-440v120h40q26 0 47 15.5t29 40.5Z"/>`,
     waterdrop:  `<path fill="#233D6F" d="M480-80q-133 0-226.5-93.5T160-400q0-89 44.5-163T326-680l154-240 154 240q77 54 121.5 128T800-400q0 133-93.5 226.5T480-80Zm0-80q100 0 170-70t70-170q0-66-32.5-121T600-616L480-800 360-616q-55 45-87.5 100T240-400q0 100 70 170t170 70Z"/>`,
     placeholder:`<path fill="rgba(35,61,111,0.3)" d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/>`,
@@ -52,6 +54,37 @@
       promo: {
         label: 'Planlegg din flytting',
         desc: 'Få et uforpliktende prisestimat på under 2 minutter.',
+        href: '#'
+      }
+    },
+    {
+      label: 'Ressurser',
+      columns: [
+        {
+          heading: 'Bloggartikler',
+          twoCol: true,
+          items: [
+            { label: 'Hva koster en flytting i Oslo?',    desc: 'Priser, timepriser og tillegg forklart',    href: '#', iconBg: '#c2e2fc', icon: ICONS.article },
+            { label: '10 ting du glemmer å pakke ned',   desc: 'Sjekkliste for en stressfri flyttedag',     href: '#', iconBg: '#f4cdff', icon: ICONS.article },
+            { label: 'Slik velger du riktig flyttebyrå', desc: '9 ting du må sjekke før du bestiller',      href: '#', iconBg: '#fdcac2', icon: ICONS.article },
+            { label: 'Kontorflytting uten driftsstans',  desc: 'Komplett guide for bedrifter i Oslo',       href: '#', iconBg: '#c2e2fc', icon: ICONS.article },
+          ]
+        },
+        {
+          heading: 'Guide for de modige',
+          items: [
+            { label: 'Del 1 — Planlegging',            desc: 'Slik starter du riktig',               href: '#', iconBg: '#e8f4e8', icon: ICONS.assignment },
+            { label: 'Del 2 — Leie flyttebil',         desc: 'Alt du trenger å vite',                href: '#', iconBg: '#e8f4e8', icon: ICONS.truck },
+            { label: 'Del 3 — Pakking og beskyttelse', desc: 'Ikke gråt over en ødelagt TV',         href: '#', iconBg: '#e8f4e8', icon: ICONS.box },
+            { label: 'Del 4 — Vennedugnaden',          desc: 'Statistikken er ikke på din side',     href: '#', iconBg: '#e8f4e8', icon: ICONS.cases },
+            { label: 'Del 5 — Hva kan gå galt',        desc: 'Kommer snart',                         href: '#', iconBg: '#f0f0f0', icon: ICONS.placeholder },
+            { label: 'Del 6 — Ny bolig, ny start',     desc: 'Kommer snart',                         href: '#', iconBg: '#f0f0f0', icon: ICONS.placeholder },
+          ]
+        }
+      ],
+      promo: {
+        label: 'Ofte stilte spørsmål',
+        desc: 'Svar på det du lurer på — fra pris til praktisk gjennomføring.',
         href: '#'
       }
     }
