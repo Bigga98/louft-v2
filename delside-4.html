@@ -9,6 +9,8 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html, body { overflow-x: hidden; }
+
     body {
       background-color: #f0f0f0;
       font-family: 'IBM Plex Sans', sans-serif;
@@ -60,8 +62,12 @@
       :root { --section-padding: 20px; }
       .grid-12 { grid-template-columns: 1fr !important; }
       .col-1-6, .col-8-13 { grid-column: 1 / -1 !important; }
-      .hero-images { order: 2; }
-      .hero-text   { order: 1; }
+      .hero-images { display: none !important; }
+      .hero-text   { order: 1; padding-top: 0 !important; }
+      .hero-section { padding-top: 0 !important; }
+      .hero-hr { display: none !important; }
+      .hero-arrow { width: 32px !important; height: 27px !important; }
+      .hero-mobile-top-img { display: block !important; }
     }
   </style>
 </head>
@@ -69,11 +75,27 @@
   <script src="guide-nav.js"></script>
 
   <!-- ── HERO LYS ── -->
-  <section style="background:#233D6F;min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
+  <section class="hero-section" style="background:#233D6F;min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
     <div class="grid-12" style="max-width:1360px;margin:0 auto;width:100%;align-items:start;">
 
       <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
       <div class="hero-text col-1-6" style="grid-row:1/3;display:flex;flex-direction:column;gap:0;padding-top:60px;">
+
+        <!-- Mobil-carousel -->
+        <div class="hero-mobile-top-img" id="hero-carousel-4" style="display:none;width:calc(100% + 2 * var(--section-padding));margin-left:calc(-1 * var(--section-padding));aspect-ratio:4/3;overflow:hidden;margin-bottom:var(--card-gap);position:relative;">
+          <div id="hero-carousel-4-track" style="position:absolute;inset:0;display:flex;transition:transform 0.35s ease;">
+            <img src="images/Loft_shoot__6.jpg"  alt="Løft" style="min-width:100%;width:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/DSCF8489.jpg"       alt="Løft" style="min-width:100%;width:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/Loft_shoot__44.jpg" alt="Løft" style="min-width:100%;width:100%;object-fit:cover;flex-shrink:0;">
+            <img src="images/Loft_shoot__47.jpg" alt="Løft" style="min-width:100%;width:100%;object-fit:cover;flex-shrink:0;">
+          </div>
+          <div id="hero-carousel-4-dots" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2;">
+            <span class="c4-dot" style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:1;transition:opacity 0.2s;"></span>
+            <span class="c4-dot" style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+            <span class="c4-dot" style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+            <span class="c4-dot" style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:0.45;transition:opacity 0.2s;"></span>
+          </div>
+        </div>
 
         <!-- Badge -->
         <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--card-gap);">
@@ -82,10 +104,10 @@
         </div>
 
         <!-- H1 -->
-        <h1 style="font-family:var(--font-heading);font-size:64px;font-weight:var(--font-weight-bold);line-height:1.05;letter-spacing:-0.03em;color:#ffffff;margin:0 0 var(--card-gap);">Vi hjelper deg med å flytte trygt fra A<svg width="57" height="48" viewBox="0 0 876.5 736" fill="none" style="display:inline-block;vertical-align:middle;margin:0 6px 4px;"><path d="M 0 437.5 L 0 304.5 L 625 304.5 L 414 92.5 L 506 0 L 876.5 366 L 512 736 L 417.5 646 L 625 437.5 L 0 437.5 Z" fill="#5079D1"/></svg>B</h1>
+        <h1 style="font-family:var(--font-heading);font-size:64px;font-weight:var(--font-weight-bold);line-height:1.05;letter-spacing:-0.03em;color:#ffffff;margin:0 0 var(--card-gap);">Vi hjelper deg med å flytte trygt fra A<svg class="hero-arrow" width="57" height="48" viewBox="0 0 876.5 736" fill="none" style="display:inline-block;vertical-align:middle;margin:0 6px 4px;"><path d="M 0 437.5 L 0 304.5 L 625 304.5 L 414 92.5 L 506 0 L 876.5 366 L 512 736 L 417.5 646 L 625 437.5 L 0 437.5 Z" fill="#5079D1"/></svg>B</h1>
 
         <!-- Strek under tittel -->
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.25);margin:0 0 40px;">
+        <hr class="hero-hr" style="border:none;border-top:1px solid rgba(255,255,255,0.25);margin:0 0 40px;">
 
         <!-- Ingress -->
         <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:#ffffff;margin:0 0 32px;max-width:520px;">Løft hjelper deg med alt du trenger for å flytte fra A til B – uten å løfte en finger selv. Vi håndterer alt fra pakking, flytting, lagring, vasking og overtakelse med en superenkel prismodell.</p>
@@ -275,7 +297,26 @@
     </div>
   </section>
 
-
-
+  <script>
+    (function () {
+      var carousel = document.getElementById('hero-carousel-4');
+      if (!carousel) return;
+      var track = document.getElementById('hero-carousel-4-track');
+      var dots  = document.querySelectorAll('#hero-carousel-4-dots .c4-dot');
+      var total = dots.length;
+      var current = 0;
+      var startX = 0;
+      function goTo(n) {
+        current = (n + total) % total;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function (d, i) { d.style.opacity = i === current ? '1' : '0.45'; });
+      }
+      carousel.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      carousel.addEventListener('touchend', function (e) {
+        var diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>
