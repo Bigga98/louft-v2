@@ -351,7 +351,9 @@
 
       .hero-hr { display: none !important; }
       .hero-arrow { width: 32px !important; height: 27px !important; }
-      .hero-mobile-top-img { display: block !important; }
+      .hero-mobile-top-img { display: block !important; margin-top: calc(-1 * var(--section-padding)) !important; }
+      .hero-section { padding-top: 0 !important; }
+      .hero-text { padding-top: 0 !important; }
       .tillit-stats { grid-column: 1 / -1 !important; }
       .tillit-review { grid-column: 1 / -1 !important; margin-left: 0 !important; }
       .tillit-stats-grid { transform: none !important; }
@@ -367,7 +369,7 @@
 
 
   <!-- ── HERO ── -->
-  <section style="background:#ffffff;min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
+  <section class="hero-section" style="background:#ffffff;min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
     <div class="grid-12" style="max-width:1360px;margin:0 auto;width:100%;align-items:start;">
 
       <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
