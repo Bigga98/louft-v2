@@ -77,8 +77,8 @@
             { label: 'Del 2 — Leie flyttebil',         desc: 'Alt du trenger å vite',                href: '#', iconBg: '#e8f4e8', icon: ICONS.truck },
             { label: 'Del 3 — Pakking og beskyttelse', desc: 'Ikke gråt over en ødelagt TV',         href: '#', iconBg: '#e8f4e8', icon: ICONS.box },
             { label: 'Del 4 — Vennedugnaden',          desc: 'Statistikken er ikke på din side',     href: '#', iconBg: '#e8f4e8', icon: ICONS.cases },
-            { label: 'Del 5 — Hva kan gå galt',        desc: 'Kommer snart',                         href: '#', iconBg: '#ebebeb', icon: ICONS.assignment },
-            { label: 'Del 6 — Ny bolig, ny start',     desc: 'Kommer snart',                         href: '#', iconBg: '#ebebeb', icon: ICONS.assignment },
+            { label: 'Del 5 — Hva kan gå galt',        desc: 'Kommer snart',                         href: '#', iconBg: '#e8f4e8', icon: ICONS.assignment },
+            { label: 'Del 6 — Ny bolig, ny start',     desc: 'Kommer snart',                         href: '#', iconBg: '#e8f4e8', icon: ICONS.assignment },
           ]
         }
       ],
