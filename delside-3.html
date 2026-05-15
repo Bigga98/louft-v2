@@ -268,6 +268,8 @@
       100% { transform: translateX(-50%); }
     }
 
+    .hero-mobile-img { display: none; }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
       :root { --section-padding: 20px; }
@@ -285,13 +287,17 @@
       .col-1-8,
       .col-8-13,
       .col-1-5,
-      .col-6-13 {
+      .col-6-13,
+      .col-1-6,
+      .col-1-7 {
         grid-column: 1 / -1 !important;
       }
 
-      /* Hero-bilder etter tekst */
-      .hero-images { order: 2; }
-      .hero-text   { order: 1; }
+      /* Hero — reset grid-row og skjul bilder */
+      .hero-text   { grid-row: auto !important; grid-column: 1 / -1 !important; padding-top: 0 !important; }
+      .hero-images { display: none !important; }
+      .hero-bottom-img { display: none !important; }
+      .hero-reviews-badge { display: none !important; }
 
       /* Feature stripe: 2 kolonner på mobil */
       .feature-grid {
@@ -301,6 +307,45 @@
         grid-column: auto !important;
       }
     }
+    /* ── MOBILE TILLEGG ── */
+    @media (max-width: 768px) {
+      .hero-h1 { font-size: 36px !important; line-height: 1.1 !important; }
+      .hero-mobile-img { display: block; }
+
+      .seksjon2-img { grid-column: 1 / -1 !important; }
+      .seksjon2-content { grid-column: 1 / -1 !important; }
+
+      .mob-h2 { font-size: 28px !important; line-height: 1.2 !important; }
+
+      .bedrift-hero-bg-wrapper { max-height: 220px !important; }
+      .bedrift-hero-overlay {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding: 24px var(--section-padding) !important;
+        background: rgba(26, 40, 74, 0.97) !important;
+        pointer-events: auto !important;
+      }
+      .bedrift-hero-title { font-size: 28px !important; grid-column: auto !important; grid-row: auto !important; }
+      #steg-wrapper { grid-column: auto !important; grid-row: auto !important; overflow: visible !important; }
+      .bedrift-info-block { grid-column: auto !important; grid-row: auto !important; }
+
+      .pris-card-1, .pris-card-2 { grid-column: 1 / -1 !important; }
+
+      .sticky-nav-col { grid-column: 1 / -1 !important; position: relative !important; top: auto !important; }
+      .sticky-nav-col nav { flex-direction: row !important; flex-wrap: wrap !important; gap: 12px !important; }
+      .sticky-content-col { grid-column: 1 / -1 !important; }
+
+      .tjenestekort-item { grid-column: 1 / -1 !important; }
+
+      .footer-top-logo { grid-column: 1 / -1 !important; }
+      .footer-top-cta { grid-column: 1 / -1 !important; justify-content: flex-start !important; margin-top: 4px !important; }
+      .footer-col-tjenester,
+      .footer-col-om,
+      .footer-col-kontakt,
+      .footer-col-social { grid-column: 1 / -1 !important; }
+    }
   </style>
 </head>
 <body>
@@ -308,7 +353,7 @@
 
 
   <!-- ── HERO ── -->
-  <section style="background:var(--color-bg-dark,#233D6F);min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
+  <section style="background:#ffffff;min-height:75vh;padding:40px var(--section-padding) 104px;display:flex;align-items:center;">
     <div class="grid-12" style="max-width:1360px;margin:0 auto;width:100%;align-items:start;">
 
       <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
@@ -317,17 +362,17 @@
         <!-- Badge -->
         <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--card-gap);">
           <span style="font-size:18px;color:#FBBC04;">★★★★★</span>
-          <span style="font-family:var(--font-body);font-size:14px;font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);">4.9 Google Anmeldelser</span>
+          <span style="font-family:var(--font-body);font-size:14px;font-weight:var(--font-weight-semibold);color:var(--color-text-muted);">4.9 Google Anmeldelser</span>
         </div>
 
         <!-- H1 -->
-        <h1 style="font-family:var(--font-heading);font-size:64px;font-weight:var(--font-weight-bold);line-height:1.05;letter-spacing:-0.03em;color:var(--color-text-on-dark);margin:0 0 var(--card-gap);">Vi hjelper deg med å flytte trygt fra A<svg width="57" height="48" viewBox="0 0 876.5 736" fill="none" style="display:inline-block;vertical-align:middle;margin:0 6px 4px;"><path d="M 0 437.5 L 0 304.5 L 625 304.5 L 414 92.5 L 506 0 L 876.5 366 L 512 736 L 417.5 646 L 625 437.5 L 0 437.5 Z" fill="#5079D1"/></svg>B</h1>
+        <h1 class="hero-h1" style="font-family:var(--font-heading);font-size:64px;font-weight:var(--font-weight-bold);line-height:1.05;letter-spacing:-0.03em;color:var(--color-text);margin:0 0 var(--card-gap);">Vi hjelper deg med å flytte trygt fra A<svg width="57" height="48" viewBox="0 0 876.5 736" fill="none" style="display:inline-block;vertical-align:middle;margin:0 6px 4px;"><path d="M 0 437.5 L 0 304.5 L 625 304.5 L 414 92.5 L 506 0 L 876.5 366 L 512 736 L 417.5 646 L 625 437.5 L 0 437.5 Z" fill="#3882E9"/></svg>B</h1>
 
         <!-- Strek under tittel -->
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.25);margin:0 0 40px;">
+        <hr style="border:none;border-top:1px solid rgba(0,0,0,0.1);margin:0 0 40px;">
 
         <!-- Ingress -->
-        <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-on-dark);margin:0 0 32px;max-width:520px;">Løft hjelper deg med alt du trenger for å flytte fra A til B – uten å løfte en finger selv. Vi håndterer alt fra pakking, flytting, lagring, vasking og overtakelse med en superenkel prismodell.</p>
+        <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-muted);margin:0 0 32px;max-width:520px;">Løft hjelper deg med alt du trenger for å flytte fra A til B – uten å løfte en finger selv. Vi håndterer alt fra pakking, flytting, lagring, vasking og overtakelse med en superenkel prismodell.</p>
 
         <!-- Feature-liste -->
         <div style="display:flex;flex-direction:column;gap:var(--text-heading-sub-gap);margin-bottom:40px;">
@@ -335,19 +380,19 @@
             <span style="width:20px;height:20px;background:#3882E9;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path transform="matrix(0.6241,0.7813,-0.6241,0.7813,9.59,0.74)" d="M3.13419 2.94095 L3.35149 0.863123 L11.7851 0 L10.9103 8.36529 L8.8222 8.57899 L9.3217 3.80268 L1.38485 11.7161 L0 10.3362 L7.96114 2.44695 L3.13419 2.94095 Z" fill="#E4E8F0"/></svg>
             </span>
-            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);">Personlig flyttekontakt</span>
+            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Personlig flyttekontakt</span>
           </div>
           <div style="display:flex;align-items:center;gap:12px;">
             <span style="width:20px;height:20px;background:#3882E9;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path transform="matrix(0.6241,0.7813,-0.6241,0.7813,9.59,0.74)" d="M3.13419 2.94095 L3.35149 0.863123 L11.7851 0 L10.9103 8.36529 L8.8222 8.57899 L9.3217 3.80268 L1.38485 11.7161 L0 10.3362 L7.96114 2.44695 L3.13419 2.94095 Z" fill="#E4E8F0"/></svg>
             </span>
-            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);">Langdistanse flytting</span>
+            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Langdistanse flytting</span>
           </div>
           <div style="display:flex;align-items:center;gap:12px;">
             <span style="width:20px;height:20px;background:#3882E9;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path transform="matrix(0.6241,0.7813,-0.6241,0.7813,9.59,0.74)" d="M3.13419 2.94095 L3.35149 0.863123 L11.7851 0 L10.9103 8.36529 L8.8222 8.57899 L9.3217 3.80268 L1.38485 11.7161 L0 10.3362 L7.96114 2.44695 L3.13419 2.94095 Z" fill="#E4E8F0"/></svg>
             </span>
-            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);">Digitale oppdateringer</span>
+            <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Digitale oppdateringer</span>
           </div>
         </div>
 
@@ -361,14 +406,19 @@
 
       </div>
 
+      <!-- Mobil-bilde — kun synlig på mobil -->
+      <div class="hero-mobile-img" style="grid-column:1/-1;border-radius:var(--card-radius);overflow:hidden;">
+        <img src="images/DSCF8489.jpg" alt="Løft" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;">
+      </div>
+
       <!-- Øverste bilder — kolonne 8–12, rad 1 -->
       <div class="hero-images col-8-13" style="grid-row:1;display:grid;grid-template-columns:58fr 42fr;gap:var(--card-gap);align-items:end;">
 
         <!-- Bilde 1 — starter 2/3 inn i kol 7 -->
-        <div style="aspect-ratio:4/5;position:relative;left:-54px;border-radius:var(--card-radius);">
+        <div class="hero-img-1" style="aspect-ratio:4/5;position:relative;left:-54px;border-radius:var(--card-radius);">
           <img src="images/DSCF8489.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--card-radius);">
           <!-- Badges — starter på grid 7 -->
-          <div style="position:absolute;bottom:16px;left:-61px;display:flex;flex-direction:column;gap:8px;">
+          <div class="hero-img-badges" style="position:absolute;bottom:16px;left:-61px;display:flex;flex-direction:column;gap:8px;">
             <div style="display:inline-flex;align-items:center;gap:10px;background:#3882E9;border-radius:100px;padding:8px 18px 8px 10px;height:40px;">
               <span style="width:25px;height:25px;background:#273352;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
                 <svg width="11" height="10" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#F0F1F5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -385,15 +435,15 @@
         </div>
 
         <!-- Bilde 2 — større, fyller gapen -->
-        <div style="aspect-ratio:5/4;margin-left:-54px;border-radius:var(--card-radius);overflow:hidden;">
+        <div class="hero-img-2" style="aspect-ratio:5/4;margin-left:-54px;border-radius:var(--card-radius);overflow:hidden;">
           <img src="images/Loft_shoot__44.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
 
       </div>
 
       <!-- Google Reviews badge — krysningspunkt bilder -->
-      <div style="grid-column:11/12;grid-row:1;align-self:end;justify-self:start;transform:translate(-65%, calc(50% + 4px));z-index:10;pointer-events:none;">
-        <div style="background:#3882E9;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,0.25);">
+      <div class="hero-reviews-badge" style="grid-column:11/12;grid-row:1;align-self:end;justify-self:start;transform:translate(-65%, calc(50% + 4px));z-index:10;pointer-events:none;">
+        <div style="background:#3882E9;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,0.15);">
           <span style="font-family:var(--font-heading);font-size:32px;font-weight:var(--font-weight-bold);color:#ffffff;line-height:1;">4.9</span>
           <span style="font-size:18px;color:#FBBC04;letter-spacing:2px;">★★★★★</span>
           <span style="font-family:var(--font-body);font-size:13px;font-weight:var(--font-weight-semibold);color:#ffffff;white-space:nowrap;">Google Reviews</span>
@@ -401,7 +451,7 @@
       </div>
 
       <!-- Nederste bilde — kolonne 7–11, rad 2 -->
-      <div style="grid-column:7/12;grid-row:2;aspect-ratio:16/7;position:relative;border-radius:var(--card-radius);overflow:hidden;">
+      <div class="hero-bottom-img" style="grid-column:7/12;grid-row:2;aspect-ratio:16/7;position:relative;border-radius:var(--card-radius);overflow:hidden;">
         <img src="images/Loft_shoot__47.jpg" alt="Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
         <!-- Badge — Lokalt, Nasjonalt og Internasjonalt -->
         <div style="position:absolute;bottom:16px;left:16px;display:inline-flex;align-items:center;gap:12px;background:#3882E9;border-radius:100px;padding:8px 20px 8px 10px;">
@@ -419,131 +469,138 @@
   </section>
 
   <!-- ── FEATURE STRIPE ── -->
-  <section style="background:var(--color-bg-light);padding:28px var(--section-padding);">
+  <section style="background:#0a345d;padding:28px var(--section-padding);">
     <div class="feature-grid grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:center;">
 
       <!-- Item 1 — kol 1–3 -->
       <div style="grid-column:1/4;display:flex;align-items:center;gap:12px;">
-        <span class="material-symbols-rounded" style="font-size:31px;color:#1e3a6e;flex-shrink:0;">request_quote</span>
-        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:var(--color-text);">Få et prisestimat</span>
+        <span class="material-symbols-rounded" style="font-size:31px;color:#ffffff;flex-shrink:0;">request_quote</span>
+        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:#ffffff;">Få et prisestimat</span>
       </div>
 
       <!-- Item 2 — kol 4–6 -->
       <div style="grid-column:4/7;display:flex;align-items:center;gap:12px;">
-        <span class="material-symbols-rounded" style="font-size:31px;color:#1e3a6e;flex-shrink:0;">inventory_2</span>
-        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:var(--color-text);">Pakking og klargjøring</span>
+        <span class="material-symbols-rounded" style="font-size:31px;color:#ffffff;flex-shrink:0;">inventory_2</span>
+        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:#ffffff;">Pakking og klargjøring</span>
       </div>
 
       <!-- Item 3 — kol 7–9 -->
       <div style="grid-column:7/10;display:flex;align-items:center;gap:12px;">
-        <span class="material-symbols-rounded" style="font-size:31px;color:#1e3a6e;flex-shrink:0;">local_shipping</span>
-        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:var(--color-text);">Transport fra A til B</span>
+        <span class="material-symbols-rounded" style="font-size:31px;color:#ffffff;flex-shrink:0;">local_shipping</span>
+        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:#ffffff;">Transport fra A til B</span>
       </div>
 
       <!-- Item 4 — kol 10–12 -->
       <div style="grid-column:10/13;display:flex;align-items:center;gap:12px;">
-        <span class="material-symbols-rounded" style="font-size:31px;color:#1e3a6e;flex-shrink:0;">water_drop</span>
-        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:var(--color-text);">Flyttevask</span>
+        <span class="material-symbols-rounded" style="font-size:31px;color:#ffffff;flex-shrink:0;">water_drop</span>
+        <span style="font-family:var(--font-body);font-size:21px;font-weight:var(--font-weight-medium);color:#ffffff;">Flyttevask</span>
       </div>
 
     </div>
   </section>
 
 
-  <!-- ── BENTO-SEKSJON ── -->
-  <section style="background:var(--color-bg-dark);padding:var(--section-padding);">
-    <div style="max-width:var(--content-width);margin:0 auto;">
+  <!-- ── SEKSJON 2 — BILDE + LISTE ── -->
+  <section style="background:var(--color-bg-light);padding:var(--section-padding);border-top:1px solid #ebebeb;">
+    <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:center;">
 
-      <!-- Headline — sentrert -->
-      <div style="text-align:center;margin-bottom:40px;">
-        <h2 style="font-family:var(--font-heading);font-size:36px;font-weight:var(--font-weight-bold);line-height:1.15;letter-spacing:-0.02em;color:var(--color-text-on-dark);max-width:680px;margin:0 auto;">Vi er din totalleverandør for flytting i Oslo — alt samlet på ett sted.</h2>
+      <!-- Venstre: foto — kol 1–7 -->
+      <div class="seksjon2-img" style="grid-column:1/7;position:relative;">
+        <img src="images/Loft_shoot__1.jpg" alt="Løft flyttebyrå i arbeid" style="width:100%;aspect-ratio:5/4;object-fit:cover;object-position:center;border-radius:var(--card-radius);">
+        <!-- Stats-overlay -->
+        <div style="position:absolute;bottom:16px;left:16px;background:#233D6F;border-radius:10px;padding:12px 18px;display:flex;flex-direction:column;gap:4px;">
+          <span style="font-family:var(--font-heading);font-size:13px;font-weight:var(--font-weight-semibold);color:#ffffff;">4,9 ★ · 170 Google-anmeldelser</span>
+          <span style="font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,0.75);">Over 1000 oppdrag i året</span>
+        </div>
       </div>
 
-      <!-- Bento — full 12-kol bredde -->
-      <div style="display:flex;flex-direction:column;gap:var(--card-gap);">
+      <!-- Høyre: 3 rader — kol 8–12 -->
+      <div class="seksjon2-content" style="grid-column:8/13;display:flex;flex-direction:column;">
 
-      <!-- Bento rad 1 — 4fr 5fr 3fr -->
-      <div class="bento-1">
-
-        <!-- Kort 1: LØFT logo + pil -->
-        <div style="min-height:260px;background:#5271CF;border-radius:var(--card-radius);padding:28px;display:flex;align-items:center;justify-content:center;">
-          <div style="display:flex;align-items:center;gap:20px;">
-            <!-- LØFT wordmark -->
-            <svg width="180" viewBox="0 0 231 68" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 0 68 L 0 0 L 11.673602851661474 0 L 11.673602851661474 57.58064693268335 L 50.81450653076172 57.58064693268335 L 50.81450653076172 68 Z" fill="white"/>
-              <g transform="translate(56.307,0)">
-                <path d="M 12.085610389709473 10.556451797485352 L 12.085610389709473 0 L 54.797264099121094 0 L 54.797264099121094 42.500003814697266 L 44.222347259521484 42.500003814697266 L 44.222347259521484 18.23387336730957 L 7.828181743621826 54.70161819458008 L 0 46.88710021972656 L 36.5315055847168 10.556451797485352 L 12.085610389709473 10.556451797485352 Z" fill="white"/>
-              </g>
-              <g transform="translate(116.873,0)">
-                <path d="M 0 68 L 0 0 L 48.89179611206055 0 L 48.89179611206055 10.419355028501787 L 11.673603504635393 10.419355028501787 L 11.673603504635393 29.750001961185145 L 43.94768378215677 29.750001961185145 L 43.94768378215677 40.16935502850178 L 11.673603504635393 40.16935502850178 L 11.673603504635393 68 Z" fill="white"/>
-              </g>
-              <g transform="translate(171.533,0)">
-                <path d="M 23.75921105356255 68 L 23.75921105356255 10.419355028501787 L 0 10.419355028501787 L 0 0 L 59.466705322265625 0 L 59.466705322265625 10.419355028501787 L 35.43281494910009 10.419355028501787 L 35.43281494910009 68 Z" fill="white"/>
-              </g>
-            </svg>
-            <!-- Pil (med Figma-rotasjon matrix) -->
-            <svg width="46" height="57" viewBox="-34.14 0 68.16 85.3" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g transform="matrix(0.6241,0.7813,-0.6241,0.7813,0,0)">
-                <path d="M 14.920532136197409 14.284510654989568 L 16.097176379120032 4.732686372834683 L 54.516441345214844 0 L 49.77930483586778 38.455401241380855 L 40.26713661718858 39.62715806748184 L 42.97189030366036 17.670363704833576 L 6.1704521629899585 54.700252532958984 L 0 48.49682573925917 L 36.909695903633576 11.57577023171188 L 14.920532136197409 14.284510654989568 Z" fill="white"/>
-              </g>
-            </svg>
+        <!-- Rad 1 -->
+        <div style="display:flex;align-items:stretch;">
+          <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex-shrink:0;padding-top:32px;">
+            <div style="width:12px;height:12px;background:#5271CF;transform:rotate(45deg);border-radius:1px;flex-shrink:0;"></div>
+            <div style="width:2px;flex:1;background:#5271CF;"></div>
+          </div>
+          <div style="flex:1;padding:32px 0 32px 32px;">
+            <h3 style="font-family:var(--font-heading);font-size:26px;font-weight:var(--font-weight-bold);color:var(--color-text);margin-bottom:10px;">Personlig flyttekontakt</h3>
+            <p style="font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--color-text-muted);">Én dedikert kontakt følger deg fra første henvendelse til nøkkelen er levert.</p>
           </div>
         </div>
 
-        <!-- Kort 2: stat — Over 1000 oppdrag -->
-        <div style="min-height:260px;background:var(--color-bg-light);border:1px solid #ebebeb;border-radius:var(--card-radius);padding:28px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;overflow:hidden;">
-          <div style="display:flex;flex-direction:column;gap:0;align-items:center;text-align:center;">
-            <div style="position:relative;display:inline-block;">
-              <p style="font-family:var(--font-heading);font-size:28px;font-weight:var(--font-weight-regular);line-height:1.25;color:var(--color-text);">Over <strong style="font-weight:var(--font-weight-bold);">1000 oppdrag</strong></p>
-              <svg width="140" height="23" viewBox="0 0 557 92" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:-15px;left:50%;transform:translateX(calc(-50% + 10px));pointer-events:none;">
-                <path d="M472.033 36.8731C303.54 60.6704 183.819 59.2797 10.4537 34.5777C4.76318 33.7669 0.5 28.8803 0.5 23.1324C0.5 15.8704 7.16069 10.4143 14.3071 11.7049C208.674 46.8059 349.645 30.9015 541.95 0.667859C555.273 -1.42679 561.491 16.6592 549.652 23.1196L426.724 90.2003C422.538 92.4848 417.318 91.4566 414.31 87.7552C410.309 82.8305 411.914 75.4651 417.602 72.6524L474.467 44.5325C478.561 42.5079 476.556 36.2344 472.033 36.8731Z" fill="#5271CF" stroke="#5271CF"/>
-              </svg>
-            </div>
-            <p style="font-family:var(--font-heading);font-size:28px;font-weight:var(--font-weight-regular);line-height:1.25;color:var(--color-text);">i året</p>
+        <!-- Rad 2 -->
+        <div style="display:flex;align-items:stretch;">
+          <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex-shrink:0;">
+            <div style="width:2px;height:32px;background:#5271CF;"></div>
+            <div style="width:12px;height:12px;background:#5271CF;transform:rotate(45deg);border-radius:1px;flex-shrink:0;"></div>
+            <div style="width:2px;flex:1;background:#5271CF;"></div>
           </div>
-          <img src="images/d60157c5.png" alt="" style="height:242px;width:auto;object-fit:contain;flex-shrink:0;align-self:flex-end;margin-bottom:-28px;margin-right:-28px;">
+          <div style="flex:1;padding:32px 0 32px 32px;">
+            <h3 style="font-family:var(--font-heading);font-size:26px;font-weight:var(--font-weight-bold);color:var(--color-text);margin-bottom:10px;">Vi tar behovene dine seriøst</h3>
+            <p style="font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--color-text-muted);">Eiendeler er dyrebare på forskjellige måter — pris, affeksjon eller uerstattelige gjenstander behandles som om det var våre egne.</p>
+          </div>
         </div>
 
-        <!-- Kort 3: anmeldelser -->
-        <div style="min-height:260px;background:#5271CF;border-radius:var(--card-radius);padding:28px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;">
-          <span style="font-family:var(--font-heading);font-size:22px;font-weight:var(--font-weight-bold);color:var(--color-text-on-dark);">Fornøyde kunder</span>
-          <span style="font-family:var(--font-heading);font-size:18px;font-weight:var(--font-weight-regular);color:#ffffff;line-height:1.5;">4,9 Stjerner av 170 Reviews på google</span>
+        <!-- Rad 3 -->
+        <div style="display:flex;align-items:flex-start;">
+          <div style="display:flex;flex-direction:column;align-items:center;width:12px;flex-shrink:0;">
+            <div style="width:2px;height:32px;background:#5271CF;"></div>
+            <div style="width:12px;height:12px;background:#5271CF;transform:rotate(45deg);border-radius:1px;flex-shrink:0;"></div>
+          </div>
+          <div style="flex:1;padding:32px 0 32px 32px;">
+            <h3 style="font-family:var(--font-heading);font-size:26px;font-weight:var(--font-weight-bold);color:var(--color-text);margin-bottom:10px;">Løft forsikring</h3>
+            <p style="font-family:var(--font-body);font-size:16px;line-height:1.6;color:var(--color-text-muted);">Alt gods er fullt forsikret under hele transporten. Ingen egenandel, ingen overraskelser.</p>
+          </div>
         </div>
 
       </div>
 
-      <!-- Bento rad 2 — 5fr 4fr 3fr -->
-      <div class="bento-2">
+    </div>
+  </section>
 
-        <!-- Kort 1: fordeler-liste -->
-        <div style="min-height:260px;background:var(--color-bg-light);border:1px solid #ebebeb;border-radius:var(--card-radius);display:flex;flex-direction:row;overflow:hidden;">
-          <img src="images/Gemini_Generated_Image_blusgwblusgwblus.png" alt="" style="width:210px;flex-shrink:0;object-fit:cover;object-position:center;">
-          <div style="display:flex;flex-direction:column;gap:16px;padding:28px 28px 28px 36px;">
-            <span style="font-family:var(--font-heading);font-size:20px;font-weight:var(--font-weight-bold);color:var(--color-text);">Alle fordelene du trenger</span>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <div style="display:flex;align-items:center;gap:10px;"><span style="width:20px;height:20px;background:var(--color-bg-dark);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="7" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span style="font-family:var(--font-body);font-size:17px;color:var(--color-text);">Personlig flyttekontakt</span></div>
-              <div style="display:flex;align-items:center;gap:10px;"><span style="width:20px;height:20px;background:var(--color-bg-dark);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="7" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span style="font-family:var(--font-body);font-size:17px;color:var(--color-text);">Digitale oppdateringer</span></div>
-              <div style="display:flex;align-items:center;gap:10px;"><span style="width:20px;height:20px;background:var(--color-bg-dark);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="7" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span style="font-family:var(--font-body);font-size:17px;color:var(--color-text);">50 % Rabatt på minilager</span></div>
-              <div style="display:flex;align-items:center;gap:10px;"><span style="width:20px;height:20px;background:var(--color-bg-dark);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="8" height="7" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span style="font-family:var(--font-body);font-size:17px;color:var(--color-text);">10 Dager Vaskegaranti</span></div>
-            </div>
+  <!-- ── SEKSJON 3 — 2×2 BILDE + KORT (wireframe) ── -->
+  <section style="background:#0a345d;padding:var(--section-padding);">
+    <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:start;gap:var(--card-gap);">
+
+      <!-- Venstre: headline + 2×2 bildegrid — kol 1–6 -->
+      <div style="grid-column:1/6;display:flex;flex-direction:column;gap:var(--card-gap);">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <h2 style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;color:#ffffff;margin:0;">Bygget på tillit</h2>
+          <p style="font-family:var(--font-body);font-size:17px;font-weight:var(--font-weight-regular);line-height:1.6;color:rgba(255,255,255,0.65);margin:0;">Tallene og menneskene bak Løft.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap);transform:scale(1.05);transform-origin:top left;">
+          <div style="aspect-ratio:16/11.55;background:#c4b8eb;border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;gap:10px;">
+            <span style="font-family:var(--font-heading);font-size:52px;font-weight:var(--font-weight-bold);color:#0a345d;line-height:1;">4,9 ★</span>
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-semibold);color:rgba(10,52,93,0.65);line-height:1.3;">170 Google<br>Reviews</span>
+          </div>
+          <div style="aspect-ratio:16/11.55;background:#c4b8eb;border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;gap:10px;">
+            <span style="font-family:var(--font-heading);font-size:52px;font-weight:var(--font-weight-bold);color:#0a345d;line-height:1;">10</span>
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-semibold);color:rgba(10,52,93,0.65);line-height:1.3;">Dager<br>vaskegaranti</span>
+          </div>
+          <div style="aspect-ratio:16/11.55;background:#c4b8eb;border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;gap:10px;">
+            <span style="font-family:var(--font-heading);font-size:52px;font-weight:var(--font-weight-bold);color:#0a345d;line-height:1;">1000+</span>
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-semibold);color:rgba(10,52,93,0.65);line-height:1.3;">Oppdrag<br>i året</span>
+          </div>
+          <div style="aspect-ratio:16/11.55;background:#c4b8eb;border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;gap:10px;">
+            <span style="font-family:var(--font-heading);font-size:52px;font-weight:var(--font-weight-bold);color:#0a345d;line-height:1;">50%</span>
+            <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-semibold);color:rgba(10,52,93,0.65);line-height:1.3;">Rabatt på<br>minilager</span>
           </div>
         </div>
+      </div>
 
-        <!-- Kort 2: behov-kort med brødtekst -->
-        <div style="min-height:260px;background:#5271CF;border-radius:var(--card-radius);padding:28px;display:flex;flex-direction:column;gap:20px;align-items:center;text-align:center;">
-          <span style="font-family:var(--font-heading);font-size:24px;font-weight:var(--font-weight-bold);color:var(--color-text-on-dark);">Vi tar behovene dine seriøst</span>
-          <p style="font-family:var(--font-body);font-size:18px;line-height:1.65;color:#ffffff;">I løft tar vi behovene til kunden våres seriøst. Eiendeler er dyrebare på forskjellige måter: pris, affeksjon eller uerstattelige eiendeler behandles som om det var våres egne.</p>
+      <!-- Høyre: stort kort med blå aksent — kol 8–12 -->
+      <div style="grid-column:8/13;align-self:start;margin-left:-55px;display:flex;border-radius:var(--card-radius);overflow:hidden;background:#ffffff;">
+        <div style="padding:40px 36px;display:flex;flex-direction:column;gap:16px;flex:1;">
+          <span style="font-size:20px;color:#FBBC04;letter-spacing:2px;">★★★★★</span>
+          <p style="font-family:var(--font-body);font-size:17px;line-height:1.65;color:var(--color-text);font-weight:var(--font-weight-semibold);">"Dette var strålende fra begynnelse til slutt. De svarte raskt på mail, behandlet alle tingene forsiktig og hilste så fint på den gamle som skulle flytte. Vi følte oss godt ivaretatt og vil anbefale dette flyttebyrået på det varmeste."</p>
+          <div style="display:flex;flex-direction:column;gap:3px;margin-top:auto;">
+            <span style="font-family:var(--font-body);font-size:14px;font-weight:var(--font-weight-semibold);color:var(--color-text);">Tanja Cecilie Lund</span>
+            <span style="font-family:var(--font-body);font-size:12px;color:var(--color-text-muted);">via Google</span>
+          </div>
         </div>
+      </div>
 
-        <!-- Kort 3: forsikring -->
-        <div style="min-height:260px;background:var(--color-bg-light);border:1px solid #ebebeb;border-radius:var(--card-radius);padding:28px;display:flex;flex-direction:column;gap:20px;align-items:center;text-align:center;">
-          <img src="images/loft-forsikring-icon.png" alt="" style="width:90px;height:90px;object-fit:contain;">
-          <span style="font-family:var(--font-heading);font-size:24px;font-weight:var(--font-weight-bold);color:var(--color-text);">Løft forsikring</span>
-          <p style="font-family:var(--font-body);font-size:18px;line-height:1.65;color:var(--color-text-muted);">Alt gods er fullt forsikret under hele transporten. Ingen egenandel, ingen overraskelser.</p>
-        </div>
-
-      </div><!-- /rad 2 -->
-      </div><!-- /9-kol wrapper, midtstilt -->
     </div>
   </section>
 
@@ -553,7 +610,7 @@
 
       <!-- Headline + knapp -->
       <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:var(--text-sub-body-gap);margin-bottom:calc(var(--card-gap) * 2);">
-        <p style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;max-width:680px;"><span style="color:#1a4358;">Vi er din totalleverandør for flytting i </span><span style="color:#1a74cd;">Oslo, alt samlet på ett sted.</span></p>
+        <p class="mob-h2" style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;max-width:680px;"><span style="color:#1a4358;">Vi er din totalleverandør for flytting i </span><span style="color:#1a74cd;">Oslo, alt samlet på ett sted.</span></p>
         <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:center;">
           <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
           <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
@@ -653,7 +710,7 @@
           </button>
         </div>
         <div style="aspect-ratio:4/3;border-radius:var(--image-radius);overflow:hidden;">
-          <img src="images/Loft_shoot__12.jpg" alt="Kontorflytting med Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="/Users/birgerbratli/Downloads/Obtino x Løft./Homepage/LØFT - WEB/LØFT - WEB/Løft nye utvalgte bilder/LØFT - WEB/LØFT_WEB-14.jpg" alt="Kontorflytting med Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
       </div>
     </div>
@@ -662,18 +719,18 @@
   <!-- ── BEDRIFT HERO-SEKSJON ── -->
   <section style="position:relative;overflow:hidden;">
     <!-- Bakgrunnsbilder — stakkede med fade -->
-    <div style="position:relative;width:100%;max-height:800px;overflow:hidden;">
+    <div class="bedrift-hero-bg-wrapper" style="position:relative;width:100%;max-height:800px;overflow:hidden;">
       <img class="steg-bg active" src="images/DSCF8489.jpg" alt="" style="width:100%;max-height:800px;object-fit:cover;display:block;">
       <img class="steg-bg" src="images/Loft_shoot__1.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.9s ease;">
       <img class="steg-bg" src="images/Loft_shoot__24.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.9s ease;">
       <img class="steg-bg" src="images/Loft_shoot__46.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:85% center;opacity:0;transition:opacity 0.9s ease;">
     </div>
     <!-- 12-kolonne grid overlay — 40px margin, 32px gutter (hero-grid) -->
-    <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr auto;column-gap:32px;padding:48px 40px 40px;pointer-events:none;">
+    <div class="bedrift-hero-overlay" style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto 1fr auto;column-gap:32px;padding:48px 40px 40px;pointer-events:none;">
 
       <!-- Tittel: kol 1–8, rad 1 -->
       <div style="grid-column:1/9;grid-row:1;align-self:start;pointer-events:auto;">
-        <h2 style="font-family:var(--font-heading);font-size:52px;font-weight:var(--font-weight-bold);line-height:1.1;letter-spacing:-0.02em;color:#ffffff;margin:0;text-shadow:0 2px 16px rgba(0,0,0,0.35);">Vi gjør flytteprosessen<br>enkel for alle.</h2>
+        <h2 class="bedrift-hero-title" style="font-family:var(--font-heading);font-size:52px;font-weight:var(--font-weight-bold);line-height:1.1;letter-spacing:-0.02em;color:#ffffff;margin:0;text-shadow:0 2px 16px rgba(0,0,0,0.35);">Vi gjør flytteprosessen<br>enkel for alle.</h2>
       </div>
 
       <!-- Steg-kortene: kol 1–6, rad 3 (bunn) -->
@@ -718,7 +775,7 @@
     </div><!-- /steg-wrapper -->
 
       <!-- Info-blokk: kol 9–12, rad 3 (bunn) -->
-      <div style="grid-column:9/13;grid-row:3;align-self:end;background:rgba(26,40,74,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:28px 32px;pointer-events:auto;">
+      <div class="bedrift-info-block" style="grid-column:9/13;grid-row:3;align-self:end;background:rgba(26,40,74,0.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:28px 32px;pointer-events:auto;">
         <p style="font-family:var(--font-heading);font-size:20px;font-weight:var(--font-weight-bold);color:#ffffff;line-height:1.45;margin:0;">Vi er fleksible dersom du ønsker å pakke ned og ut selv eller om du ønsker at vi skal hjelpe til med hele prosessen.</p>
       </div>
 
@@ -866,7 +923,7 @@
       <!-- Header — sentrert -->
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:calc(var(--card-gap) * 2);max-width:var(--text-max-width);margin-left:auto;margin-right:auto;">
         <p style="font-family:var(--font-body);font-size:var(--nav-cat-size);font-weight:var(--font-weight-semibold);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--text-heading-sub-gap);">Priser</p>
-        <h2 style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;color:var(--color-text);margin-bottom:var(--text-sub-body-gap);">Superenkel prismodell</h2>
+        <h2 class="mob-h2" style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;color:var(--color-text);margin-bottom:var(--text-sub-body-gap);">Superenkel prismodell</h2>
         <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--text-sub-body-gap);">Alle flytteprosesser er ulike, men vi ønsker å tilby en enkel pris til alle våre kunder.</p>
         <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;">
           <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Få et prisestimat</span>
@@ -878,11 +935,11 @@
 
       <!-- To priskort — kol 2–11 -->
       <div class="grid-12" style="margin-bottom:calc(var(--card-gap) * 2);">
-        <div style="grid-column:2/7;background:var(--color-card);border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;gap:var(--title-body-gap);">
+        <div class="pris-card-1" style="grid-column:2/7;background:var(--color-card);border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;gap:var(--title-body-gap);">
           <p style="font-family:var(--font-body);font-size:var(--card-title-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">For kun 1.750,- per time</p>
           <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:var(--color-text-muted);line-height:1.65;">Du får tilgang til et helt team med tre effektive løftere, en stor varebil og din egen prosjektleder som håndterer all dialog underveis i prosessen. Forsikring er også inkludert.</p>
         </div>
-        <div style="grid-column:7/12;background:var(--color-card);border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;gap:var(--title-body-gap);">
+        <div class="pris-card-2" style="grid-column:7/12;background:var(--color-card);border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;gap:var(--title-body-gap);">
           <p style="font-family:var(--font-body);font-size:var(--card-title-size);font-weight:var(--font-weight-semibold);color:var(--color-text);">Ønsker du fastpris?</p>
           <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:var(--color-text-muted);line-height:1.65;">Med over 1 000 oppdrag i året har vi blitt helt rå på å estimere hvor lang tid prosessen tar, og ikke minst hvor mye det vil koste. Om du ønsker en fastpris kan vi garantere deg at du aldri blir belastet for mer enn den avtalte prisen.</p>
         </div>
@@ -899,7 +956,7 @@
     <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:start;">
 
       <!-- Venstre: kol 1–4 — sticky nav -->
-      <div style="grid-column:1/4;position:sticky;top:30vh;">
+      <div class="sticky-nav-col" style="grid-column:1/4;position:sticky;top:30vh;">
         <nav style="display:flex;flex-direction:column;gap:4px;">
           <button class="sb-nav active" data-block="blokk-1" onclick="document.getElementById('blokk-1').scrollIntoView({behavior:'smooth'})" style="display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:8px 0;text-align:left;">
             <span class="sb-bar" style="width:3px;height:22px;border-radius:2px;flex-shrink:0;"></span>
@@ -927,7 +984,7 @@
       </style>
 
       <!-- Høyre: kol 5–12 — 3 innholdsblokker -->
-      <div style="grid-column:5/13;display:flex;flex-direction:column;gap:calc(var(--section-padding) * 1.1);">
+      <div class="sticky-content-col" style="grid-column:5/13;display:flex;flex-direction:column;gap:calc(var(--section-padding) * 1.1);">
 
         <!-- Blokk 1 — Trygg pakning -->
         <div id="blokk-1" style="display:flex;flex-direction:column;gap:calc(var(--card-gap) * 1.5);">
@@ -944,7 +1001,7 @@
             </span>
           </button>
           <div style="width:100%;aspect-ratio:16/9;border-radius:var(--card-radius);overflow:hidden;">
-            <img src="/Users/birgerbratli/Downloads/Obtino x Løft./Shoot/Loft_shoot__26.jpg" alt="Trygg pakning med Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="images/Loft_shoot__39.jpg" alt="Trygg pakning med Løft" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
         </div>
 
@@ -957,7 +1014,7 @@
           <p style="font-family:var(--font-body);font-size:18px;font-weight:var(--font-weight-regular);line-height:1.65;color:var(--color-text-on-dark);">Som kunde av Løft får du 50% rabatt på leie av minilager hos Flexistore. Rabatten gjelder i 2 måneder og kan brukes på lager i alle størrelser og avdelinger.</p>
           <div style="display:inline-flex;align-items:center;gap:10px;">
             <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-regular);color:var(--color-text-on-dark-muted);">Bruk koden</span>
-            <span style="font-family:monospace;font-size:15px;font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:3px 10px;letter-spacing:0.08em;">LOFT</span>
+            <span style="font-family:monospace;font-size:15px;font-weight:var(--font-weight-semibold);color:var(--color-text-on-dark);background:#c4b8eb;border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:3px 10px;letter-spacing:0.08em;">LOFT</span>
             <span style="font-family:var(--font-body);font-size:15px;font-weight:var(--font-weight-regular);color:var(--color-text-on-dark-muted);">i Flexistore-appen</span>
           </div>
           <button class="btn-lys" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-light);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
@@ -998,22 +1055,6 @@
       </div>
     </div>
 
-    <!-- Horisontal bildescroll — full bredde -->
-    <div style="margin-top:calc(var(--card-gap)*2);overflow:hidden;margin-left:calc(-1*var(--section-padding));margin-right:calc(-1*var(--section-padding));">
-      <div style="display:flex;gap:16px;padding:0 var(--section-padding);animation:scroll-left 18s linear infinite;width:max-content;">
-        <div class="wf-img" style="width:280px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:220px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:260px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:240px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:280px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:220px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <!-- Duplisert for sømløs loop -->
-        <div class="wf-img" style="width:280px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:220px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:260px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-        <div class="wf-img" style="width:240px;height:200px;border-radius:var(--card-radius);flex-shrink:0;background:var(--wf-dark-surface);"></div>
-      </div>
-    </div>
 
   </section>
 
@@ -1021,16 +1062,16 @@
   <section style="background:var(--color-bg-light);padding:var(--section-padding);">
     <div class="grid-12" style="max-width:var(--content-width);margin:0 auto;align-items:start;">
       <div class="col-1-5" style="display:flex;flex-direction:column;gap:var(--card-gap);">
-        <div class="wf-img" style="width:100%;aspect-ratio:5/4;border-radius:var(--card-radius);">
-          <span class="wf-label">Bilde</span>
-        </div>
-        <div style="display:inline-flex;align-items:center;gap:8px;background:var(--wf-btn);border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);width:fit-content;">
-          <div class="wf-line-sm" style="width:120px;background:var(--wf-text-dark);"></div>
-          <div style="width:19px;height:19px;border-radius:50%;background:var(--wf-text-dark);flex-shrink:0;"></div>
-        </div>
+        <img src="images/Loft_shoot__6.jpg" alt="Løft flytteservice" style="width:100%;aspect-ratio:5/4;border-radius:var(--card-radius);object-fit:cover;display:block;">
+        <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;align-self:flex-start;">
+          <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Kontakt oss</span>
+          <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
+            <svg width="9" height="8" viewBox="0 0 14 13" fill="none"><path d="M1 6.5H13M13 6.5L7.5 1M13 6.5L7.5 12" stroke="#3882E9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </button>
       </div>
       <div class="col-6-13" style="display:flex;flex-direction:column;">
-        <h2 style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;color:var(--color-text);margin-bottom:32px;">Ofte stilte spørsmål</h2>
+        <h2 class="mob-h2" style="font-family:var(--font-heading);font-size:40px;font-weight:var(--font-weight-semibold);line-height:1.15;letter-spacing:-0.02em;color:var(--color-text);margin-bottom:32px;">Ofte stilte spørsmål</h2>
 
         <div class="faq-item open">
           <button class="faq-trigger"><span class="faq-question">Hva koster en flytting?</span><span class="faq-icon">+</span></button>
@@ -1100,7 +1141,7 @@
       <div class="grid-12" style="align-items:start;">
 
         <!-- Kort 1 — span 3, kort, blå -->
-        <div style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
+        <div class="tjenestekort-item" style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
           <div style="height:295px;background:#c2e2fc;border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;justify-content:flex-end;">
             <p style="font-family:var(--font-heading);font-size:var(--card-title-size);font-weight:var(--font-weight-semibold);color:#233D6F;line-height:1.2;margin-bottom:var(--title-body-gap);">Privatflytting</p>
             <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:rgba(35,61,111,0.6);line-height:1.65;">Fra kasse til nøkkel — vi tar alt.</p>
@@ -1109,7 +1150,7 @@
         </div>
 
         <!-- Kort 2 — span 3, høy, lilla -->
-        <div style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
+        <div class="tjenestekort-item" style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
           <div style="height:378px;background:#f4cdff;border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;justify-content:flex-end;">
             <p style="font-family:var(--font-heading);font-size:var(--card-title-size);font-weight:var(--font-weight-semibold);color:#3b0764;line-height:1.2;margin-bottom:var(--title-body-gap);">Kontorflytting</p>
             <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:rgba(59,7,100,0.6);line-height:1.65;">Minimal nedetid. Åpner mandag som normalt.</p>
@@ -1118,7 +1159,7 @@
         </div>
 
         <!-- Kort 3 — span 3, kort, rosa -->
-        <div style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
+        <div class="tjenestekort-item" style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
           <div style="height:295px;background:#fdcac2;border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;justify-content:flex-end;">
             <p style="font-family:var(--font-heading);font-size:var(--card-title-size);font-weight:var(--font-weight-semibold);color:#6b1a12;line-height:1.2;margin-bottom:var(--title-body-gap);">Spesialtransport</p>
             <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:rgba(107,26,18,0.6);line-height:1.65;">Piano, safe, kunst — vi løfter det andre ikke tør.</p>
@@ -1127,7 +1168,7 @@
         </div>
 
         <!-- Kort 4 — span 3, høy, blå -->
-        <div style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
+        <div class="tjenestekort-item" style="grid-column:span 3;display:flex;flex-direction:column;gap:var(--card-gap);">
           <div style="height:378px;background:#c2e2fc;border-radius:var(--card-radius);padding:var(--card-text-padding-y) var(--card-text-padding-x);display:flex;flex-direction:column;justify-content:flex-end;">
             <p style="font-family:var(--font-heading);font-size:var(--card-title-size);font-weight:var(--font-weight-semibold);color:#233D6F;line-height:1.2;margin-bottom:var(--title-body-gap);">Dødsbo</p>
             <p style="font-family:var(--font-body);font-size:var(--card-body-size);font-weight:var(--font-weight-regular);color:rgba(35,61,111,0.6);line-height:1.65;">Diskret, hensynsfull og grundig tømming.</p>
@@ -1146,7 +1187,7 @@
 
       <!-- Topp: logo + beskrivelse + CTA -->
       <div class="grid-12" style="align-items:start;margin-bottom:48px;">
-        <div style="grid-column:1/6;display:flex;flex-direction:column;gap:16px;">
+        <div class="footer-top-logo" style="grid-column:1/6;display:flex;flex-direction:column;gap:16px;">
           <svg width="90" viewBox="0 0 231 68" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M 0 68 L 0 0 L 11.673602851661474 0 L 11.673602851661474 57.58064693268335 L 50.81450653076172 57.58064693268335 L 50.81450653076172 68 Z" fill="white"/>
             <g transform="translate(56.307,0)"><path d="M 12.085610389709473 10.556451797485352 L 12.085610389709473 0 L 54.797264099121094 0 L 54.797264099121094 42.500003814697266 L 44.222347259521484 42.500003814697266 L 44.222347259521484 18.23387336730957 L 7.828181743621826 54.70161819458008 L 0 46.88710021972656 L 36.5315055847168 10.556451797485352 L 12.085610389709473 10.556451797485352 Z" fill="white"/></g>
@@ -1159,7 +1200,7 @@
             <span style="font-family:var(--font-body);font-size:13px;color:var(--color-footer-muted);">4.9 · Google Anmeldelser</span>
           </div>
         </div>
-        <div style="grid-column:10/13;display:flex;justify-content:flex-end;align-items:flex-start;">
+        <div class="footer-top-cta" style="grid-column:10/13;display:flex;justify-content:flex-end;align-items:flex-start;">
           <button class="btn-bla" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-btn-blue);border:none;border-radius:var(--btn-radius);padding:0 12px 0 18px;height:var(--btn-height);cursor:pointer;">
             <span style="font-family:var(--font-body);font-size:var(--nav-link-size);font-weight:var(--font-weight-medium);color:#ffffff;white-space:nowrap;">Planlegg flytting</span>
             <span style="width:19px;height:19px;border-radius:50%;background:#ffffff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transform:translateY(0.1em);">
@@ -1173,7 +1214,7 @@
       <div class="grid-12" style="margin-bottom:48px;">
 
         <!-- Tjenester: kol 1–4 -->
-        <div style="grid-column:1/5;display:flex;flex-direction:column;">
+        <div class="footer-col-tjenester" style="grid-column:1/5;display:flex;flex-direction:column;">
           <p style="font-family:var(--font-body);font-size:var(--nav-cat-size);font-weight:var(--font-weight-semibold);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-footer-muted);padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px;">Tjenester</p>
           <a href="#" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-body);font-size:var(--footer-link-size);color:var(--color-footer-link);text-decoration:none;margin-bottom:10px;">
             <span style="width:30px;height:30px;border-radius:7px;background:#c2e2fc;flex-shrink:0;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 -960 960 960"><path fill="#233D6F" d="m20-427 20-80h220l-20 80H20Zm175 232q-35-35-35-85H60l20-87h207l36-146h84l50-200H180l6-24q6-28 27.5-45.5T264-800h456l-37 160h117l120 160-40 200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H400q0 50-35 85t-85 35q-50 0-85-35Zm-95-378 20-80h260l-20 80H100Zm180 333q17 0 28.5-11.5T320-280q0-17-11.5-28.5T280-320q-17 0-28.5 11.5T240-280q0 17 11.5 28.5T280-240Zm400 0q17 0 28.5-11.5T720-280q0-17-11.5-28.5T680-320q-17 0-28.5 11.5T640-280q0 17 11.5 28.5T680-240Zm-43-200h193l4-21-74-99h-95l-28 120Z"/></svg></span>
@@ -1206,7 +1247,7 @@
         </div>
 
         <!-- Om oss: kol 5–7 -->
-        <div style="grid-column:5/8;display:flex;flex-direction:column;">
+        <div class="footer-col-om" style="grid-column:5/8;display:flex;flex-direction:column;">
           <p style="font-family:var(--font-body);font-size:var(--nav-cat-size);font-weight:var(--font-weight-semibold);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-footer-muted);padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px;">Om oss</p>
           <a href="#" style="font-family:var(--font-body);font-size:var(--footer-link-size);color:var(--color-footer-link);text-decoration:none;margin-bottom:10px;">Om Løft</a>
           <a href="#" style="font-family:var(--font-body);font-size:var(--footer-link-size);color:var(--color-footer-link);text-decoration:none;margin-bottom:10px;">Jobb hos oss</a>
@@ -1214,7 +1255,7 @@
         </div>
 
         <!-- Kontakt: kol 8–10 -->
-        <div style="grid-column:8/11;display:flex;flex-direction:column;">
+        <div class="footer-col-kontakt" style="grid-column:8/11;display:flex;flex-direction:column;">
           <p style="font-family:var(--font-body);font-size:var(--nav-cat-size);font-weight:var(--font-weight-semibold);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-footer-muted);padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px;">Kontakt</p>
           <a href="tel:+4722000000" style="font-family:var(--font-body);font-size:var(--footer-link-size);color:var(--color-footer-link);text-decoration:none;margin-bottom:10px;">22 00 00 00</a>
           <a href="mailto:hei@loft.no" style="font-family:var(--font-body);font-size:var(--footer-link-size);color:var(--color-footer-link);text-decoration:none;margin-bottom:10px;">hei@loft.no</a>
@@ -1223,7 +1264,7 @@
         </div>
 
         <!-- Følg oss: kol 11–12 -->
-        <div style="grid-column:11/13;display:flex;flex-direction:column;">
+        <div class="footer-col-social" style="grid-column:11/13;display:flex;flex-direction:column;">
           <p style="font-family:var(--font-body);font-size:var(--nav-cat-size);font-weight:var(--font-weight-semibold);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-footer-muted);padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:16px;">Følg oss</p>
           <a href="#" style="display:inline-flex;align-items:center;gap:9px;font-family:var(--font-body);font-size:var(--footer-link-size);color:var(--color-footer-link);text-decoration:none;margin-bottom:12px;">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
