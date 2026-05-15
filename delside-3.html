@@ -351,6 +351,7 @@
 
       .hero-hr { display: none !important; }
       .hero-arrow { width: 32px !important; height: 27px !important; }
+      .hero-mobile-top-img { display: block !important; }
       .tillit-stats { grid-column: 1 / -1 !important; }
       .tillit-review { grid-column: 1 / -1 !important; margin-left: 0 !important; }
       .tillit-stats-grid { transform: none !important; }
@@ -371,6 +372,11 @@
 
       <!-- Venstre: tekst — kolonne 1–6, rad 1–2 -->
       <div class="hero-text col-1-6" style="grid-row:1/3;display:flex;flex-direction:column;gap:0;padding-top:60px;">
+
+        <!-- Mobil-bilde over badge -->
+        <div class="hero-mobile-top-img" style="display:none;width:100%;aspect-ratio:4/3;border-radius:var(--card-radius);overflow:hidden;margin-bottom:var(--card-gap);">
+          <img src="images/Loft_shoot__6.jpg" alt="Løft flytteservice" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
 
         <!-- Badge -->
         <div style="display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--card-gap);">
