@@ -342,6 +342,13 @@
 
       .tjenestekort-item { grid-column: 1 / -1 !important; }
 
+      /* Steg-seksjon: alle åpne på mobil, ingen timer */
+      .steg-kort { cursor: default !important; }
+      .steg-kort .steg-body { grid-template-rows: 1fr !important; }
+      .steg-kort .steg-body-inner { opacity: 1 !important; transform: translateY(0) !important; transition: none !important; }
+      .steg-kort .steg-progress { height: 100% !important; animation: none !important; }
+      #steg-wrapper { overflow: visible !important; }
+
       .footer-top-logo { grid-column: 1 / -1 !important; }
       .footer-top-cta { grid-column: 1 / -1 !important; justify-content: flex-start !important; margin-top: 4px !important; }
       .footer-col-tjenester,
